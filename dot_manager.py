@@ -11,13 +11,31 @@ repo_mapper = "dot_conf/map2repopath.json"
 local_conf = "dot_conf/local.json"
 repo_path = os.getcwd()
 
+RESET = '\033[0m'
+BOLD = '\033[1m'
+UNDERLINE = '\033[4m'
+REVERSE = '\033[7m'
 
-def _error(msg: str):
-    print(f"[ERROR]: {msg}")
+FG_RED = '\033[31m'
+FG_GREEN = '\033[32m'
+FG_YELLOW = '\033[33m'
+FG_BLUE = '\033[34m'
+
+BG_RED = '\033[41m'
+BG_GREEN = '\033[42m'
+BG_YELLOW = '\033[43m'
+BG_BLUE = '\033[44m'
+
+COMMON_FILE_LINK_COLOR = UNDERLINE + FG_BLUE
+SUCCESS_FILE_LINK_COLOR = UNDERLINE + FG_BLUE + BOLD
+
+
+def _warn(msg: str):
+    print(f"{BG_YELLOW}[SKIPPED]{RESET} {msg}")
 
 
 def _log(msg: str):
-    print(f"[LOG]: {msg}")
+    print(f"[LOG] {msg}")
 
 
 def _os_type() -> str:
@@ -40,9 +58,9 @@ def _mapper(type: str) -> json:
                     raise FileNotFoundError(
                         f"""!
 
-You should config your windows-user-home first!
+{FG_YELLOW} You should config your windows-user-home first! {RESET}
 
-By create a file named <<{local_conf}>> at the root of this git repo,
+By create a file named {BOLD}{FG_GREEN} <<{local_conf}>> {RESET}at the root of this git repo,
     in which specify your "win-user-home":"C:/msys2/home/xxx".
     and you can also just use "~"
 
@@ -97,8 +115,8 @@ def _get_conf_path(type: str, conf: str) -> Optional[str]:
     try:
         pt = mapper[conf]
     except KeyError:
-        _error(
-            f'There is no item about \"{conf}\" in map2{type}path.json file, please check it.'
+        _warn(
+            f'There is no item about {COMMON_FILE_LINK_COLOR} \"{conf}\" {RESET} in {FG_YELLOW}map2{BG_BLUE}{BOLD}{type}{RESET}{FG_YELLOW}path.json{RESET} file, please check it.'
         )
         return None
     return os.path.normpath(pt)
@@ -122,27 +140,31 @@ def _handle_exists_file(filename: str, del_exist: bool):
     if del_exist:
         if os.path.isdir(filename):
             shutil.rmtree(filename)
-            _log(f"[RemoveDir]: Delete {filename}")
+            _log(
+                f"{FG_YELLOW}[RemoveDir]{RESET}: Delete {COMMON_FILE_LINK_COLOR}{filename}{RESET}")
         else:
             os.remove(filename)
-            _log(f"[RemoveFile]: Delete {filename}")
+            _log(
+                f"{FG_YELLOW}[RemoveFile]{RESET}: Delete {COMMON_FILE_LINK_COLOR}{filename}{RESET}")
     else:
         new_name = f"{filename}{_suffix()}"
         os.rename(filename, new_name)
-        _log(f"[Rename]: {filename} => {new_name}")
+        _log(
+            f"{FG_GREEN}[Rename]{RESET}: {COMMON_FILE_LINK_COLOR}{filename}{RESET} => {COMMON_FILE_LINK_COLOR}{new_name}{RESET}")
 
 
 def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=False):
     # check repo
     if repo_source is None or not os.path.exists(repo_source):
-        _error(
-            f"[SKIP]: {repo_source} unexists, skip create this file's symbolink to {local_link}"
+        _warn(
+            f"{FG_YELLOW}[CONF-MAPPED,REPO-MISS]{RESET}: {COMMON_FILE_LINK_COLOR}{repo_source}{RESET} unexists, skip create this file's symbolink to {COMMON_FILE_LINK_COLOR}{local_link}{RESET}"
         )
         return
 
     # check local
     if local_link is None:
-        _log(f"[SKIP]: {repo_source} don't have mapped path in your os")
+        _warn(
+            f"{FG_YELLOW}[REPO-HAS,LOCAL-UNMAPPED]{RESET}: {COMMON_FILE_LINK_COLOR}{repo_source}{RESET} don't have mapped path in your os")
         return
 
     if os.path.exists(local_link):
@@ -163,17 +185,18 @@ def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=
     try:
         is_dir = os.path.isdir(repo_source)
         os.symlink(repo_source, local_link, target_is_directory=is_dir)
-        _log(f"[SUCCESS] {local_link} => {repo_source} DONE!")
+        _log(
+            f"{BG_GREEN}[SUCCESS]{RESET} {SUCCESS_FILE_LINK_COLOR}{local_link}{RESET} => {SUCCESS_FILE_LINK_COLOR}{repo_source}{RESET} DONE!")
     except OSError:
-        _error(
-            "[SKIP]: Please check if you have sudo mode to create symbollink.\n Occurrs when create link at {link}"
+        _warn(
+            f"{FG_YELLOW}[SKIP]{RESET}: Please check if you have {BOLD}sudo mode{RESET} to create symbollink.\n Occurrs when create link at {{COMMON_FILE_LINK_COLOR}}{local_link}{RESET}"
         )
     except Exception as e:
-        _error(
-            f"[SKIP]: {type(e).__name__} while link {repo_source} to {local_link}")
+        _warn(
+            f"{FG_YELLOW}[SKIP]{RESET}: {type(e).__name__} while link {COMMON_FILE_LINK_COLOR}{repo_source}{RESET} to {COMMON_FILE_LINK_COLOR}{local_link}{RESET}")
 
 
-def link_to_repo(conf_list, del_exist=False):
+def link_to_repo(conf_list: list[str], del_exist=False):
     for conf in conf_list:
         local_path, repo_path = _get_paired_path(conf)
         _make_link(repo_path, local_path, del_exist)
@@ -187,4 +210,4 @@ if __name__ == "__main__":
         "bash_alias",
     ]
 
-    print(_get_all_supported_conf())
+    link_to_repo(all_supported_dotfile, True)

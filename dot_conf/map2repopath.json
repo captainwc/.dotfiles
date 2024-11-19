@@ -13,7 +13,7 @@
         "vscode_snippets": "vscode/snippets"
     },
     "linux": {
-        "bash_alias": "unix/.bash_aliases",
+        "bash_alias": "unix/bash/.bash_aliases",
         "vim": "vim/vim8/.vimrc",
         "vim_plug": "vim/vim8/.vim",
         "nvim": "nvim",
