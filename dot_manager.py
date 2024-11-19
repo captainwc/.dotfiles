@@ -98,13 +98,13 @@ def _get_conf_path(type: str, conf: str) -> Optional[str]:
         pt = mapper[conf]
     except KeyError:
         _error(
-            f'"{conf}" in supported list haven\'t specify the mapped path in map2{type}path.json file, please check it'
+            f'There is no item about \"{conf}\" in map2{type}path.json file, please check it.'
         )
         return None
     return os.path.normpath(pt)
 
 
-def _get_paired_path(conf: str) -> list[str, str]:
+def _get_paired_path(conf: str) -> list[Optional[str], Optional[str]]:
     local_path = _get_conf_path("local", conf)
     repo_path = _get_conf_path("repo", conf)
     if local_path == "." or local_path == "":
