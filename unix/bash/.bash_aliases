@@ -122,7 +122,7 @@ mk() {
     case "$extension" in
     cpp)
         echo "Compiling C++ file '$file'..."
-        g++ "$file" -o "$base" -std=c++20
+        g++ "$file" -o "$base" -std=c++20 -g
         if [ $? -eq 0 ]; then
             echo "Running executable '$base'..."
             ./"$base"
@@ -132,7 +132,7 @@ mk() {
         ;;
     c)
         echo "Compiling C file '$file'..."
-        gcc "$file" -o "$base"
+        gcc "$file" -o "$base" -g
         if [ $? -eq 0 ]; then
             echo "Running executable '$base'..."
             ./"$base"

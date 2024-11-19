@@ -536,9 +536,9 @@ function! DebugFile()
   write
   let ft = &filetype
   if ft ==# 'c'
-    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "gcc % -o %< -g && ./%< && gdb -q %< && rm %<"
+    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "gcc % -o %< -g && ./%< && cgdb -q %< && rm %<"
   elseif ft ==# 'cpp'
-    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "g++ % -o %< -std=c++20 -g && gdb -q %< && rm %<"
+    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "g++ % -o %< -std=c++20 -g && cgdb -q %< && rm %<"
   elseif ft ==# 'python'
 	  FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "pudb %"
   elseif ft ==# 'go'

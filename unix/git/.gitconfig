@@ -1,0 +1,12 @@
+[core]
+        editor = vim
+		autocrlt = input
+[user]
+        name = shuaikai
+        email = wddjwk@qq.com
+[init]
+        defaultBranch = main
+[credential "helperselector"]
+        selected = manager
+; [url "https://gitclone.com/"]
+;         insteadOf = https://

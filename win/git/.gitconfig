@@ -1,8 +1,8 @@
 [core]
         editor = vim
-        autocrlf = true
+		autocrlf = true
 [user]
-        name = shuaikai
+        name = wddjwk
         email = wddjwk@qq.com
 [init]
         defaultBranch = main
