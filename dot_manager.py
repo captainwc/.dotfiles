@@ -11,6 +11,15 @@ repo_mapper = "dot_conf/map2repopath.json"
 local_conf = "dot_conf/local.json"
 repo_path = os.getcwd()
 
+
+def _os_type() -> str:
+    systype = platform.system()
+    if systype == "Windows":
+        return "win"
+    else:
+        return "linux"
+
+
 RESET = '\033[0m'
 BOLD = '\033[1m'
 UNDERLINE = '\033[4m'
@@ -26,6 +35,20 @@ BG_GREEN = '\033[42m'
 BG_YELLOW = '\033[43m'
 BG_BLUE = '\033[44m'
 
+if _os_type() == "win":
+    RESET = ''
+    BOLD = ''
+    UNDERLINE = ''
+    REVERSE = ''
+    FG_RED = ''
+    FG_GREEN = ''
+    FG_YELLOW = ''
+    FG_BLUE = ''
+    BG_RED = ''
+    BG_GREEN = ''
+    BG_YELLOW = ''
+    BG_BLUE = ''
+
 COMMON_FILE_LINK_COLOR = UNDERLINE + FG_BLUE
 SUCCESS_FILE_LINK_COLOR = UNDERLINE + FG_BLUE + BOLD
 
@@ -36,14 +59,6 @@ def _warn(msg: str):
 
 def _log(msg: str):
     print(f"[LOG] {msg}")
-
-
-def _os_type() -> str:
-    systype = platform.system()
-    if systype == "Windows":
-        return "win"
-    else:
-        return "linux"
 
 
 def _mapper(type: str) -> json:
@@ -116,7 +131,8 @@ def _get_conf_path(type: str, conf: str) -> Optional[str]:
         pt = mapper[conf]
     except KeyError:
         _warn(
-            f'There is no item about {COMMON_FILE_LINK_COLOR} \"{conf}\" {RESET} in {FG_YELLOW}map2{BG_BLUE}{BOLD}{type}{RESET}{FG_YELLOW}path.json{RESET} file, please check it.'
+            f'There is no item about {COMMON_FILE_LINK_COLOR} \"{conf}\" {RESET} in {FG_YELLOW}map2{
+                BG_BLUE}{BOLD}{type}{RESET}{FG_YELLOW}path.json{RESET} file, please check it.'
         )
         return None
     return os.path.normpath(pt)
@@ -157,7 +173,8 @@ def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=
     # check repo
     if repo_source is None or not os.path.exists(repo_source):
         _warn(
-            f"{FG_YELLOW}[CONF-MAPPED,REPO-MISS]{RESET}: {COMMON_FILE_LINK_COLOR}{repo_source}{RESET} unexists, skip create this file's symbolink to {COMMON_FILE_LINK_COLOR}{local_link}{RESET}"
+            f"{FG_YELLOW}[CONF-MAPPED,REPO-MISS]{RESET}: {COMMON_FILE_LINK_COLOR}{repo_source}{
+                RESET} unexists, skip create this file's symbolink to {COMMON_FILE_LINK_COLOR}{local_link}{RESET}"
         )
         return
 
@@ -189,7 +206,8 @@ def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=
             f"{BG_GREEN}[SUCCESS]{RESET} {SUCCESS_FILE_LINK_COLOR}{local_link}{RESET} => {SUCCESS_FILE_LINK_COLOR}{repo_source}{RESET} DONE!")
     except OSError:
         _warn(
-            f"{FG_YELLOW}[SKIP]{RESET}: Please check if you have {BOLD}sudo mode{RESET} to create symbollink.\n Occurrs when create link at {{COMMON_FILE_LINK_COLOR}}{local_link}{RESET}"
+            f"{FG_YELLOW}[SKIP]{RESET}: Please check if you have {BOLD}sudo mode{
+                RESET} to create symbollink.\n Occurrs when create link at {{COMMON_FILE_LINK_COLOR}}{local_link}{RESET}"
         )
     except Exception as e:
         _warn(
