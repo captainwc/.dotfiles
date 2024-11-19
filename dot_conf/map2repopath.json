@@ -1,0 +1,30 @@
+{
+    "win": {
+        "bash": "win/bash/.bashrc",
+        "bash_alias": "win/bash/.bash_aliases",
+        "vim": "vim/vim8/.vimrc",
+        "vim_plug": "vim/vim8/.vim",
+        "git": "git/.gitconfig",
+        "nvim": "nvim",
+        "clangd": ".config/clangd/config.yaml",
+        "helix": "helix/config.toml",
+        "vscode_setting": "vscode/settings.json",
+        "vscode_key": "vscode/keybindings.json",
+        "vscode_snippets": "vscode/snippets"
+    },
+    "linux": {
+        "bash_alias": "unix/.bash_aliases",
+        "vim": "vim/vim8/.vimrc",
+        "vim_plug": "vim/vim8/.vim",
+        "nvim": "nvim",
+        "git": "git/.gitconfig",
+        "helix": "helix/config.toml",
+        "files": ".files",
+        "cgdb": ".cgdb/cgdbrc",
+        "gdb": "gdb/.gdbinit",
+        "pip": ".pip/pip.conf",
+        "redis": ".redis/redis.conf",
+        "clangd": ".config/clangd/config.yaml",
+        "tmux": ".config/tmux/tmux.conf"
+    }
+}

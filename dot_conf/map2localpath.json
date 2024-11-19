@@ -1,0 +1,29 @@
+{
+    "win": {
+        "bash": "${win-user-home}/.bashrc",
+        "bash_alias": "${win-user-home}/.bash_aliases",
+        "vim": "${win-user-home}/.vimrc",
+        "git": "~/.gitconfig",
+        "nvim": "~/AppData/Local/nvim",
+        "clangd": "~/AppData/Local/clangd/config.yaml",
+        "helix": "~/AppData/Roaming/helix/config.toml",
+        "vscode_setting": "~/AppData/Roaming/Code/User/settings.json",
+        "vscode_key": "~/AppData/Roaming/Code/User/keybindings.json",
+        "vscode_snippets": "~/AppData/Roaming/Code/User/snippets"
+    },
+    "linux": {
+        "bash": "",
+        "bash_alias": "~/.bash_aliases",
+        "vim": "~/.vimrc",
+        "nvim": "~/.config/nvim",
+        "git": "~/.gitconfig",
+        "helix": "",
+        "files": "~/.files",
+        "cgdb": "~/.cgdb/cgdbrc",
+        "gdb": "~/.gdbinit",
+        "pip": "~/.pip/pip.conf",
+        "redis": "~/.redis/redis.conf",
+        "clangd": "~/.config/clangd/config.yaml",
+        "tmux": "~/.config/tmux/tmux.conf"
+    }
+}

@@ -1,0 +1,23 @@
+## theme
+
+theme = "onedark"
+
+## editor
+
+[editor]
+
+[editor.auto-save]
+after-delay.timeout = 2000
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 20 # Max free space at the end of line
+
+## keymap
+
+[keys.normal]
+C-r = ":sh gdb a.exe"
+ret = ":w"
+
+[keys.insert]
+

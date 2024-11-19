@@ -1,0 +1,517 @@
+{
+    // executable
+    "clangd.path": "clangd",
+    "clang-format.executable": "clang-format",
+    // git
+    "git.path": "git",
+    "git.openRepositoryInParentFolders": "never",
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "remote.SSH.configFile": "~/.ssh/config",
+    "remote.SSH.remotePlatform": {
+        "kk03": "linux",
+        "vlab": "linux",
+        "kk02": "linux",
+        "kkdebian": "linux",
+        "vm-debian": "linux",
+        "vm-centos": "linux"
+    },
+    // terminal
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "terminal.integrated.profiles.windows": {
+        "Ubuntu (WSL)": {
+            "path": "C:\\WINDOWS\\System32\\wsl.exe",
+            "args": [
+                "-d",
+                "Ubuntu",
+                "-u",
+                "shuaikai"
+            ]
+        },
+        "PowerShell": {
+            "path": "pwsh.exe",
+            "icon": "terminal-powershell",
+            "args": [
+                "-NoExit",
+                "/c",
+                "chcp 65001"
+            ],
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash",
+            "Path": "bash",
+            "icon": "terminal-bash",
+            "args": [],
+        }
+    },
+    "terminal.integrated.automationProfile.windows": {
+        "path": "powershell",
+    },
+    // scripts
+    "markdown.styles": [
+        "~/.files/github.css"
+    ],
+    "workbench.colorTheme": "Quiet Light",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "none",
+    "workbench.editor.wrapTabs": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook",
+        "*.pdf": "pdf.view",
+        "*.pptx": "default",
+        "*.md": "default",
+        "*.png": "cweijan.officeViewer",
+        "{git,gitlens}:/**/*.{md,csv}": "default",
+        "{git,gitlens}:/**/*.{md,csv,svg}": "default"
+    },
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 300,
+    "files.associations": {
+        "*.S": "gas"
+    },
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "editor.fontSize": 20,
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": true,
+    "editor.fontWeight": "normal",
+    "editor.tabCompletion": "on",
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.accessibilitySupport": "off",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.detectIndentation": false,
+    "editor.minimap.renderCharacters": false,
+    "editor.inlineSuggest.enabled": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "editor.unicodeHighlight.allowedLocales": {
+        "ja": true,
+        "zh-hans": true,
+        "zh-hant": true
+    },
+    "diffEditor.codeLens": true,
+    "debug.allowBreakpointsEverywhere": true,
+    // terminal settings
+    "terminal.integrated.enableImages": true,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.fontWeight": "normal",
+    "terminal.integrated.env.windows": {
+        "LANG": "en_US.UTF-8"
+    },
+    // cpp & cmake
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.intelliSenseEngineFallback": "enabled",
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.autocomplete": "default",
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "cmake.configureOnOpen": false,
+    "cmake.options.statusBarVisibility": "compact",
+    "cmake.useCMakePresets": "auto",
+    "cmake.options.advanced": {
+        "build": {
+            "statusBarVisibility": "visible"
+        },
+        "launch": {
+            "statusBarVisibility": "visible"
+        },
+        "debug": {
+            "statusBarVisibility": "visible"
+        }
+    },
+    // code runner
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.executorMap": {
+        "java": "javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dirWithoutTrailingSlash && gcc $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt",
+        "cpp": "cd $dirWithoutTrailingSlash && g++ $fileName -o $fileNameWithoutExt -std=c++20 && ./$fileNameWithoutExt",
+        "go": "cd $dirWithoutTrailingSlash && go run $fileName",
+        "shellscript": "bash",
+        "python": "set PYTHONIOENCODING=utf8 && python -u",
+        "bat": "cmd /c",
+        "lua": "lua",
+        "csharp": "cd $dirWithoutTrailingSlash && dotnet run $filename",
+        "javascript": "node",
+        "rust": "cd $dirWithoutTrailingSlash && rustc $fileName && ./$fileNameWithoutExt",
+        "powershell": "chcp 65001 & set NO_COLOR=1 & pwsh -ExecutionPolicy ByPass -File",
+        "dart": "dart",
+        "pascal": "cd $dirWithoutTrailingSlash && fpc $fileName && ./$fileNameWithoutExt",
+        "perl": "perl",
+        "perl6": "perl6",
+        "php": "php",
+        "r": "Rscript",
+        "swift": "swift",
+        "objective-c": "cd $dirWithoutTrailingSlash && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "ruby": "ruby",
+        "groovy": "groovy",
+    },
+    "code-runner.executorMapByFileExtension": {
+        ".g4": "cd $dirWithoutTrailingSlash && antlr $fileName",
+        ".smt": "cd $dirWithoutTrailingSlash && z3 $fileName",
+        ".smt2": "cd $dirWithoutTrailingSlash && z3 $fileName",
+        ".ahk": "autohotkey",
+        ".lisp": "sbcl --script",
+        ".vb": "cd $dirWithoutTrailingSlash && vbc /nologo $fileName && $dir$fileNameWithoutExt",
+    },
+    "code-runner.executorMapByGlob": {
+        "pom.xml": "cd $dirWithoutTrailingSlash && mvn clean package"
+    },
+    // better comment
+    "better-comments.tags": [
+        {
+            "tag": "!",
+            "color": "#FF2D00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "?",
+            "color": "#3498DB",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "//",
+            "color": "#474747",
+            "strikethrough": true,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "todo",
+            "color": "#FF8C00",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "*",
+            "color": "#00CD66",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "~",
+            "color": "#b146c2",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "^",
+            "color": "#b146c2",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+        {
+            "tag": "&",
+            "color": "#d29c27",
+            "strikethrough": false,
+            "underline": false,
+            "backgroundColor": "transparent",
+            "bold": false,
+            "italic": false
+        },
+    ],
+    // 插件inline BookMarks，可以用注释的方式添加标签
+    "inline-bookmarks.expert.custom.words.mapping": {
+        "blue": [
+            ">[\\s]*mark[\\s]",
+            "@[\\s]*mark[\\s]",
+            ">[\\s]*m[\\s]",
+            "@[\\s]*m[\\s]"
+        ],
+        "purple": [
+            ">[\\s]*panic[\\s]",
+            "@[\\s]*panic[\\s]"
+        ],
+        "green": [
+            ">[\\s]*note[\\s]",
+            "@[\\s]*note[\\s]"
+        ],
+        "red": [
+            ">[\\s]*warn[\\s]",
+            ">[\\s]*why[\\s]",
+            ">[\\s]*mind[\\s]",
+            "@[\\s]*warn[\\s]",
+            "@[\\s]*why[\\s]",
+            "@[\\s]*mind[\\s]"
+        ],
+        "warn": [
+            ">[\\s]*todo[\\s]",
+            ">[\\s]*TODO[\\s]",
+            "@[\\s]*todo[\\s]",
+            "@[\\s]*TODO[\\s]",
+            "@[\\s]*tmp[\\s]",
+            ">[\\s]*tmp[\\s]"
+        ]
+    },
+    "inline-bookmarks.expert.custom.styles": {
+        "default": {
+            "gutterIconColor": "#157EFB",
+            "overviewRulerColor": "rgba(21, 126, 251, 0.7)",
+            "light": {
+                "fontWeight": "bold"
+            },
+            "dark": {
+                "color": "Chocolate"
+            }
+        },
+        "red": {
+            "gutterIconColor": "#F44336",
+            "light": {
+                "fontWeight": "bold"
+            },
+            "dark": {
+                "color": "Chocolate"
+            }
+        },
+        "blue": {
+            "gutterIconColor": "#42a5f5",
+            "light": {
+                "fontWeight": "bold"
+            },
+            "dark": {
+                "color": "Chocolate"
+            }
+        },
+        "green": {
+            "gutterIconColor": "#1ed66d",
+            "light": {
+                "fontWeight": "bold"
+            },
+            "dark": {
+                "color": "Chocolate"
+            }
+        },
+        "purple": {
+            "gutterIconColor": "#C679E0",
+            "light": {
+                "fontWeight": "bold"
+            },
+            "dark": {
+                "color": "Chocolate"
+            }
+        },
+        "warn": { // example custom style with yellow color
+            "gutterIconColor": "#F4F400",
+            "overviewRulerColor": "#F4F400B0",
+            "light": {
+                "fontWeight": "bold"
+            },
+            "dark": {
+                "color": "Chocolate"
+            }
+        }
+    },
+    // formater
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    // other plugins
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "cpp": false
+    },
+    // update bellow... 20231121
+    "hediet.vscode-drawio.resizeImages": null,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "cmake.showOptionsMovedNotification": false,
+    "liveServer.settings.donotVerifyTags": true,
+    "terminal.integrated.fontFamily": "'DroidSansMono NF'",
+    "redhat.telemetry.enabled": true,
+    "editor.minimap.showSlider": "always",
+    "window.commandCenter": false,
+    "clang-format.fallbackStyle": "Google",
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    "C_Cpp.formatting": "clangFormat",
+    "code-runner.defaultLanguage": "c++",
+    "code-runner.clearPreviousOutput": true,
+    "[cmake]": {
+        "editor.defaultFormatter": "cheshirekow.cmake-format"
+    },
+    "cmake.showNotAllDocumentsSavedQuestion": false,
+    "leetcode.endpoint": "leetcode-cn",
+    "leetcode.defaultLanguage": "cpp",
+    "leetcode.hint.commandShortcut": false,
+    "leetcode.hint.configWebviewMarkdown": false,
+    "clangd.checkUpdates": false,
+    "clangd.fallbackFlags": [
+        "-std=c++20"
+    ],
+    "cppref.lang": "zh",
+    "debug.onTaskErrors": "abort",
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+    "explorer.confirmPasteNative": false,
+    "github.copilot.editor.enableAutoCompletions": true,
+    // 可以定制编辑器之外的样式
+    "apc.activityBar": {
+        "size": 36,
+        "itemSize": 36,
+        "itemMargin": 6,
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "cnblogsClient.windows.workspace": "d:\\notes\\cnblogs",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "code-runner.runInTerminal": true,
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "hexeditor.columnWidth": 8,
+    "hexeditor.showDecodedText": true,
+    "hexeditor.defaultEndianness": "little",
+    "hexeditor.inspectorType": "aside",
+    "fittencode.languagePreference.displayPreference": "zh-cn",
+    "fittencode.languagePreference.commentPreference": "zh-cn",
+    "editor.wordWrap": "on",
+    "fittencode.inlineCompletion.enable": false,
+    // latex
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xe->bib->xe->xe",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "xe->bib",
+            "tools": [
+                "xelatex",
+                "bibtex",
+            ]
+        },
+        {
+            "name": "xe->bib->xe",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "texify", //放在最前面为默认编译方案, 适用于MikTex
+            "tools": [
+                "texify"
+            ]
+        },
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            // 编译工具和命令
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "texify",
+            "command": "texify",
+            "args": [
+                "--synctex",
+                "--pdf",
+                "--tex-option=\"-interaction=nonstopmode\"",
+                "--tex-option=\"-file-line-error\"",
+                "%DOC%.tex"
+            ]
+        }
+    ],
+    "latex-workshop.view.pdf.viewer": "external",
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "lldb.suppressUpdateNotifications": true,
+    // "latex-workshop.latex.autoClean.run": "onBuilt",
+}

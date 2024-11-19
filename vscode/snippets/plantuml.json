@@ -1,0 +1,24 @@
+{
+    "Start UML": {
+        "prefix": "uml",
+        "body": [
+            "@startuml anonymous",
+            "skin rose",
+            "skinparam shadowing false",
+            "scale 2",
+            "\n$0\n",
+            "@enduml"
+        ]
+    },
+    "Start MindMap": {
+        "prefix": "mind",
+        "body": [
+            "@startmindmap mindmap",
+            "skin rose",
+            "skinparam shadowing false",
+            "scale 2",
+            "\n$0\n\n",
+            "@endmindmap"
+        ]
+    },
+}

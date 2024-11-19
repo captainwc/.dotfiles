@@ -1,0 +1,13 @@
+{
+    "Main entry": {
+        "prefix" : "main",
+        "body":[
+            "if __name__ == \"__main__\":",
+            "\t$0"
+        ]
+    },
+    "print":{
+        "prefix" : "pt",
+        "body" : "print($1, end=\" \")$0"
+    }
+}
