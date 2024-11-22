@@ -31,18 +31,19 @@ alias vimal='vim ~/.bash_aliases_local'
 alias vimenv='vim ~/.bash_env'
 
 # some tools
-alias bat='batcat'
 alias diff='colordiff'
-alias fd='fdfind'
-alias grep='rg'
-alias top='htop'
 alias cman='man -M /usr/share/man/zh_CN'
 alias gdb='cgdb -q'
 alias sqlite='sqlite3'
 
 # modern unix
+alias top='btop'
+alias fd='fdfind'
+alias grep='rg'
 alias du='dust'
 alias df='duf'
+alias bench='hyperfine'
+alias bat='batcat'
 
 # 需要高版本glibc
 # alias diff='delta'
@@ -51,7 +52,6 @@ alias df='duf'
 # ------------小工具备忘----------
 # proc     类似 ps
 # mycli    mysql 命令行带自动补全
-# lsd	   彩色 ls
 # --------------------------------
 
 # functions
