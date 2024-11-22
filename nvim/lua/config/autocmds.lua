@@ -16,13 +16,13 @@ function RunFile()
     vim.cmd("w")
     local ft = vim.bo.filetype
     local run_cmd =
-        { javascript = "node", typescript = "ts-node", python = "python3", go = "go run", sh = "bash", lua = "lua" }
+        { javascript = "node", typescript = "ts-node", python = "python", go = "go run", sh = "bash", lua = "lua" }
     if run_cmd[ft] then
         ToggleFT("RUN", run_cmd[ft] .. " %")
     elseif ft == "c" then
         ToggleFT("RUN", "gcc % -o %< && ./%< && rm %<")
     elseif ft == "cpp" then
-        ToggleFT("RUN", "g++ % -o %< -std=c++20 && ./%< && rm %<")
+        ToggleFT("RUN", "g++ % -o %< -std=c++20 && %< && rm %<")
     elseif ft == "java" then
         ToggleFT("RUN", "javac % && java %<")
     end

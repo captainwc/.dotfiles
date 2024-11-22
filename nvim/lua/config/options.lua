@@ -12,6 +12,7 @@ vim.o.expandtab = true
 vim.g.floaterm_width = 0.6
 vim.g.floaterm_height = 0.6
 vim.g.floaterm_autoclose = 0
+-- vim.opt.shell = "D:/env/msys2/usr/bin/bash.exe"
 
 -- -- Fittencode
 

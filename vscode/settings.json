@@ -137,7 +137,7 @@
         "cpp": "cd $dirWithoutTrailingSlash && g++ $fileName -o $fileNameWithoutExt -std=c++20 && ./$fileNameWithoutExt",
         "go": "cd $dirWithoutTrailingSlash && go run $fileName",
         "shellscript": "bash",
-        "python": "set PYTHONIOENCODING=utf8 && python -u",
+        "python": "cd $dirWithoutTrailingSlash && set PYTHONIOENCODING=utf8 && python -u $fileName",
         "bat": "cmd /c",
         "lua": "lua",
         "csharp": "cd $dirWithoutTrailingSlash && dotnet run $filename",
@@ -361,7 +361,7 @@
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8"
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -380,7 +380,7 @@
     "security.workspace.trust.untrustedFiles": "open",
     "cmake.showOptionsMovedNotification": false,
     "liveServer.settings.donotVerifyTags": true,
-    "terminal.integrated.fontFamily": "'DroidSansMono NF'",
+    "terminal.integrated.fontFamily": "'DroidSansM Nerd Font Mono'",
     "redhat.telemetry.enabled": true,
     "editor.minimap.showSlider": "always",
     "window.commandCenter": false,
