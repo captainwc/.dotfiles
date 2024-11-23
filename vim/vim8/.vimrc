@@ -70,7 +70,7 @@ set noshowmode           " 设置不打开底部insert
 set hidden               " 设置允许在未保存切换buffer
 set background=dark      " 设置背景默认黑色
 set mouse=a              " 设置允许使用鼠标
-set clipboard^=unnamedplus " 设置vim剪贴板（”寄存器）和系统剪切板（+寄存器）同步
+" set clipboard^=unnamedplus " 设置vim剪贴板（”寄存器）和系统剪切板（+寄存器）同步, 好像会使得复制失效
 set linebreak
 " 背景透明
 " hi Normal guibg=NONE ctermbg=NONE
@@ -419,9 +419,10 @@ nnoremap <silent> <leader>k :FloatermKill<CR>
 tnoremap <silent> <leader>k <C-\><C-n>:FloatermKill<CR>
 tnoremap <silent> <C-n> <C-\><C-n>:FloatermNext<CR>
 tnoremap <silent> <F7> <C-\><C-n>:FloatermHide<CR>
-nnoremap <F5> :call RunFile()<CR>
 nnoremap <leader>r :call RunFile()<CR>
+nnoremap <F5> :call RunFile()<CR>
 nnoremap <leader>d :call DebugFile()<CR>
 
 " ===================================== LeaderF  ============================================
 nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
+nnoremap <leader><leader>b :Buffers<CR>
