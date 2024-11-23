@@ -1,10 +1,10 @@
-import platform
 import json
 import os
-from datetime import datetime
-from typing import Dict, Optional
+import platform
 import shutil
+from datetime import datetime
 from pathlib import Path
+from typing import Dict, Optional
 
 local_mapper = "dot_conf/map2localpath.json"
 repo_mapper = "dot_conf/map2repopath.json"
@@ -157,6 +157,11 @@ def _handle_exists_file(filename: str, del_exist: bool):
             shutil.rmtree(filename)
             _log(
                 f"{FG_YELLOW}[RemoveDir]{RESET}: Delete {COMMON_FILE_LINK_COLOR}{filename}{RESET}"
+            )
+        elif os.path.islink(filename):
+            os.unlink(filename)
+            _log(
+                f"{FG_YELLOW}[RemoveLink]{RESET}: Delete {COMMON_FILE_LINK_COLOR}{filename}{RESET}"
             )
         else:
             os.remove(filename)
