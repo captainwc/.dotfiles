@@ -109,12 +109,13 @@
         "LANG": "en_US.UTF-8"
     },
     // cpp & cmake
-    "C_Cpp.intelliSenseEngine": "disabled",
+    "C_Cpp.intelliSenseEngine": "default",
     "C_Cpp.errorSquiggles": "enabled",
     "C_Cpp.intelliSenseEngineFallback": "enabled",
-    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.cppStandard": "c++23",
     "C_Cpp.autocomplete": "default",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "C_Cpp.enhancedColorization": "enabled",
     "cmake.configureOnOpen": false,
     "cmake.options.statusBarVisibility": "compact",
     "cmake.useCMakePresets": "auto",
@@ -358,7 +359,7 @@
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "[cpp]": {
-        "editor.defaultFormatter": "xaver.clang-format"
+        "editor.defaultFormatter": "ms-vscode.cpptools"
     },
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff"

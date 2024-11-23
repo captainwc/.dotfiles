@@ -4,6 +4,10 @@
 "【用法】 :Plugstatus 查看插件状态；直接在此加入[Plug]行然后 :PlugInstall 安装；去掉[Plug]行后sv，:PlugClean 删除
 call plug#begin('~/.vim/plugged')
 
+" <FZF> ：需要python
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " <AirLine>
 Plug 'vim-airline/vim-airline'
 
@@ -24,35 +28,16 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "【用法】 先进入可视模式，然后：<leader>cc 注释；<leader>c<space> 切换注释状态
 Plug 'scrooloose/nerdcommenter'
 
-" <Syntastic> 语法检查
-" Plug 'vim-scripts/Syntastic'
-" <Ale> 语法检查
-" [Usages] <leader>s
-Plug 'dense-analysis/ale'
-
-" <LeaderF> 模糊查找，需要vim支持python环境（:version)
-" Plug 'yggdroot/leaderf'
-
 " <tag list> 显示源码大纲，要配合ctags使用
 " [Usages] <leader>b
 Plug 'vim-scripts/taglist.vim'
-
-" 森林主题， :colorscheme everForest<CR>
-Plug 'sainnhe/vim-color-forest-night'
 
 " coc
 " [Usages] CocInstall coc-cland等安装对不同语言的支持，CocCommand补全来查看各种命令
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" leetcode 插件
-" Plug 'ianding1/leetcode.vim'
-
 " 浮动终端
 Plug 'voldikss/vim-floaterm'
-
-" <ycm>
-" Plug 'valloric/youcompleteme'
-" Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
 
@@ -232,17 +217,17 @@ nnoremap <c-s-right> <c-w>L
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 别处配置映射，此处汇总
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" "---------<ALE>---------
-" nnoremap sp <Plug>(ale_previous_wrap)
-" nnoremap sn <Plug>(ale_next_wrap)
-" nnoremap <Leader>s :ALEToggle<CR>
-" nnoremap <Leader>d :ALEDetail<CR>
-"
 " "---------<NerdTree>----
 " nnoremap <leader>n :NERDTreeToggle<CR>
 "
 " "---------<Comment>-----
 " "<leader>cc 注释；<leader>c<space> 切换注释状态
+"
+" "---------<LeaderF>-----
+" "<leader><leader>f
+"
+" "---------<Coc>--------
+" "<leader>f
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件配置
@@ -264,7 +249,7 @@ nnoremap <c-s-right> <c-w>L
         let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '__pycache__']   " Hide temp files in NERDTree
         "let g:NERDTreeShowLineNumbers=1  " Show Line Number
     " Open Nerdtree when there's no file opened
-        "autocmd vimenter * if !argc()|NERDTree|endif
+		autocmd vimenter * if !argc()|NERDTree|endif
     " Or, auto-open Nerdtree
         "autocmd vimenter * NERDTree
     " Close NERDTree when there's no other windows
@@ -290,18 +275,6 @@ nnoremap <c-s-right> <c-w>L
 
     ">> NERDTree-Tabs
         "let g:nerdtree_tabs_open_on_console_startup=1 "Auto-open Nerdtree-tabs on VIM enter
-    ">> Nerdtree-devicons
-        "set guifont=DroidSansMono_Nerd_Font:h11
-    ">> Nerdtree-syntax-highlighting
-        "let g:NERDTreeDisableFileExtensionHighlight = 1
-        "let g:NERDTreeDisableExactMatchHighlight = 1
-        "let g:NERDTreeDisablePatternMatchHighlight = 1
-        "let g:NERDTreeFileExtensionHighlightFullName = 1
-        "let g:NERDTreeExactMatchHighlightFullName = 1
-        "let g:NERDTreePatternMatchHighlightFullName = 1
-        "let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-        "let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
-        "let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
 " }----<NerdTree>
 
 " ===============================  NredCommenter  ==================================
@@ -334,116 +307,6 @@ nnoremap <c-s-right> <c-w>L
 	let g:NERDToggleCheckAllLines = 1
 " }----------<NerdCommenter>
 
-" ====================================  LeaderF  ==================================
-" " <LeaderF>-----------{
-" let g:Lf_ShortcutF = '<c-p>'
-" " 配置根目录为包含这些文件的路径，以及工作方式 a A c C f F ，STFW
-" let g:Lf_WorkingDirectoryMode = 'AF'
-" let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
-" let g:Lf_DefaultExternalTool='rg'
-" " g:Lf_ShowHidden 设置1则显示隐藏文件. 默认值0.
-" " g:Lf_PreviewInPopup 设置成1, 预览(preview)会在弹出(popup)窗口里显示, 而不会在原来的文件所在的窗口里显示. 默认值是0.
-" " g:Lf_WindowHeight 设置窗口高度
-" " g:Lf_CacheDirectory 设置缓存路径
-" " g:Lf_StlColorscheme 设置状态栏配色方案
-" " g:Lf_PreviewResult 设置哪几个功能自动显示preview
-" " g:Lf_ReverseOrder 设置为1, 结果从下到上显示, 跟fzf/CtrlP一致, 默认是0, 从上倒下显示.
-" if has('nvim')
-"     let s:cachedir = expand(stdpath('cache'))
-"     let s:configdir = expand(stdpath('config'))
-" else
-"     "vim will share same folder with nvim
-"     if has('win32')
-"         let s:cachedir = expand('~/AppData/Local/Temp/cache/nvim')
-"         let s:configdir = expand('~/AppData/Local/nvim')
-"     else
-"         let s:cachedir = expand('~/.cache/nvim')
-"         let s:configdir = expand('~/.config/nvim')
-"     endif
-" endif
-" let g:Lf_PreviewInPopup = 1
-" let g:Lf_WindowHeight = 0.30
-" let g:Lf_CacheDirectory = s:cachedir
-" let g:Lf_StlColorscheme = 'powerline'
-" let g:Lf_PreviewResult = {
-"         \ 'File': 0,
-"         \ 'Buffer': 0,
-"         \ 'Mru': 0,
-"         \ 'Tag': 0,
-"         \ 'BufTag': 1,
-"         \ 'Function': 1,
-"         \ 'Line': 1,
-"         \ 'Colorscheme': 0,
-"         \ 'Rg': 0,
-"         \ 'Gtags': 0
-"         \}
-"
-
-" " }--------<LeaderF>
-" ===================================  Syntastic  ==================================
-" " <Syntastic>--------------------------{
-" " 启用Syntastic插件
-" let g:syntastic_enable_signs = 1
-" let g:syntastic_auto_loc_list = 1
-"
-" " 设置Syntastic在每次编辑时触发语法检查
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_check_on_text_changed = 1
-"
-" " 配置C/C++语言的检查器
-" let g:syntastic_c_checkers = ['gcc', 'cppcheck']
-" let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
-"
-" " 配置C/C++语言的检查命令
-" let g:syntastic_c_gcc_args = ['-Wall', '-Wextra']
-" let g:syntastic_cpp_gcc_args = ['-Wall', '-Wextra']
-" " }--------<Syntastic>
-
-" ==============================  ALE  =======================================
-" <ALE>--------------------------------{
-" 启用 ALE 插件
-let g:ale_enabled = 0
-
-"打开文件时不进行检查
-let g:ale_lint_on_enter = 0
-
-" 配置 ALE 在每次编辑时触发语法检查
-let g:ale_lint_on_text_changed = 'always'
-
-" 自定义error和warning图标
-" let g:ale_sign_error = '✖'
-" let g:ale_sign_warning = '⚠'
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
-let g:ale_set_highlights = 0
-
-"在vim自带的状态栏中整合ale
-let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
-
-"显示Linter名称,出错或警告等相关信息
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-"普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-nnoremap sp <Plug>(ale_previous_wrap)
-nnoremap sn <Plug>(ale_next_wrap)
-"触发/关闭语法检查
-nnoremap <Leader>s :ALEToggle<CR>
-"查看错误或警告的详细信息
-"nnoremap <Leader>d :ALEDetail<CR>
-
-" 配置 ALE 使用的检查器和语言
-let g:ale_linters = {
-	\ 'c': ['gcc', 'cppcheck'],
-    \ 'cpp': ['gcc', 'cppcheck'],
-    \ 'python': ['flake8'],
-    \ 'sh': ['shellcheck'],
-    \ 'java': ['javac'],
-    \ }
-" }--------<Ale>
-
 " ==================================   RainBow   ===================================
 " <Rainbow>------{ // Copy from https://github.com/luochen1990/rainbow/blob/master/README_zh.md //------
 " 本插件较为古老，不是通过VimPlug安装的。共有三个文件，直接删除掉就好。分别是：
@@ -475,15 +338,6 @@ let g:rainbow_conf = {
 " NERDTree与Rainbow会冲突，产生多余的括号，所以有 nerdtree:0一项
 " }---------<Rainbow>
 
-"=====================================  Easymotion  =====================================
-"let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-map <Leader><leader>h <Plug>(easymotion-linebackward)
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-map <Leader><leader>l <Plug>(easymotion-lineforward)
-" 重复上一次操作, 类似repeat插件, 很强大
-map <Leader><leader>. <Plug>(easymotion-repeat)
-
 " ================================= Coc ================================================
 " inoremap <silent> <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
 inoremap <silent> <expr> <Tab> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
@@ -493,7 +347,6 @@ let g:coc_disable_startup_warning = 1
 let g:coc_user_config = {
 \ 'python.formatting.provider': 'autopep8',
 \}
-
 " nnoremap <silent> <leader>r :call CocAction('rename')<CR>
 
 " ================================= FloatTerm  ================================================
@@ -557,8 +410,9 @@ let g:floaterm_wintype = 'float'
 let g:floaterm_position = 'center'
 let g:floaterm_title = 'floaterm: $1/$2'
 
-" let g:floaterm_keymap_new = '<Leader>t'
+let g:floaterm_keymap_new = '<Leader>t'
 let g:floaterm_keymap_toggle = '<Leader>tt'
+let g:floaterm_keymap_toggle = '<Leader><Leader>t'
 
 nnoremap <silent> <leader>t :FloatermNew --autoclose=1 <CR>
 nnoremap <silent> <leader>k :FloatermKill<CR>
@@ -569,4 +423,5 @@ nnoremap <F5> :call RunFile()<CR>
 nnoremap <leader>r :call RunFile()<CR>
 nnoremap <leader>d :call DebugFile()<CR>
 
+" ===================================== LeaderF  ============================================
 nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>

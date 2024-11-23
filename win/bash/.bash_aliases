@@ -1,3 +1,17 @@
+## cppcheck
+cklog() {
+    files=$(fd -e h -e cpp -e hpp)
+	# suppressed = "--suppress=missingInclude --suppress=missingIncludeSystem"
+	if [ ! -d "cppchecklog" ]; then
+		mkdir cppchecklog
+	fi
+    for file in $files; do
+		log_file="cppchecklog/$(basename $file).log"
+        cppcheck "$file" --language=c++ --std=c++20 --enable=all 2> ${log_file}
+		sed -i '/missingInclude/,+2d' ${log_file}
+    done
+}
+
 # 七牛云-------------------------------------------------------------------------------------------------
 ## - qossls
 ## - qossla
