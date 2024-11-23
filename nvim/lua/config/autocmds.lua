@@ -22,7 +22,7 @@ function RunFile()
     elseif ft == "c" then
         ToggleFT("RUN", "gcc % -o %< && ./%< && rm %<")
     elseif ft == "cpp" then
-        ToggleFT("RUN", "g++ % -o %< -std=c++20 && %< && rm %<")
+        ToggleFT("RUN", "g++ % -o %< -std=c++20 -fmodules-ts && %< && rm %<")
     elseif ft == "java" then
         ToggleFT("RUN", "javac % && java %<")
     end
@@ -45,7 +45,7 @@ function DebugFile()
             string.format(
                 "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
                 "DEBUG",
-                'bash -c "g++ % -o %< -g -std=c++20 && cgdb -q %< && rm %<"'
+                'bash -c "g++ % -o %< -g -std=c++20 -fmodules-ts && cgdb -q %< && rm %<"'
             )
         )
     elseif ft == "python" then
