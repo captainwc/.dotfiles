@@ -192,30 +192,38 @@ def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=
         )
         return
 
-    if os.path.exists(local_link):
-        if os.path.islink(local_link):
-            old_target = os.readlink(local_link)
-            if os.path.samefile(old_target, repo_source):
-                _log(
-                    f"{FG_GREEN}[Link exist]{RESET} {SUCCESS_FILE_LINK_COLOR}{local_link}{RESET} => {SUCCESS_FILE_LINK_COLOR}{old_target}{RESET}"
-                )
-                return
-            else:
-                _handle_exists_file(local_link, del_exist)
+    if os.path.islink(local_link):
+        old_target = os.readlink(local_link)
+        if os.path.samefile(old_target, repo_source):
+            _log(
+                f"{FG_GREEN}[Link exist]{RESET} {SUCCESS_FILE_LINK_COLOR}{local_link}{RESET} => {SUCCESS_FILE_LINK_COLOR}{old_target}{RESET}"
+            )
+            return
         else:
             _handle_exists_file(local_link, del_exist)
     else:
-        par = Path(local_link).parent
-        if not os.path.exists(par):
-            os.makedirs(par)
+        if os.path.exists(local_link):
+            _handle_exists_file(local_link, del_exist)
+        else:
+            par = Path(local_link).parent
+            if not os.path.exists(par):
+                os.makedirs(par)
 
     # make link
     try:
         is_dir = os.path.isdir(repo_source)
         os.symlink(repo_source, local_link, target_is_directory=is_dir)
-        _log(
-            f"{BG_GREEN}[SUCCESS]{RESET} {SUCCESS_FILE_LINK_COLOR}{local_link}{RESET} => {SUCCESS_FILE_LINK_COLOR}{repo_source}{RESET} DONE!"
-        )
+        ## make sure that the creatation done successfully
+        if os.path.exists(os.readlink(local_link)) and os.path.samefile(
+            os.readlink(local_link), repo_source
+        ):
+            _log(
+                f"{BG_GREEN}[SUCCESS]{RESET} {SUCCESS_FILE_LINK_COLOR}{local_link}{RESET} => {SUCCESS_FILE_LINK_COLOR}{repo_source}{RESET} DONE!"
+            )
+        else:
+            _warn(
+                f"{BG_RED}[FAILED, BROKEN SYMBOLIC]{RESET} {COMMON_FILE_LINK_COLOR}{local_link}{RESET} => {BG_YELLOW}{os.readlink(local_link)}{RESET}, should be =>> {COMMON_FILE_LINK_COLOR}{repo_source}{RESET}"
+            )
     except OSError as e:
         _warn(
             f"""{FG_RED}[Exception]{RESET}: Please check if you have {BOLD}sudo mode{
