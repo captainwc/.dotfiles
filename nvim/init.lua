@@ -1,6 +1,9 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
+-- config about mini.surround referred to plugins/minisurround.lua
+require("mini.surround").setup()
+
 -- vim.cmd([[colorscheme catppuccin-mocha]])
 vim.cmd([[colorscheme dracula]])
 -- vim.cmd.colorscheme = "embark"
