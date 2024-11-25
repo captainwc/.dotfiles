@@ -6,14 +6,10 @@
 -- vim.g.mapleader = ","
 
 -- normal
--- vim.api.nvim_set_keymap("n", "<leader>b", ":Tlist<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader><leader>c", ":set nonumber norelativenumber nolist wrap<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader><leader>v", ":set number relativenumber nowrap<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>h", ":nohlsearch<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>w", ":if &wrap | set nowrap | else | set wrap | endif<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>q", ":wq<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader><leader>q", ":q!<CR>", { noremap = true })
+-- Toggle Wrap: Use <leader>uw Instead
+-- vim.api.nvim_set_keymap("n", "<leader>w", ":if &wrap | set nowrap | else | set wrap | endif<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<CR>", ":w<esc>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true })
 
 -- FloatTerm
 vim.api.nvim_set_keymap("n", "<Leader>t", ":FloatermToggle<CR>", { noremap = true, silent = true })
@@ -25,10 +21,6 @@ vim.api.nvim_set_keymap("t", "<leader>k", "<C-\\><C-n>:FloatermKill<CR>", { nore
 vim.api.nvim_set_keymap("n", "<F5>", ":lua RunFile()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>r", ":lua RunFile()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>d", ":lua DebugFile()<CR>", { noremap = true, silent = true })
-
--- commenting
-vim.api.nvim_set_keymap("n", "<leader>c<space>", ":CommentToggle<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>c<space>", ":CommentToggle<CR>", { noremap = true, silent = true })
 
 -- Fittencode
 vim.api.nvim_set_keymap("n", "<leader>as", ":Fitten start_chat<CR>", { noremap = true, silent = true })
