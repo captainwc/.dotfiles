@@ -11,7 +11,9 @@
         "helix": "helix/config.toml",
         "vscode_setting": "vscode/settings.json",
         "vscode_key": "vscode/keybindings.json",
-        "vscode_snippets": "vscode/snippets"
+        "vscode_snippets": "vscode/snippets",
+        "tmux": ".config/tmux/.tmux.conf",
+        "tmux_local": ".config/tmux/.tmux.conf.local"
     },
     "linux": {
         "bash_alias": "unix/bash/.bash_aliases",
@@ -28,6 +30,7 @@
         "pip": ".pip/pip.conf",
         "redis": ".redis/redis.conf",
         "clangd": ".config/clangd/config.yaml",
-        "tmux": ".config/tmux/tmux.conf"
+        "tmux": ".config/tmux/.tmux.conf",
+        "tmux_local": ".config/tmux/.tmux.conf.local"
     }
 }
