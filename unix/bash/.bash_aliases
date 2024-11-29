@@ -32,6 +32,8 @@ alias vima='vim ~/.bash_aliases'
 alias vimal='vim ~/.bash_aliases_local'
 alias vimenv='vim ~/.bash_env'
 
+alias tmuxkillall="tmux ls | awk -F ':' '{print $1}' | xargs -I{} echo 'kill session: {}' && tmux kill-session -t {}"
+
 # some tools
 alias diff='colordiff'
 alias cman='man -M /usr/share/man/zh_CN'

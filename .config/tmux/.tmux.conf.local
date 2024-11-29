@@ -170,7 +170,6 @@ tmux_conf_theme_status_attr="none"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 
 # window status style
 #   - built-in variables are:
@@ -262,8 +261,11 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 # App  󰨡 󰖲  
 # Keyboard 󰌌  󰌏 󰧺
 #
+# terminal title
+# tmux_conf_theme_terminal_title=" #h ❐ #S ● #I #W"
+tmux_conf_theme_terminal_title=" #h 󰄙 #S ❐ #W #I"
 tmux_conf_theme_status_left=" 󰄙 #S "
-tmux_conf_theme_window_status_current_format="󰨡 #W"
+tmux_conf_theme_window_status_current_format="❐ #W"
 # tmux_conf_theme_window_status_current_format="#{circled_window_index} #W"
 # tmux_conf_theme_window_status_current_format="#I #W#{?window_zoomed_flag,🔍,}"
 #
