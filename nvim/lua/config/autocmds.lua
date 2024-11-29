@@ -110,6 +110,19 @@ function ShowFilePath()
     )
 end
 
+-- 规则化路径分隔符
+function NormalizePath(path)
+    local osType = jit.os
+    local sep
+    if osType == "Windows" then
+        sep = "\\"
+    else
+        sep = "/"
+    end
+    local normalPath = path:gsub("[/\\]", sep)
+    return normalPath
+end
+
 -- 寻找根CMakeLists.txt路径
 function FindCMakeRoot()
     -- vim.ui.input({ prompt = "Enter your name:" }, function(input)
@@ -129,26 +142,28 @@ function FindCMakeRoot()
         end -- 如果没有更上层的目录了，退出循环
         path = parent
     end
-    return last_cmake_file or nil
+    return NormalizePath(last_cmake_file) or nil
 end
 
 -- CMAKE 运行当前文件同名的 target， 会重新配置cmake
 function CMakeRunTarget()
     local targetName = vim.fn.expand("%:p:t:r")
     local cmakeRoot = FindCMakeRoot()
-    local buildDir = cmakeRoot .. "/build"
+    local buildDir = NormalizePath(cmakeRoot .. "/build")
+    local relativeBin = NormalizePath("bin/" .. targetName)
     vim.cmd("w")
     vim.cmd(
         string.format(
             "FloatermNew --title=CMakeRunTarget:%s --autoclose=0 %s",
             targetName,
             string.format(
-                "rm -rf %s ; mkdir %s ; cd %s && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target=%s && clear && bin/%s",
+                "((rm -rf %s && mkdir %s) || (mkdir %s)) && cd %s && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target=%s && clear && %s",
+                buildDir,
                 buildDir,
                 buildDir,
                 buildDir,
                 targetName,
-                targetName
+                relativeBin
             )
         )
     )
@@ -158,19 +173,21 @@ end
 function CMakeDebugTarget()
     local targetName = vim.fn.expand("%:p:t:r")
     local cmakeRoot = FindCMakeRoot()
-    local buildDir = cmakeRoot .. "/build"
+    local buildDir = NormalizePath(cmakeRoot .. "/build")
+    local relativeBin = NormalizePath("bin/" .. targetName)
     vim.cmd("w")
     vim.cmd(
         string.format(
-            "FloatermNew --autoclose=1 --title=CMakeDebugTarget:%s --width=0.9 --height=0.85 %s",
+            "FloatermNew --title=CMakeDebugTarget:%s --autoclose=1 --width=0.9 --height=0.85 %s",
             targetName,
             string.format(
-                "rm -rf %s ; mkdir %s ; cd %s && cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build . --target=%s && clear && cgdb bin/%s",
+                "((rm -rf %s && mkdir %s) || (mkdir %s)) && cd %s && cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build . --target=%s && clear && cgdb %s",
+                buildDir,
                 buildDir,
                 buildDir,
                 buildDir,
                 targetName,
-                targetName
+                relativeBin
             )
         )
     )
@@ -180,13 +197,19 @@ end
 function CMakeRunTargetNonClean()
     local targetName = vim.fn.expand("%:p:t:r")
     local cmakeRoot = FindCMakeRoot()
-    local buildDir = cmakeRoot .. "/build"
+    local buildDir = NormalizePath(cmakeRoot .. "/build")
+    local relativeBin = NormalizePath("bin/" .. targetName)
     vim.cmd("w")
     vim.cmd(
         string.format(
             "FloatermNew --title=CMakeRunTarget:%s --autoclose=0 %s",
             targetName,
-            string.format("cd %s && cmake --build . --target=%s && clear && bin/%s", buildDir, targetName, targetName)
+            string.format(
+                "cd %s && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target=%s && clear && %s",
+                buildDir,
+                targetName,
+                relativeBin
+            )
         )
     )
 end
@@ -195,17 +218,18 @@ end
 function CMakeDebugTargetNonClean()
     local targetName = vim.fn.expand("%:p:t:r")
     local cmakeRoot = FindCMakeRoot()
-    local buildDir = cmakeRoot .. "/build"
+    local buildDir = NormalizePath(cmakeRoot .. "/build")
+    local relativeBin = NormalizePath("bin/" .. targetName)
     vim.cmd("w")
     vim.cmd(
         string.format(
-            "FloatermNew --autoclose=1 --title=CMakeDebugTarget:%s --width=0.9 --height=0.85 %s",
+            "FloatermNew --title=CMakeDebugTarget:%s --autoclose=1 --width=0.9 --height=0.85 %s",
             targetName,
             string.format(
-                "cd %s && cmake --build . --target=%s && clear && cgdb bin/%s",
+                "cd %s && cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build . --target=%s && clear && cgdb %s",
                 buildDir,
                 targetName,
-                targetName
+                relativeBin
             )
         )
     )
