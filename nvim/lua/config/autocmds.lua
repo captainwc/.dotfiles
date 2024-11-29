@@ -90,3 +90,129 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = Set_transparent_background,
 })
+
+-- 文件路径相关
+function ShowFilePath()
+    local fullpath = vim.fn.expand("%:p")
+    local folder = vim.fn.expand("%:p:h")
+    local filename = vim.fn.expand("%:p:t")
+    local fullbase = vim.fn.expand("%:p:r")
+    local extension = vim.fn.expand("%:p:e")
+    print(
+        string.format(
+            "FULL: %s\nFolder: %s\nFilename: %s\nFullBase: %s\nEXT: %s\n",
+            fullpath,
+            folder,
+            filename,
+            fullbase,
+            extension
+        )
+    )
+end
+
+function Log(any)
+    print(any)
+end
+
+function Execute(cmd)
+    -- ret = os.execute(cmd)
+    -- return ret
+    cmd = cmd:gsub("\\", "/")
+    Log("[cmd]：" .. cmd .. "\n")
+    local ret = os.execute(
+        string.format('D:/env/msys2/usr/bin/bash -c "%s"', cmd)
+        -- string.format(
+        --     "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
+        --     "ExecuteCommand",
+        --     string.format('D:/env/msys2/usr/bin/bash -c "%s"', cmd)
+        -- )
+    )
+    -- ToggleFT("CmakeBuild", cmd)
+    Log("[cmd ret]: " .. ret)
+    return ret
+end
+
+-- 寻找根CMakeLists.txt路径
+function FindCMakeRoot()
+    -- vim.ui.input({ prompt = "Enter your name:" }, function(input)
+    --     print("[input]: " .. input)
+    -- end)
+    -- ShowFilePath()
+    local path = vim.fn.expand("%:p:h") -- 获取当前文件所在目录
+    local last_cmake_file = nil
+
+    while true do
+        if vim.fn.filereadable(path .. "/CMakeLists.txt") == 1 then
+            last_cmake_file = path
+        end
+        local parent = vim.fn.fnamemodify(path, ":h")
+        if parent == path then
+            break
+        end -- 如果没有更上层的目录了，退出循环
+        path = parent
+    end
+    return last_cmake_file or nil
+end
+
+function CMakeRunTarget(targetName, buildType, clearCache)
+    buildType = buildType or "Release"
+    clearCache = clearCache or false
+
+    -- (1) find cmake root dir
+    local workDir = FindCMakeRoot()
+    if not workDir then
+        Log("Couldn't find CMakeLists in this folder and it's parent")
+        return 1
+    end
+
+    -- (2) confirm build dir
+    local buildDir = workDir .. "\\build"
+    if vim.fn.isdirectory(buildDir) == 0 then
+        local mkDirRet = Execute("mkdir -p " .. buildDir)
+        if mkDirRet ~= 0 then
+            Log("Make BuildDir Failed")
+            return 1
+        end
+    end
+
+    -- (3) whether need to clean the builddir
+    if clearCache then
+        local rmDirRet = Execute(string.format("rm -rf %s/*", buildDir))
+        if rmDirRet ~= 0 then
+            Log("Clean BuildDir Failed")
+            return 1
+        end
+    end
+
+    -- (4) Cmake Gen
+    local cmakeRet = Execute(string.format("cd %s && cmake .. -DCAMKE_BUILD_TYPE=%s", buildDir, buildType))
+    if cmakeRet ~= 0 then
+        Log("Cmake Generate Failed")
+        return 1
+    end
+
+    -- (5) Cmake Build Target
+    local cmakeBuildRet = Execute(string.format("cd %s && cmake --build . --target=%s", buildDir, targetName))
+    if cmakeBuildRet ~= 0 then
+        Log("Cmake Build Target Failed")
+        return 1
+    end
+
+    -- (6) Run Target
+    -- Execute(string.format("cd bin && ./%s", targetName))
+    ToggleFT("RUN", string.format("cd %s/bin && %s.exe", buildDir, targetName))
+    -- vim.cmd(
+    --     string.format(
+    --         "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
+    --         "CMAKE RUN",
+    --         string.format('D:/env/msys2/usr/bin/bash.exe -c "%s"', )
+    --     )
+    -- )
+end
+
+function Hello()
+    local targetName = vim.fn.expand("%:p:t:r")
+    CMakeRunTarget(targetName, "Debug", false)
+end
+
+-- 最大的问题是命令执行流不同步。要么合并为一条命令，要么用回调的方式规避异步
