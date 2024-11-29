@@ -110,28 +110,6 @@ function ShowFilePath()
     )
 end
 
-function Log(any)
-    print(any)
-end
-
-function Execute(cmd)
-    -- ret = os.execute(cmd)
-    -- return ret
-    cmd = cmd:gsub("\\", "/")
-    Log("[cmd]：" .. cmd .. "\n")
-    local ret = os.execute(
-        string.format('D:/env/msys2/usr/bin/bash -c "%s"', cmd)
-        -- string.format(
-        --     "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
-        --     "ExecuteCommand",
-        --     string.format('D:/env/msys2/usr/bin/bash -c "%s"', cmd)
-        -- )
-    )
-    -- ToggleFT("CmakeBuild", cmd)
-    Log("[cmd ret]: " .. ret)
-    return ret
-end
-
 -- 寻找根CMakeLists.txt路径
 function FindCMakeRoot()
     -- vim.ui.input({ prompt = "Enter your name:" }, function(input)
@@ -154,65 +132,81 @@ function FindCMakeRoot()
     return last_cmake_file or nil
 end
 
-function CMakeRunTarget(targetName, buildType, clearCache)
-    buildType = buildType or "Release"
-    clearCache = clearCache or false
-
-    -- (1) find cmake root dir
-    local workDir = FindCMakeRoot()
-    if not workDir then
-        Log("Couldn't find CMakeLists in this folder and it's parent")
-        return 1
-    end
-
-    -- (2) confirm build dir
-    local buildDir = workDir .. "\\build"
-    if vim.fn.isdirectory(buildDir) == 0 then
-        local mkDirRet = Execute("mkdir -p " .. buildDir)
-        if mkDirRet ~= 0 then
-            Log("Make BuildDir Failed")
-            return 1
-        end
-    end
-
-    -- (3) whether need to clean the builddir
-    if clearCache then
-        local rmDirRet = Execute(string.format("rm -rf %s/*", buildDir))
-        if rmDirRet ~= 0 then
-            Log("Clean BuildDir Failed")
-            return 1
-        end
-    end
-
-    -- (4) Cmake Gen
-    local cmakeRet = Execute(string.format("cd %s && cmake .. -DCAMKE_BUILD_TYPE=%s", buildDir, buildType))
-    if cmakeRet ~= 0 then
-        Log("Cmake Generate Failed")
-        return 1
-    end
-
-    -- (5) Cmake Build Target
-    local cmakeBuildRet = Execute(string.format("cd %s && cmake --build . --target=%s", buildDir, targetName))
-    if cmakeBuildRet ~= 0 then
-        Log("Cmake Build Target Failed")
-        return 1
-    end
-
-    -- (6) Run Target
-    -- Execute(string.format("cd bin && ./%s", targetName))
-    ToggleFT("RUN", string.format("cd %s/bin && %s.exe", buildDir, targetName))
-    -- vim.cmd(
-    --     string.format(
-    --         "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
-    --         "CMAKE RUN",
-    --         string.format('D:/env/msys2/usr/bin/bash.exe -c "%s"', )
-    --     )
-    -- )
-end
-
-function Hello()
+-- CMAKE 运行当前文件同名的 target， 会重新配置cmake
+function CMakeRunTarget()
     local targetName = vim.fn.expand("%:p:t:r")
-    CMakeRunTarget(targetName, "Debug", false)
+    local cmakeRoot = FindCMakeRoot()
+    local buildDir = cmakeRoot .. "/build"
+    vim.cmd("w")
+    vim.cmd(
+        string.format(
+            "FloatermNew --title=CMakeRunTarget:%s --autoclose=0 %s",
+            targetName,
+            string.format(
+                "rm -rf %s ; mkdir %s ; cd %s && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target=%s && clear && bin/%s",
+                buildDir,
+                buildDir,
+                buildDir,
+                targetName,
+                targetName
+            )
+        )
+    )
 end
 
--- 最大的问题是命令执行流不同步。要么合并为一条命令，要么用回调的方式规避异步
+-- CMAKE 调试当前文件同名的 target， 会重新配置cmake
+function CMakeDebugTarget()
+    local targetName = vim.fn.expand("%:p:t:r")
+    local cmakeRoot = FindCMakeRoot()
+    local buildDir = cmakeRoot .. "/build"
+    vim.cmd("w")
+    vim.cmd(
+        string.format(
+            "FloatermNew --autoclose=1 --title=CMakeDebugTarget:%s --width=0.9 --height=0.85 %s",
+            targetName,
+            string.format(
+                "rm -rf %s ; mkdir %s ; cd %s && cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build . --target=%s && clear && cgdb bin/%s",
+                buildDir,
+                buildDir,
+                buildDir,
+                targetName,
+                targetName
+            )
+        )
+    )
+end
+
+-- CMAKE 运行当前文件同名的 target，不会重新配置cmake
+function CMakeRunTargetNonClean()
+    local targetName = vim.fn.expand("%:p:t:r")
+    local cmakeRoot = FindCMakeRoot()
+    local buildDir = cmakeRoot .. "/build"
+    vim.cmd("w")
+    vim.cmd(
+        string.format(
+            "FloatermNew --title=CMakeRunTarget:%s --autoclose=0 %s",
+            targetName,
+            string.format("cd %s && cmake --build . --target=%s && clear && bin/%s", buildDir, targetName, targetName)
+        )
+    )
+end
+
+-- CMAKE 调试当前文件同名的target，不会重新配置cmake
+function CMakeDebugTargetNonClean()
+    local targetName = vim.fn.expand("%:p:t:r")
+    local cmakeRoot = FindCMakeRoot()
+    local buildDir = cmakeRoot .. "/build"
+    vim.cmd("w")
+    vim.cmd(
+        string.format(
+            "FloatermNew --autoclose=1 --title=CMakeDebugTarget:%s --width=0.9 --height=0.85 %s",
+            targetName,
+            string.format(
+                "cd %s && cmake --build . --target=%s && clear && cgdb bin/%s",
+                buildDir,
+                targetName,
+                targetName
+            )
+        )
+    )
+end

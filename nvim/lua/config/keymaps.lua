@@ -22,8 +22,10 @@ vim.api.nvim_set_keymap("n", "<Leader>k", ":FloatermKill<CR>", { noremap = true,
 vim.api.nvim_set_keymap("t", "<leader>k", "<C-\\><C-n>:FloatermKill<CR>", { noremap = true, silent = true })
 
 -- FloatTerm 中运行代码
-vim.api.nvim_set_keymap("n", "<F5>", ":lua RunFile()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<F6>", ":lua Hello()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>mcr", ":lua CMakeRunTarget()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>mcd", ":lua CMakeDebugTarget()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>mr", ":lua CMakeRunTargetNonClean()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>md", ":lua CMakeDebugTargetNonClean()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>r", ":lua RunFile()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>d", ":lua DebugFile()<CR>", { noremap = true, silent = true })
 
