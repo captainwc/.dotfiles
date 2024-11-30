@@ -10,3 +10,5 @@
         selected = manager
 ; [url "https://gitclone.com/"]
 ;         insteadOf = https://
+[pull]
+	rebase = false
