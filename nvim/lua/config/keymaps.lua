@@ -14,8 +14,10 @@ vim.api.nvim_set_keymap("n", "g,", "<C-o>", { noremap = true, silent = true }) -
 vim.api.nvim_set_keymap("n", "g.", "<C-i>", { noremap = true, silent = true }) -- go prev
 vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = true, silent = true }) -- go back
 vim.api.nvim_set_keymap("n", "<M-right>", "<C-i>", { noremap = true, silent = true }) -- go prev
+vim.api.nvim_set_keymap("n", "<leader>fp", ":lua ShowFilePath()<CR>", { noremap = true, silent = true }) -- print currfile path
 
 -- FloatTerm
+vim.api.nvim_set_keymap("n", "<Leader>mn", ":FloatermNew<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>t", ":FloatermToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<leader>t", "<C-\\><C-n>:FloatermToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>k", ":FloatermKill<CR>", { noremap = true, silent = true })

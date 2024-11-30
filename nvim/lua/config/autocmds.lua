@@ -91,25 +91,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     callback = Set_transparent_background,
 })
 
--- 文件路径相关
-function ShowFilePath()
-    local fullpath = vim.fn.expand("%:p")
-    local folder = vim.fn.expand("%:p:h")
-    local filename = vim.fn.expand("%:p:t")
-    local fullbase = vim.fn.expand("%:p:r")
-    local extension = vim.fn.expand("%:p:e")
-    print(
-        string.format(
-            "FULL: %s\nFolder: %s\nFilename: %s\nFullBase: %s\nEXT: %s\n",
-            fullpath,
-            folder,
-            filename,
-            fullbase,
-            extension
-        )
-    )
-end
-
 -- 规则化路径分隔符
 function NormalizePath(path)
     local osType = jit.os
@@ -121,6 +102,16 @@ function NormalizePath(path)
     end
     local normalPath = path:gsub("[/\\]", sep)
     return normalPath
+end
+
+-- 文件路径相关
+function ShowFilePath()
+    local fullpath = vim.fn.expand("%:p")
+    local folder = vim.fn.expand("%:p:h")
+    local filename = vim.fn.expand("%:p:t")
+    local fullbase = vim.fn.expand("%:p:r")
+    local extension = vim.fn.expand("%:p:e")
+    print(NormalizePath(fullpath))
 end
 
 -- 寻找根CMakeLists.txt路径
