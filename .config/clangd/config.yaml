@@ -15,13 +15,17 @@ Diagnostics:
         zircon*,
         altera*,
 
+        bugprone-easily-swappable-parameters, #相邻同类型参数容易混淆
         cppcoreguidelines-avoid-c-arrays, # 不要用 C 数组
         cppcoreguidelines-avoid-do-while,
         cppcoreguidelines-avoid-magic-numbers, # 不要用魔法数字
         cppcoreguidelines-macro-usage, # 宏定义用法，不要定义常数之类的
         cppcoreguidelines-non-private-member-variables-in-classes, # 所有成员变量都得是private的
         cppcoreguidelines-owning-memory, # 用gsl::owner<> 来表示指针拥有对象的所有权
-        cppcoreguidelines-pro-bounds-array-to-pointer-dacay, # 数组传参退化为指针
+        cppcoreguidelines-pro-bounds-array-to-pointer-decay, # 数组传参退化为指针
+        cppcoreguidelines-pro-bounds-pointer-arithmetic, # 不要使用指针运算
+        cppcoreguidelines-pro-bounds-constant-array-index, # 数组index当为常量
+        google-build-using-namespace, # 不要用using namesapce xxx;
         google-readability-todo,
         hicpp-avoid-c-arrays, # 禁用c风格数组
         hicpp-braces-around-statements,
@@ -29,8 +33,10 @@ Diagnostics:
         misc-no-recursion, #递归
         misc-non-private-member-variables-in-classes, # public成员变量，或许不该用，但是想用
         modernize-avoid-c-arrays, # 同上
+        modernize-use-nodiscard, # 推荐使用 [[nodiscard]]
         modernize-use-trailing-return-type, # 不要每个都加上尾返回值类型
         readability-braces-around-statements,
+        readability-convert-member-functions-to-static, # 转为静态成员函数
         readability-identifier-length, # 不检查变量名长度
         readability-implicit-bool-conversion, # 隐式布尔类型转换
         readability-magic-numbers, #同上

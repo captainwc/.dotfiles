@@ -30,7 +30,7 @@ alias vimz='vim ~/.zshrc'
 alias vimv='vim ~/.vimrc'
 alias vima='vim ~/.bash_aliases'
 alias vimal='vim ~/.bash_aliases_local'
-alias vimenv='vim ~/.bash_env'
+alias vime='vim ~/.bash_env'
 
 alias tmuxkillall="tmux ls | awk -F ':' '{print \$1}' | tee >(xargs -I{} echo 'kill session: {}') | xargs -I{} tmux kill-session -t {}"
 
@@ -245,6 +245,13 @@ fkill() {
     if [ "x$pid" != "x" ]; then
         echo $pid | xargs kill -${1:-9}
     fi
+}
+
+pyserver() {
+    path=$(pwd)
+    vm_ip=localhost
+    port=8081
+    /usr/bin/python3 -m http.server --directory ${path} --bind ${vm_ip} ${port}
 }
 
 ### perf
