@@ -1,4 +1,5 @@
 {
+    "bazel.enableCodeLens": true,
     // executable
     "clangd.path": "clangd",
     "clang-format.executable": "clang-format",
@@ -8,16 +9,9 @@
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "remote.SSH.configFile": "~/.ssh/config",
-    "remote.SSH.remotePlatform": {
-        "kk03": "linux",
-        "vlab": "linux",
-        "kk02": "linux",
-        "kkdebian": "linux",
-        "vm-debian": "linux",
-        "vm-centos": "linux"
-    },
+    "remote.SSH.remotePlatform": {},
     // terminal
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.profiles.windows": {
         "Ubuntu (WSL)": {
             "path": "C:\\WINDOWS\\System32\\wsl.exe",
@@ -59,7 +53,7 @@
     "markdown.styles": [
         "~/.files/github.css"
     ],
-    "workbench.colorTheme": "Quiet Light",
+    "workbench.colorTheme": "One Dark Pro Darker",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.editor.wrapTabs": true,
@@ -75,7 +69,8 @@
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 300,
     "files.associations": {
-        "*.S": "gas"
+        "*.S": "gas",
+        "*.cu": "cuda-cpp",
     },
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
@@ -109,10 +104,9 @@
         "LANG": "en_US.UTF-8"
     },
     // cpp & cmake
-    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.intelliSenseEngine": "disabled",
     "C_Cpp.errorSquiggles": "enabled",
-    "C_Cpp.intelliSenseEngineFallback": "enabled",
-    "C_Cpp.default.cppStandard": "c++23",
+    "C_Cpp.default.cppStandard": "c++20",
     "C_Cpp.autocomplete": "default",
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
     "C_Cpp.enhancedColorization": "enabled",
@@ -136,6 +130,7 @@
         "java": "javac $fileName && java $fileNameWithoutExt",
         "c": "cd $dirWithoutTrailingSlash && gcc $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt",
         "cpp": "cd $dirWithoutTrailingSlash && g++ $fileName -o $fileNameWithoutExt -std=c++20 && ./$fileNameWithoutExt",
+        "cu": "cd $dirWithoutTrailingSlash && nvcc $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt",
         "go": "cd $dirWithoutTrailingSlash && go run $fileName",
         "shellscript": "bash",
         "python": "cd $dirWithoutTrailingSlash && set PYTHONIOENCODING=utf8 && python -u $fileName",
@@ -359,7 +354,7 @@
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "[cpp]": {
-        "editor.defaultFormatter": "ms-vscode.cpptools"
+        "editor.defaultFormatter": "xaver.clang-format"
     },
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff"
@@ -514,5 +509,7 @@
     "latex-workshop.view.pdf.viewer": "external",
     "latex-workshop.latex.autoBuild.run": "onSave",
     "lldb.suppressUpdateNotifications": true,
+    "makefile.configureOnOpen": false,
+    "diffEditor.hideUnchangedRegions.enabled": true,
     // "latex-workshop.latex.autoClean.run": "onBuilt",
 }
