@@ -14,16 +14,24 @@ Diagnostics:
         llvmlib*,
         zircon*,
         altera*,
-        google-readability-todo,
-        readability-braces-around-statements,
-        hicpp-braces-around-statements,
-        modernize-use-trailing-return-type, # 不要每个都加上尾返回值类型
-        readability-identifier-length, # 不检查变量名长度
-        cppcoreguidelines-avoid-magic-numbers, # 不检查魔法数字
-        readability-magic-numbers, #同上
-        misc-no-recursion, #递归
+
+        cppcoreguidelines-avoid-c-arrays, # 不要用 C 数组
         cppcoreguidelines-avoid-do-while,
-        misc-non-private-member-variables-in-classes, # public成员变量，或许不该用，但是想用
+        cppcoreguidelines-avoid-magic-numbers, # 不要用魔法数字
+        cppcoreguidelines-macro-usage, # 宏定义用法，不要定义常数之类的
+        cppcoreguidelines-non-private-member-variables-in-classes, # 所有成员变量都得是private的
         cppcoreguidelines-owning-memory, # 用gsl::owner<> 来表示指针拥有对象的所有权
+        cppcoreguidelines-pro-bounds-array-to-pointer-dacay, # 数组传参退化为指针
+        google-readability-todo,
         hicpp-avoid-c-arrays, # 禁用c风格数组
+        hicpp-braces-around-statements,
+        hicpp-no-array-decay, # 防止数组传参退化为指针
+        misc-no-recursion, #递归
+        misc-non-private-member-variables-in-classes, # public成员变量，或许不该用，但是想用
+        modernize-avoid-c-arrays, # 同上
+        modernize-use-trailing-return-type, # 不要每个都加上尾返回值类型
+        readability-braces-around-statements,
+        readability-identifier-length, # 不检查变量名长度
+        readability-implicit-bool-conversion, # 隐式布尔类型转换
+        readability-magic-numbers, #同上
       ]
