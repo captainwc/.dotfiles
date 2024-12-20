@@ -22,7 +22,7 @@ function RunFile()
     elseif ft == "c" then
         ToggleFT("RUN", "gcc % -o %< && ./%< && rm %<")
     elseif ft == "cpp" then
-        ToggleFT("RUN", "g++ % -o %< -std=c++20 -fmodules-ts && %< && rm %<")
+        ToggleFT("RUN", "g++ % -o %< -std=c++20 -fmodules-ts && ./%< && rm %<")
     elseif ft == "java" then
         ToggleFT("RUN", "javac % && java %<")
     end
