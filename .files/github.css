@@ -80,6 +80,13 @@ body {
     line-height: 1.5;
 }
 
+/* #megamenu-content {
+    background-image: url(./background/JPG_1017.jpg);
+    background-repeat: repeat;
+    background-position: right;
+    background-size: cover;
+} */
+
 #write {
     max-width: 860px;
     margin: 0 auto;
