@@ -51,20 +51,20 @@
     },
     // scripts
     "markdown.styles": [
-        "~/.files/github.css"
+        "~/.files/spring.css"
     ],
-    "workbench.colorTheme": "One Dark Pro Darker",
+    "workbench.colorTheme": "One Dark Modern",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.editor.wrapTabs": true,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook",
-        "*.pdf": "pdf.view",
-        "*.pptx": "default",
-        "*.md": "default",
+        "*.pdf": "cweijan.officeViewer",
+        "*.pptx": "cweijan.officeViewer",
+        "*.md": "cweijan.officeViewer",
         "*.png": "cweijan.officeViewer",
         "{git,gitlens}:/**/*.{md,csv}": "default",
-        "{git,gitlens}:/**/*.{md,csv,svg}": "default"
+        "{git,gitlens,git-graph}:/**/*.{md,csv,svg}": "default"
     },
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 300,
@@ -98,7 +98,7 @@
     // terminal settings
     "terminal.integrated.enableImages": true,
     "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "terminal.integrated.fontSize": 15,
+    "terminal.integrated.fontSize": 16,
     "terminal.integrated.fontWeight": "normal",
     "terminal.integrated.env.windows": {
         "LANG": "en_US.UTF-8"
@@ -511,5 +511,6 @@
     "lldb.suppressUpdateNotifications": true,
     "makefile.configureOnOpen": false,
     "diffEditor.hideUnchangedRegions.enabled": true,
+    "vscode-office.editorTheme": "Auto",
     // "latex-workshop.latex.autoClean.run": "onBuilt",
 }

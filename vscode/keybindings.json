@@ -218,5 +218,9 @@
     {
         "key": "ctrl+shift+oem_plus",
         "command": "-workbench.action.zoomIn"
+    },
+    {
+        "key": "alt+g",
+        "command": "lazygit.openLazygit"
     }
 ]
