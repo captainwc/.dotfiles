@@ -77,12 +77,18 @@ end
 
 -- 设置透明背景
 function Set_transparent_background()
-    vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
-    vim.cmd("hi NonText guibg=NONE ctermbg=NONE")
-    vim.cmd("hi StatusLine guibg=NONE ctermbg=NONE")
-    vim.cmd("hi VertSplit guibg=NONE ctermbg=NONE")
-    vim.cmd("hi NormalNC guibg=NONE ctermbg=NONE")
-    vim.cmd("hi SignColumn guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight Normal guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight Normal guifg=#FFFFFFF")
+    vim.cmd("highlight NonText guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight SignColumn guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight VertSplit guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight StatusLine guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight StatusLineNC guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight TabLine guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight TabLineFill guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight TabLineSel guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight NormalFloat guibg=NONE ctermbg=NONE")
+    vim.cmd("highlight FloatBorder guibg=NONE ctermbg=NONE")
 end
 
 -- 自动执行每次颜色方案加载时设置透明背景

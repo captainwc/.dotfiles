@@ -238,6 +238,16 @@ fnvim() {
     file=$(fd . $@ | fzf) && nvim $file
 }
 
+fbat() {
+    local file
+    file=$(fd . $@ | fzf) && bat $file
+}
+
+fcat() {
+    local file
+    file=$(fd . $@ | fzf) && cat $file
+}
+
 fkill() {
     local pid
     pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
