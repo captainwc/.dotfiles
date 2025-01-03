@@ -75,7 +75,7 @@ function DebugFile()
     end
 end
 
--- 设置透明背景
+-- 设置透明背景 -> 改用插件 transparent.nvim
 function Set_transparent_background()
     vim.cmd("highlight Normal guibg=NONE ctermbg=NONE")
     vim.cmd("highlight Normal guifg=#FFFFFFF")
@@ -91,11 +91,11 @@ function Set_transparent_background()
     vim.cmd("highlight FloatBorder guibg=NONE ctermbg=NONE")
 end
 
--- 自动执行每次颜色方案加载时设置透明背景
-vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern = "*",
-    callback = Set_transparent_background,
-})
+-- -- 自动执行每次颜色方案加载时设置透明背景
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--     pattern = "*",
+--     callback = Set_transparent_background,
+-- })
 
 -- 规则化路径分隔符
 function NormalizePath(path)

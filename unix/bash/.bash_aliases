@@ -35,7 +35,8 @@ alias vime='vim ~/.bash_env'
 alias tmuxkillall="tmux ls | awk -F ':' '{print \$1}' | tee >(xargs -I{} echo 'kill session: {}') | xargs -I{} tmux kill-session -t {}"
 
 # some tools
-alias diff='colordiff'
+alias diff='icdiff'
+alias ct=cheat
 alias cman='man -M /usr/share/man/zh_CN'
 alias gdb='cgdb -q'
 alias sqlite='sqlite3'
@@ -105,6 +106,10 @@ neo() {
     else
         neofetch --ascii_distro $1
     fi
+}
+
+topk() {
+    cat $1 | tr -s ' ' '\n' | sort | uniq -c | sort -nr | awk '{print $1, $2}' | head -$2
 }
 
 # 编译运行
