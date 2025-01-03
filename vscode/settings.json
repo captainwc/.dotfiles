@@ -422,10 +422,9 @@
     "hexeditor.showDecodedText": true,
     "hexeditor.defaultEndianness": "little",
     "hexeditor.inspectorType": "aside",
-    "fittencode.languagePreference.displayPreference": "zh-cn",
-    "fittencode.languagePreference.commentPreference": "zh-cn",
+    "fittencode.languagePreference.commentPreference": "en",
     "editor.wordWrap": "on",
-    "fittencode.inlineCompletion.enable": false,
+    "fittencode.inlineCompletion.enable": true,
     // latex
     "latex-workshop.latex.recipes": [
         {
@@ -513,4 +512,57 @@
     "diffEditor.hideUnchangedRegions.enabled": true,
     "vscode-office.editorTheme": "Auto",
     // "latex-workshop.latex.autoClean.run": "onBuilt",
+    // background
+    "winopacity.opacity": 220,
+    "background.enabled": true,
+    "background.fullscreen": {
+        "images": [
+            "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1061.jpg",
+            "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1087.jpg",
+            "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1094.jpg",
+            "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/PNG_2008.png",
+        ],
+        "opacity": 0.18,
+        "size": "cover",
+        "position": "center",
+        "interval": 3600,
+        "random": true
+    },
+    // color theme
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        // "[One Dark Modern]": {
+        "rules": {
+            "macro": {
+                "foreground": "#f9f274b7",
+                "fontStyle": "italic bold"
+            },
+            "*.readonly": {
+                "foreground": "#f5c812b7",
+                "fontStyle": "bold"
+            },
+            "*.static": {
+                "foreground": "#955cfe",
+                "fontStyle": "italic bold"
+            },
+            "templateType": "#ff0000",
+            "namespace": "#91ecb2f8",
+            "property": {
+                "foreground": "#de6872",
+                "fontStyle": "italic"
+            },
+            "method": {
+                "foreground": "#0ec0f6",
+                "fontStyle": "italic"
+            },
+            "typeParameter": {
+                "foreground": "#C1AE75",
+                "fontStyle": "bold"
+            },
+        }
+        // }
+    },
+    "fittencode.languagePreference.displayPreference": "zh-cn",
+    "fittencode.Unit Test Framework.C/C++": "gtest",
+    "fittencode.Unit Test Framework.Python": "pytest"
 }
