@@ -1,0 +1,229 @@
+﻿# For documentation, see https://www.sumatrapdfreader.org/settings/settings3-4-6.html
+FixedPageUI [
+	TextColor = #000000
+	BackgroundColor = #ffffff
+	SelectionColor = #f5fc0c
+	WindowMargin = 2 4 2 4
+	PageSpacing = 4 4
+	HideScrollbars = true
+]
+ComicBookUI [
+	WindowMargin = 0 0 0 0
+	PageSpacing = 4 4
+	CbxMangaMode = false
+	BackgroundColor = #c7edcc
+]
+ChmUI [
+	UseFixedPageUI = false
+	BackgroundColor = #c7edcc
+]
+
+SelectionHandlers [
+]
+ExternalViewers [
+]
+
+ZoomLevels = 8.33 12.5 18 25 33.33 50 66.67 75 80 90 100 110 120 125 135 150 175 200 300 400 600 800 1000 1200 1600
+ZoomIncrement = 10
+
+PrinterDefaults [
+	PrintScale = shrink
+]
+ForwardSearch [
+	HighlightOffset = 0
+	HighlightWidth = 15
+	HighlightColor = #6581ff
+	HighlightPermanent = false
+]
+Annotations [
+	HighlightColor = #ffff00
+	UnderlineColor = #00ff00
+	TextIconColor = #ffff00
+	TextIconType = 
+	DefaultAuthor = 
+]
+
+RememberOpenedFiles = false
+RememberStatePerDocument = true
+RestoreSession = true
+UiLanguage = cn
+EnableTeXEnhancements = false
+DefaultDisplayMode = continuous facing
+DefaultZoom = fit width
+Shortcuts [
+	[
+		Cmd = CmdToggleBookmarks
+		Key = Alt + q
+	]
+	[
+		Cmd = CmdScrollUpPage
+		Key = Tab
+	]
+	[
+		Cmd = CmdScrollUpHalfPage
+		Key = u
+	]
+	[
+		Cmd = CmdScrollUpHalfPage
+		Key = Up
+	]
+	[
+		Cmd = CmdScrollDownHalfPage
+		Key = d
+	]
+	[
+		Cmd = CmdScrollDownHalfPage
+		Key = Down
+	]
+	[
+		Cmd = CmdGoToPrevPage
+		Key = Left
+	]
+	[
+		Cmd = CmdGoToNextPage
+		Key = Right
+	]
+	[
+		Cmd = CmdCreateAnnotUnderline
+		Key = t
+	]
+	[
+		Cmd = CmdSaveAnnotations
+		Key = Ctrl + s
+	]
+	[
+		Cmd = CmdFavoriteToggle
+		Key = Alt + w
+	]
+	[
+		Cmd = CmdFavoriteAdd
+		Key = Alt + r
+	]
+	[
+		Cmd = CmdZoomFitPage
+		Key = Alt + 5
+	]
+	[
+		Cmd = CmdZoomFitContent
+		Key = Alt + 3
+	]
+	[
+		Cmd = CmdZoomFitWidth
+		Key = Alt + 4
+	]
+	[
+		Cmd = CmdFacingView
+		Key = Alt + 2
+	]
+	[
+		Cmd = CmdSinglePageView
+		Key = Alt + 1
+	]
+]
+EscToExit = false
+ReuseInstance = false
+ReloadModifiedDocuments = true
+
+MainWindowBackground = #80fff200
+FullPathInTitle = false
+ShowMenubar = true
+ShowToolbar = true
+ShowFavorites = false
+ShowToc = true
+TocDy = 0
+SidebarDx = 416
+ToolbarSize = 18
+TabWidth = 300
+TreeFontSize = 0
+SmoothScroll = true
+ShowStartPage = true
+CheckForUpdates = true
+WindowState = 2
+WindowPos = 1158 0 769 1039
+UseTabs = true
+UseSysColors = false
+CustomScreenDPI = 0
+
+FileStates [
+	[
+		FilePath = D:\books\计算机网络\2023王道 计算机网络.pdf
+		Favorites [
+			[
+				Name = TCP
+				PageNo = 241
+			]
+		]
+		IsPinned = false
+		IsMissing = false
+		OpenCount = 0
+		UseDefaultState = true
+	]
+	[
+		FilePath = D:\books\数据结构与算法\2023王道 数据结构.pdf
+		Favorites [
+			[
+				Name = 遍历二叉树
+				PageNo = 153
+			]
+			[
+				Name = 邻接表
+				PageNo = 215
+			]
+			[
+				Name = BFS
+				PageNo = 223
+			]
+			[
+				Name = DFS
+				PageNo = 225
+			]
+		]
+		IsPinned = false
+		IsMissing = false
+		OpenCount = 0
+		UseDefaultState = true
+	]
+	[
+		FilePath = D:\books\计算机组成原理\深入理解计算机系统 第3版.pdf
+		Favorites [
+			[
+				Name = 控制流汇编指令
+				PageNo = 175
+			]
+		]
+		IsPinned = false
+		IsMissing = false
+		OpenCount = 0
+		UseDefaultState = true
+	]
+	[
+		FilePath = D:\books\数据结构与算法\数据结构 清华大学 第3版.pdf
+		Favorites [
+			[
+				Name = 二叉树模板类定义
+				PageNo = 137
+				PageLabel = 117
+			]
+		]
+		IsPinned = false
+		IsMissing = false
+		OpenCount = 0
+		UseDefaultState = true
+	]
+]
+SessionData [
+]
+TimeOfLastUpdateCheck = 0 0
+OpenCountWeek = 643
+
+# Settings below are not recognized by the current version
+EbookUI [
+	Set UseFixedPageUI = true
+	FontName = "华文中宋"
+	FontSize = 15
+	TextColor = #5f4b32
+	BackgroundColor = #fbf3e0
+	UseFixedPageUI = false
+	WindowMargin = 2 4 2 4
+	PageSpacing = 4 4
+]
