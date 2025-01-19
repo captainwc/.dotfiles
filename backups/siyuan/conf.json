@@ -258,7 +258,7 @@
               ],
               "direction": "tb",
               "instance": "Layout",
-              "size": "313px",
+              "size": "232px",
               "type": "left"
             },
             {
@@ -296,7 +296,7 @@
                       "title": "隐蔽特性"
                     },
                     {
-                      "activeTime": "1737279496991",
+                      "activeTime": "1737282367238",
                       "children": {
                         "action": "cb-get-scroll",
                         "blockId": "20250118005812-t3iyftd",
@@ -312,7 +312,22 @@
                     },
                     {
                       "active": true,
-                      "activeTime": "1737281782486",
+                      "activeTime": "1737282401901",
+                      "children": {
+                        "action": "cb-get-scroll",
+                        "blockId": "20250113211958-x1bdrnc",
+                        "instance": "Editor",
+                        "mode": "wysiwyg",
+                        "notebookId": "20250112172913-llz36c4",
+                        "rootId": "20250113211958-x1bdrnc"
+                      },
+                      "docIcon": "",
+                      "instance": "Tab",
+                      "pin": false,
+                      "title": "gcc \u0026 clang"
+                    },
+                    {
+                      "activeTime": "1737282366645",
                       "children": {
                         "action": "cb-get-scroll",
                         "blockId": "20250119172458-e4yi7uh",
@@ -392,7 +407,7 @@
             "hotkey": "⌥1",
             "hotkeyLangId": "fileTree",
             "icon": "iconFiles",
-            "show": true,
+            "show": false,
             "size": {
               "height": 0,
               "width": 313
@@ -404,7 +419,7 @@
             "hotkey": "⌥2",
             "hotkeyLangId": "outline",
             "icon": "iconAlignCenter",
-            "show": false,
+            "show": true,
             "size": {
               "height": 0,
               "width": 232
@@ -657,11 +672,11 @@
           "default": ""
         },
         "insertAfter": {
-          "custom": "⇧⌘A",
+          "custom": "⌘↩",
           "default": "⇧⌘A"
         },
         "insertBefore": {
-          "custom": "⇧⌘B",
+          "custom": "⌥⌘↩",
           "default": "⇧⌘B"
         },
         "insertBottom": {
@@ -907,7 +922,7 @@
       },
       "list": {
         "checkToggle": {
-          "custom": "⌘↩",
+          "custom": "",
           "default": "⌘↩"
         },
         "indent": {
