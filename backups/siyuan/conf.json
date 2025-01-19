@@ -1,0 +1,1369 @@
+{
+  "logLevel": "debug",
+  "appearance": {
+    "mode": 0,
+    "modeOS": true,
+    "darkThemes": [
+      {
+        "name": "midnight",
+        "label": "midnight（默认主题）"
+      },
+      {
+        "name": "Cliff Dark",
+        "label": "Cliff Dark"
+      },
+      {
+        "name": "Savor",
+        "label": "写味（Savor）"
+      },
+      {
+        "name": "vert",
+        "label": "vert"
+      }
+    ],
+    "lightThemes": [
+      {
+        "name": "daylight",
+        "label": "daylight（默认主题）"
+      },
+      {
+        "name": "Savor",
+        "label": "写味（Savor）"
+      }
+    ],
+    "themeDark": "Cliff Dark",
+    "themeLight": "Savor",
+    "themeVer": "5.3.1",
+    "icons": [
+      "Savor-icon",
+      "ant",
+      "material"
+    ],
+    "icon": "Savor-icon",
+    "iconVer": "1.0.3",
+    "codeBlockThemeLight": "github",
+    "codeBlockThemeDark": "base16/dracula",
+    "lang": "zh_CN",
+    "themeJS": true,
+    "closeButtonBehavior": 0,
+    "hideStatusBar": false
+  },
+  "langs": [
+    {
+      "label": "العربية",
+      "name": "ar_SA"
+    },
+    {
+      "label": "Deutsch",
+      "name": "de_DE"
+    },
+    {
+      "label": "English",
+      "name": "en_US"
+    },
+    {
+      "label": "Español",
+      "name": "es_ES"
+    },
+    {
+      "label": "Français",
+      "name": "fr_FR"
+    },
+    {
+      "label": "עברית",
+      "name": "he_IL"
+    },
+    {
+      "label": "Italiano",
+      "name": "it_IT"
+    },
+    {
+      "label": "日本語",
+      "name": "ja_JP"
+    },
+    {
+      "label": "Polski",
+      "name": "pl_PL"
+    },
+    {
+      "label": "Русский",
+      "name": "ru_RU"
+    },
+    {
+      "label": "繁體中文",
+      "name": "zh_CHT"
+    },
+    {
+      "label": "简体中文",
+      "name": "zh_CN"
+    }
+  ],
+  "lang": "zh_CN",
+  "fileTree": {
+    "alwaysSelectOpenedFile": false,
+    "openFilesUseCurrentTab": false,
+    "refCreateSaveBox": "",
+    "refCreateSavePath": "",
+    "docCreateSaveBox": "",
+    "docCreateSavePath": "",
+    "maxListCount": 512,
+    "maxOpenTabCount": 8,
+    "allowCreateDeeper": false,
+    "removeDocWithoutConfirm": false,
+    "closeTabsOnStart": false,
+    "useSingleLineSave": true,
+    "sort": 6
+  },
+  "tag": {
+    "sort": 4
+  },
+  "editor": {
+    "allowHTMLBLockScript": true,
+    "fontSize": 20,
+    "fontSizeScrollZoom": true,
+    "fontFamily": "华文中宋",
+    "codeSyntaxHighlightLineNum": false,
+    "codeTabSpaces": 4,
+    "codeLineWrap": true,
+    "codeLigatures": true,
+    "displayBookmarkIcon": true,
+    "displayNetImgMark": true,
+    "generateHistoryInterval": 10,
+    "historyRetentionDays": 30,
+    "emoji": [],
+    "virtualBlockRef": false,
+    "virtualBlockRefExclude": "",
+    "virtualBlockRefInclude": "",
+    "blockRefDynamicAnchorTextMaxLen": 96,
+    "plantUMLServePath": "https://www.plantuml.com/plantuml/svg/~1",
+    "fullWidth": true,
+    "katexMacros": "{}",
+    "readOnly": false,
+    "embedBlockBreadcrumb": true,
+    "listLogicalOutdent": false,
+    "listItemDotNumberClickFocus": true,
+    "floatWindowMode": 0,
+    "dynamicLoadBlocks": 192,
+    "justify": false,
+    "rtl": false,
+    "spellcheck": false,
+    "onlySearchForDoc": false,
+    "backlinkExpandCount": 8,
+    "backmentionExpandCount": -1,
+    "backlinkContainChildren": true,
+    "markdown": {
+      "inlineAsterisk": true,
+      "inlineUnderscore": true,
+      "inlineSup": true,
+      "inlineSub": true,
+      "inlineTag": true,
+      "inlineMath": true,
+      "inlineStrikethrough": true
+    }
+  },
+  "export": {
+    "paragraphBeginningSpace": true,
+    "addTitle": true,
+    "blockRefMode": 4,
+    "blockEmbedMode": 1,
+    "blockRefTextLeft": "",
+    "blockRefTextRight": "",
+    "tagOpenMarker": "#",
+    "tagCloseMarker": "#",
+    "fileAnnotationRefMode": 0,
+    "pandocBin": "D:\\notes\\siyuan\\temp\\pandoc\\bin\\pandoc.exe",
+    "markdownYFM": true,
+    "pdfFooter": "%page / %pages",
+    "docxTemplate": "",
+    "pdfWatermarkStr": "",
+    "pdfWatermarkDesc": "",
+    "imageWatermarkStr": "",
+    "imageWatermarkDesc": ""
+  },
+  "graph": {
+    "maxBlocks": 10240,
+    "local": {
+      "dailyNote": false,
+      "type": {
+        "tag": false,
+        "paragraph": false,
+        "heading": false,
+        "math": false,
+        "code": false,
+        "table": false,
+        "list": false,
+        "listItem": false,
+        "blockquote": false,
+        "super": false
+      },
+      "d3": {
+        "nodeSize": 16,
+        "linkWidth": 8,
+        "lineOpacity": 0.36,
+        "centerStrength": 0.015,
+        "collideRadius": 600,
+        "collideStrength": 0.08,
+        "linkDistance": 400,
+        "arrow": true
+      }
+    },
+    "global": {
+      "minRefs": 0,
+      "dailyNote": false,
+      "type": {
+        "tag": false,
+        "paragraph": false,
+        "heading": false,
+        "math": false,
+        "code": false,
+        "table": false,
+        "list": false,
+        "listItem": false,
+        "blockquote": false,
+        "super": false
+      },
+      "d3": {
+        "nodeSize": 16,
+        "linkWidth": 8,
+        "lineOpacity": 0.36,
+        "centerStrength": 0.015,
+        "collideRadius": 600,
+        "collideStrength": 0.08,
+        "linkDistance": 400,
+        "arrow": true
+      }
+    }
+  },
+  "uiLayout": {
+    "bottom": {
+      "data": [],
+      "pin": true
+    },
+    "hideDock": false,
+    "layout": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "instance": "Wnd"
+                },
+                {
+                  "children": [],
+                  "instance": "Wnd",
+                  "resize": "tb"
+                }
+              ],
+              "direction": "tb",
+              "instance": "Layout",
+              "size": "313px",
+              "type": "left"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "activeTime": "1737279304213",
+                      "children": {
+                        "action": "cb-get-scroll",
+                        "blockId": "20250117192004-kuyw3or",
+                        "instance": "Editor",
+                        "mode": "wysiwyg",
+                        "notebookId": "20250112125129-ooze7ot",
+                        "rootId": "20250117192004-kuyw3or"
+                      },
+                      "docIcon": "",
+                      "instance": "Tab",
+                      "pin": false,
+                      "title": "C++11"
+                    },
+                    {
+                      "activeTime": "1737279472406",
+                      "children": {
+                        "action": "cb-get-scroll",
+                        "blockId": "20250117182337-8mpukem",
+                        "instance": "Editor",
+                        "mode": "wysiwyg",
+                        "notebookId": "20250112125129-ooze7ot",
+                        "rootId": "20250117182337-8mpukem"
+                      },
+                      "docIcon": "",
+                      "instance": "Tab",
+                      "pin": false,
+                      "title": "隐蔽特性"
+                    },
+                    {
+                      "activeTime": "1737279496991",
+                      "children": {
+                        "action": "cb-get-scroll",
+                        "blockId": "20250118005812-t3iyftd",
+                        "instance": "Editor",
+                        "mode": "wysiwyg",
+                        "notebookId": "20250112172913-llz36c4",
+                        "rootId": "20250118005812-t3iyftd"
+                      },
+                      "docIcon": "",
+                      "instance": "Tab",
+                      "pin": false,
+                      "title": "编译器路径"
+                    },
+                    {
+                      "active": true,
+                      "activeTime": "1737281782486",
+                      "children": {
+                        "action": "cb-get-scroll",
+                        "blockId": "20250119172458-e4yi7uh",
+                        "instance": "Editor",
+                        "mode": "wysiwyg",
+                        "notebookId": "20250112172913-llz36c4",
+                        "rootId": "20250119172458-e4yi7uh"
+                      },
+                      "docIcon": "",
+                      "instance": "Tab",
+                      "pin": false,
+                      "title": "环境变量CPATH常见错误"
+                    }
+                  ],
+                  "height": "",
+                  "instance": "Wnd",
+                  "width": ""
+                }
+              ],
+              "direction": "lr",
+              "instance": "Layout",
+              "resize": "lr",
+              "size": "auto",
+              "type": "center"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "instance": "Wnd"
+                },
+                {
+                  "children": [],
+                  "instance": "Wnd",
+                  "resize": "tb"
+                }
+              ],
+              "direction": "tb",
+              "instance": "Layout",
+              "resize": "lr",
+              "size": "0px",
+              "type": "right"
+            }
+          ],
+          "direction": "lr",
+          "instance": "Layout",
+          "size": "auto",
+          "type": "normal"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "instance": "Wnd"
+            },
+            {
+              "children": [],
+              "instance": "Wnd",
+              "resize": "lr"
+            }
+          ],
+          "direction": "lr",
+          "instance": "Layout",
+          "resize": "tb",
+          "size": "0px",
+          "type": "bottom"
+        }
+      ],
+      "direction": "tb",
+      "instance": "Layout",
+      "type": "normal"
+    },
+    "left": {
+      "data": [
+        [
+          {
+            "hotkey": "⌥1",
+            "hotkeyLangId": "fileTree",
+            "icon": "iconFiles",
+            "show": true,
+            "size": {
+              "height": 0,
+              "width": 313
+            },
+            "title": "文档树",
+            "type": "file"
+          },
+          {
+            "hotkey": "⌥2",
+            "hotkeyLangId": "outline",
+            "icon": "iconAlignCenter",
+            "show": false,
+            "size": {
+              "height": 0,
+              "width": 232
+            },
+            "title": "大纲",
+            "type": "outline"
+          },
+          {
+            "hotkey": "⌥6",
+            "hotkeyLangId": "inbox",
+            "icon": "iconInbox",
+            "show": false,
+            "size": {
+              "height": 0,
+              "width": 320
+            },
+            "title": "收集箱",
+            "type": "inbox"
+          }
+        ],
+        [
+          {
+            "hotkey": "⌥3",
+            "hotkeyLangId": "bookmark",
+            "icon": "iconBookmark",
+            "show": false,
+            "size": {
+              "height": 0,
+              "width": 232
+            },
+            "title": "书签",
+            "type": "bookmark"
+          },
+          {
+            "hotkey": "⌥4",
+            "hotkeyLangId": "tag",
+            "icon": "iconTags",
+            "show": false,
+            "size": {
+              "height": 0,
+              "width": 232
+            },
+            "title": "标签",
+            "type": "tag"
+          }
+        ]
+      ],
+      "pin": true
+    },
+    "right": {
+      "data": [
+        [
+          {
+            "hotkey": "⌥8",
+            "hotkeyLangId": "graphView",
+            "icon": "iconGraph",
+            "show": false,
+            "size": {
+              "height": 0,
+              "width": 320
+            },
+            "title": "关系图",
+            "type": "graph"
+          },
+          {
+            "hotkey": "⌥9",
+            "hotkeyLangId": "globalGraph",
+            "icon": "iconGlobalGraph",
+            "show": false,
+            "size": {
+              "height": 0,
+              "width": 320
+            },
+            "title": "全局关系图",
+            "type": "globalGraph"
+          }
+        ],
+        [
+          {
+            "hotkey": "⌥7",
+            "hotkeyLangId": "backlinks",
+            "icon": "iconLink",
+            "show": false,
+            "size": {
+              "height": 0,
+              "width": 320
+            },
+            "title": "反向链接",
+            "type": "backlink"
+          }
+        ]
+      ],
+      "pin": true
+    }
+  },
+  "userData": "d716d5d6812229ac440f08261821941a0a8d16e079cb9344b77c9e138414e6102d1e6fe6fc58c8e89aadad279788e7757d0063fd08e08b972d85b1aac8165f0397e632aba2730d8ab08d0c62c2cadd8cfa85038d93a2a39c7beccadfe4ea6684bf313760854d58600d7dc9bee48822f12d25d11cad3f8fbe644f8d5f221baddfe578580ecabeb144fb64896e6592cb467d1d573c01a63f75424543b85b8ac23784ffbbc49d842c872056f400eb658c1784fecdeada83344a993550e1f71afe4ea806ef8703839034ee008a69fbc09e43e179a53a2de9dc0431db338eae0a1a0054fba67c476f2a754f2a4ac8aa3f11d3e30cd10a2c46b34fb72349396aa7555ef3b27e744e6c990466f73fee56ca162d20403be9b911a7a1706fb482c3abbc9c9c3213fc2708ec0e8b900438f9649bd3cb757e39fd6690034cd09289170d2e9949a2849e7864b16775fdbde64eb1bd37f94801ec0274a02460e63031a1911b13244f004640dfeb4f8329daf710598a3c8e08dce7cc254c795bba835a37ada8383a90bb69dd707f4db6d46d63dd12f97a4165865e0f48820f9eae2a1b59f2da9a97a3b2ecb2e715ac3d760418313b09ff10e1a5febc99f23ff74cef99da67e62580745ebd89ddd7f05420886fbd467306eb310e036b0a0b2f18c2e1aa3d1caea2af7e17590240f4b7dab006e2fdb90909ea492b17b12b73e5241882aef732410c63b05b4dfb5a2a97cf4d38f811c0d432d4e5dc54bc5753b24fc80c74ed0d9d1e1699bca4af892e3627990240306c9a0de1ed7d808b1454731a848a17f5d67bbc27c6e52704fa1718b9fa05e22c3dfded072421d7c6b223a6debc49d30da0019a41ad159a0af094f6d505a2eae7e1c782975774c9a6ee6a8adf2b283a3e0bff4647afda6ddcb01b42fd53edf1835fefbb4452f2df96ff6ba3f469e96467760223c07e8bf49e133889ad20665aaeeefea67c8bc9079fe12c8289597335e6ebb4e432a29fe79c02df30cb311d1a3e1a1f6ae5dd292af56333777959120d167c98dde1d4549c81e8cf8bd2b127505966bd8453fb96b17df6fb3b02812476257d386aef48c0358ed62f2ea3133565c319803765b815d087d820386d3a12800936b5db931e933593d5e0912b83683844bf6e3c93b6fa8befe7f176333b76e3474a78d38542b3bd1a6d8c299f9c42fe55cc6654ff4a4fe4a0edabe9c86dc3dadf5f251cf1df827d2b718dfa8d8ed848b8ecb36f48c38056b54b16e8952e3ba2c9205b2403c95a2623a6eb4925605ef19260be2bcc79bee5e2b0ae2cba97b201a559723b0c9343b5a937c0ac7e2217623bf837b78c93931a4ee0a56d7511cf94256012eabb02943f594f6c48f5224fcdff14ec0e219ca6057d908ac8670d559ea5f37d2b0277b91e35783c7e36e65f8d07eb149aaa19d64a192b7f98175e9f8aea490eba91fa6afbb51703cecf1b9cf979cf18286e3c291b5577d83376f125e67af0a51fddeb02e2b6a19ce8b17977adac7e1ffa5cc5c5337d645a958d0977325e7ca6ac3fe5036ddda4379937983b60232c08016436c278a689093cd1e3ed16d0d0cc178b41556f9c486d94c4aac9b191bc94ccc57da94aa137e8d850e444bc144e0e0ec63917796d1a5f4bf82c9b05fea0dd76eb7d110a66fd5b1ba9ae5ab09721d5fc2de38d0bde84dc18154743b819fe26ed6d60e8f337c9746596d875b8379480727c3aaf04b0cde0abeec9791bf0d0de522af03238be4bc67c88cbe7f1655ff0dcbcf5ac44a29040b96224d11a3757af002f662c15e4f3f1b57ac4f15dfa102a4b4992618f974293aa29d35f41c4d76a4589be0e9b9153c0082f3f7c4d2289cdb1cfaa50b2427942344cf1925414828aa88ddd816e69c936b31f6a7c58e42daaa8bea54931b5f01f77118a35eb8afe34691cec7e0ca680290c0ccfbf102c00bbe3539c8d10f660cf9feccb0c290d00969a591e78b583419c1f8d2c53fd49a5a83f5e73a9202ede744cf760c6d94fbb6fa73e975e72b9e502061e321390dabd1c93ab016fecd03329008eb9dbd1ed9c4ce78ea268ea09c1b7a96d3a2fc4de3e924b7d95f8843d40c414bc81d8b225904a3ae74af0074965b84c1956084ab08ba31ed2e8b7b713645da94f18193a5a6403f2e43ed15b38e64f442f9431500da6975f0ab2410266bafdf95725747c0706f38831bb2c30fad30315089764fc498a64f49c5fc6b568ffa47c6125987249c92fb3c0e66a870daf37be42878cb94fca71bd703574b7dfa8dc64a14633b412f3074753a85339da103591acea9e1898a9c5b9761ec4896734a44b78dbe3b3c27a2dfe8d383399ca68846e79569e3dc4009dc0aa7dbacd25045309370b9579875af1b2449f6da9087324ebd82e30de3515009b858f345c03c50396bf14e40762ccbe142500a8ea45e414e7af182080bd751cbaa7ab0d6a0aa1283f836b72bbab077b3ec4ff90549091ee5ec38787bdd594169fce511a31aec26fcf21892141e336c7b365d501d721a11453cab512c9d6691c2761c13dfaf0c2a7895d249990e2ce86196ff9e364f52e828ffbe0a9a5e0103f96877f7d69bb2ef4dcea4876a4eb956e1eaf371edfe4389022b098dd8041327d40e3d3796694ebff7365910095b0d7031e85a433589d6aa99ee27119a4c1895d007673f5105210d7284af20ce2a1453cf2d214ceaf40290e6693d989c9b6495da2ebd8f619a1393e77e12772471f2c048ef6967d72c43ab2c89fbb2f4cf058f4a0c8f2eda11e90a98ed399aee0d434031effb7b6d00d478706293993fdab6d70a8ae11e21bb08c3bc13534cd79a7eea4f4a6ef3c92118c004e23266b6f9092d1b52b0a5ffe5cd26cfbce7dfa48eadbad641f89f60955bdc99c9eeefd89d380aba607edc96a6c7a0843ae7ff94ab4dc39efac616008a3c9d43a248a3cf34947d14f3e8735c1e653a99363cfbe5cbfb37c4d3ae20112caf629f417d4c95d5aad63aff9a3c1f8f04ef9943fde379d3999441476d9f96c6ec51c9453c413171e7de89af4c67ab53d52f4227a25f0c97d84b4eccbc60ac948dea593e2c555219f37b4557c2965154fa6501302adad9c66688f417bc9e04f2cb840203aa3b3434baeea660b34e2daff6f240da44c1dcb2b61b710d54a525e5475a30543c610b6dc964e21c1ad26aaa890fc4a0289473ef8ade1ae601f08ddfb84c687f929e0b6da8836b8179ddf2b9fa9c34cc0668472a9012438b634d1e291488d2be7cc79f527c9d465fadb97cab844f76be2b670bbb32bc024fb059f07255a3e68914273349de172134f9b9d741e30682c250648d6585022e0f9c0b0a04f56f4a4e395c14963a9faf562224780bdaa9dc41890cae3a712a3a43ff90188341dc8e60c28b1daf0f9681d",
+  "account": {
+    "displayTitle": true,
+    "displayVIP": true
+  },
+  "readonly": false,
+  "localIPs": [
+    "127.0.0.1",
+    "192.168.1.4",
+    "192.168.81.1",
+    "192.168.5.1",
+    "198.18.0.1",
+    "169.254.217.59",
+    "169.254.206.64",
+    "169.254.137.216",
+    "169.254.212.235",
+    "169.254.139.121",
+    "[::1]",
+    "[2409:8a4b:37f:7ec0:d5e1:15b9:8e26:5a41]",
+    "[2409:8a4b:37f:7ec0:ac2d:b1a6:a60f:124]",
+    "[fe80::b9bb:a4a4:ab16:c4a5]",
+    "[fe80::4400:ae11:ab7a:11b9]",
+    "[fe80::8801:b4ca:2fae:740d]",
+    "[fe80::24e1:405c:61c0:93c8]",
+    "[fe80::b647:718:d25:f9ca]",
+    "[fe80::2fbb:86eb:7d7:d83b]",
+    "[fe80::7f12:9a2a:2551:3a59]",
+    "[fe80::7ff6:a0fb:a84c:3f4f]"
+  ],
+  "accessAuthCode": "",
+  "system": {
+    "id": "9c13a582-9478-49c8-9f0f-752f87b36494",
+    "name": "kaikai",
+    "kernelVersion": "3.1.20",
+    "os": "windows",
+    "osPlatform": "Microsoft Windows 11 Home China",
+    "container": "std",
+    "isMicrosoftStore": true,
+    "isInsider": false,
+    "homeDir": "C:\\Users\\wddjwk",
+    "workspaceDir": "D:\\notes\\siyuan",
+    "appDir": "C:\\Program Files\\WindowsApps\\89C2A984.SiYuan_3.1.20.0_x64__1qfd3tsw4ngc2\\app\\resources",
+    "confDir": "D:\\notes\\siyuan\\conf",
+    "dataDir": "D:\\notes\\siyuan\\data",
+    "networkServe": false,
+    "networkProxy": {
+      "scheme": "",
+      "host": "",
+      "port": ""
+    },
+    "disableGoogleAnalytics": false,
+    "downloadInstallPkg": true,
+    "autoLaunch2": 0,
+    "lockScreenMode": 0,
+    "disabledFeatures": [],
+    "microsoftDefenderExcluded": true
+  },
+  "keymap": {
+    "editor": {
+      "general": {
+        "ai": {
+          "custom": "⌥W",
+          "default": ""
+        },
+        "alignCenter": {
+          "custom": "⌥C",
+          "default": "⌥C"
+        },
+        "alignLeft": {
+          "custom": "⌥L",
+          "default": "⌥L"
+        },
+        "alignRight": {
+          "custom": "⌥R",
+          "default": "⌥R"
+        },
+        "attr": {
+          "custom": "⌥A",
+          "default": "⌥⌘A"
+        },
+        "backlinks": {
+          "custom": "⌥B",
+          "default": "⌥B"
+        },
+        "collapse": {
+          "custom": "⌘↑",
+          "default": "⌘↑"
+        },
+        "copyBlockEmbed": {
+          "custom": "⇧⌘E",
+          "default": "⇧⌘E"
+        },
+        "copyBlockRef": {
+          "custom": "⇧⌘C",
+          "default": "⇧⌘C"
+        },
+        "copyHPath": {
+          "custom": "⌥⇧P",
+          "default": "⇧⌘P"
+        },
+        "copyID": {
+          "custom": "",
+          "default": ""
+        },
+        "copyPlainText": {
+          "custom": "",
+          "default": ""
+        },
+        "copyProtocol": {
+          "custom": "⇧⌘H",
+          "default": "⇧⌘H"
+        },
+        "copyProtocolInMd": {
+          "custom": "",
+          "default": ""
+        },
+        "copyText": {
+          "custom": "",
+          "default": ""
+        },
+        "duplicate": {
+          "custom": "⌘D",
+          "default": "⌘D"
+        },
+        "duplicateCompletely": {
+          "custom": "",
+          "default": ""
+        },
+        "exitFocus": {
+          "custom": "",
+          "default": ""
+        },
+        "expand": {
+          "custom": "⌘↓",
+          "default": "⌘↓"
+        },
+        "expandDown": {
+          "custom": "⌥⇧↓",
+          "default": "⌥⇧↓"
+        },
+        "expandUp": {
+          "custom": "⌥⇧↑",
+          "default": "⌥⇧↑"
+        },
+        "fullscreen": {
+          "custom": "⌥Y",
+          "default": "⌥Y"
+        },
+        "graphView": {
+          "custom": "⌥G",
+          "default": "⌥G"
+        },
+        "hLayout": {
+          "custom": "",
+          "default": ""
+        },
+        "insertAfter": {
+          "custom": "⇧⌘A",
+          "default": "⇧⌘A"
+        },
+        "insertBefore": {
+          "custom": "⇧⌘B",
+          "default": "⇧⌘B"
+        },
+        "insertBottom": {
+          "custom": "⌥⌘.",
+          "default": "⌥⌘."
+        },
+        "insertRight": {
+          "custom": "⌥.",
+          "default": "⌥."
+        },
+        "jumpToParent": {
+          "custom": "⇧⌘J",
+          "default": "⇧⌘J"
+        },
+        "jumpToParentNext": {
+          "custom": "⇧⌘N",
+          "default": "⇧⌘N"
+        },
+        "jumpToParentPrev": {
+          "custom": "⇧⌘M",
+          "default": "⇧⌘M"
+        },
+        "moveToDown": {
+          "custom": "⌥↓",
+          "default": "⇧⌘↓"
+        },
+        "moveToUp": {
+          "custom": "⌥↑",
+          "default": "⇧⌘↑"
+        },
+        "netAssets2LocalAssets": {
+          "custom": "",
+          "default": ""
+        },
+        "netImg2LocalAsset": {
+          "custom": "",
+          "default": ""
+        },
+        "newContentFile": {
+          "custom": "F4",
+          "default": "F4"
+        },
+        "newNameFile": {
+          "custom": "F3",
+          "default": "F3"
+        },
+        "newNameSettingFile": {
+          "custom": "⌘F3",
+          "default": "⌘F3"
+        },
+        "openBy": {
+          "custom": "⌘O",
+          "default": "⌥,"
+        },
+        "optimizeTypography": {
+          "custom": "⌥F",
+          "default": ""
+        },
+        "outline": {
+          "custom": "⌥O",
+          "default": "⌥O"
+        },
+        "preview": {
+          "custom": "⌥⌘9",
+          "default": "⌥⌘9"
+        },
+        "quickMakeCard": {
+          "custom": "⌥⌘F",
+          "default": "⌥⌘F"
+        },
+        "redo": {
+          "custom": "⇧⌘Z",
+          "default": "⌘Y"
+        },
+        "refPopover": {
+          "custom": "",
+          "default": ""
+        },
+        "refTab": {
+          "custom": "⇧⌘.",
+          "default": "⇧⌘."
+        },
+        "refresh": {
+          "custom": "F5",
+          "default": "F5"
+        },
+        "rename": {
+          "custom": "F2",
+          "default": "F2"
+        },
+        "showInFolder": {
+          "custom": "⇧⌘O",
+          "default": "⌥A"
+        },
+        "spaceRepetition": {
+          "custom": "⌥⇧F",
+          "default": "⌥F"
+        },
+        "switchAdjust": {
+          "custom": "",
+          "default": ""
+        },
+        "switchReadonly": {
+          "custom": "",
+          "default": ""
+        },
+        "undo": {
+          "custom": "⌘Z",
+          "default": "⌘Z"
+        },
+        "vLayout": {
+          "custom": "",
+          "default": ""
+        },
+        "wysiwyg": {
+          "custom": "⌥⌘7",
+          "default": "⌥⌘7"
+        }
+      },
+      "heading": {
+        "heading1": {
+          "custom": "⌥⌘1",
+          "default": "⌥⌘1"
+        },
+        "heading2": {
+          "custom": "⌥⌘2",
+          "default": "⌥⌘2"
+        },
+        "heading3": {
+          "custom": "⌥⌘3",
+          "default": "⌥⌘3"
+        },
+        "heading4": {
+          "custom": "⌥⌘4",
+          "default": "⌥⌘4"
+        },
+        "heading5": {
+          "custom": "⌥⌘5",
+          "default": "⌥⌘5"
+        },
+        "heading6": {
+          "custom": "⌥⌘6",
+          "default": "⌥⌘6"
+        },
+        "paragraph": {
+          "custom": "⌥⌘0",
+          "default": "⌥⌘0"
+        }
+      },
+      "insert": {
+        "appearance": {
+          "custom": "⌥Q",
+          "default": "⌥⌘X"
+        },
+        "bold": {
+          "custom": "⌘B",
+          "default": "⌘B"
+        },
+        "check": {
+          "custom": "⌘L",
+          "default": "⌘L"
+        },
+        "clearInline": {
+          "custom": "⌘\\",
+          "default": "⌘\\"
+        },
+        "code": {
+          "custom": "⇧⌘K",
+          "default": "⇧⌘K"
+        },
+        "inline-code": {
+          "custom": "⌘G",
+          "default": "⌘G"
+        },
+        "inline-math": {
+          "custom": "⌘M",
+          "default": "⌘M"
+        },
+        "italic": {
+          "custom": "⌘I",
+          "default": "⌘I"
+        },
+        "kbd": {
+          "custom": "⌘'",
+          "default": "⌘'"
+        },
+        "lastUsed": {
+          "custom": "⌥X",
+          "default": "⌥X"
+        },
+        "link": {
+          "custom": "⌘K",
+          "default": "⌘K"
+        },
+        "list": {
+          "custom": "",
+          "default": ""
+        },
+        "mark": {
+          "custom": "⌥D",
+          "default": "⌥D"
+        },
+        "memo": {
+          "custom": "⌥⌘M",
+          "default": "⌥⌘M"
+        },
+        "ordered-list": {
+          "custom": "",
+          "default": ""
+        },
+        "quote": {
+          "custom": "",
+          "default": ""
+        },
+        "ref": {
+          "custom": "⌥[",
+          "default": "⌥["
+        },
+        "strike": {
+          "custom": "⇧⌘S",
+          "default": "⇧⌘S"
+        },
+        "sub": {
+          "custom": "⌘J",
+          "default": "⌘J"
+        },
+        "sup": {
+          "custom": "⌘H",
+          "default": "⌘H"
+        },
+        "table": {
+          "custom": "",
+          "default": "⌘O"
+        },
+        "tag": {
+          "custom": "⌘T",
+          "default": "⌘T"
+        },
+        "underline": {
+          "custom": "⌘U",
+          "default": "⌘U"
+        }
+      },
+      "list": {
+        "checkToggle": {
+          "custom": "⌘↩",
+          "default": "⌘↩"
+        },
+        "indent": {
+          "custom": "⇥",
+          "default": "⇥"
+        },
+        "outdent": {
+          "custom": "⇧⇥",
+          "default": "⇧⇥"
+        }
+      },
+      "table": {
+        "delete-column": {
+          "custom": "⇧⌘-",
+          "default": "⇧⌘-"
+        },
+        "delete-row": {
+          "custom": "⌘-",
+          "default": "⌘-"
+        },
+        "insertColumnLeft": {
+          "custom": "⇧⌘L",
+          "default": "⇧⌘L"
+        },
+        "insertColumnRight": {
+          "custom": "⇧⌘R",
+          "default": "⇧⌘R"
+        },
+        "insertRowAbove": {
+          "custom": "⇧⌘T",
+          "default": "⇧⌘T"
+        },
+        "insertRowBelow": {
+          "custom": "⇧⌘D",
+          "default": "⇧⌘D"
+        },
+        "moveToDown": {
+          "custom": "⌥⌘B",
+          "default": "⌥⌘B"
+        },
+        "moveToLeft": {
+          "custom": "⌥⌘L",
+          "default": "⌥⌘L"
+        },
+        "moveToRight": {
+          "custom": "⌥⌘R",
+          "default": "⌥⌘R"
+        },
+        "moveToUp": {
+          "custom": "⌥⌘T",
+          "default": "⌥⌘T"
+        }
+      }
+    },
+    "general": {
+      "addToDatabase": {
+        "custom": "",
+        "default": ""
+      },
+      "backlinks": {
+        "custom": "⌥7",
+        "default": "⌥7"
+      },
+      "bookmark": {
+        "custom": "⌥3",
+        "default": "⌥3"
+      },
+      "closeAll": {
+        "custom": "⌥⇧⌘W",
+        "default": ""
+      },
+      "closeLeft": {
+        "custom": "⌥⇧W",
+        "default": ""
+      },
+      "closeOthers": {
+        "custom": "⌥⌘W",
+        "default": ""
+      },
+      "closeRight": {
+        "custom": "⇧⌘W",
+        "default": ""
+      },
+      "closeTab": {
+        "custom": "⌘W",
+        "default": "⌘W"
+      },
+      "closeUnmodified": {
+        "custom": "",
+        "default": ""
+      },
+      "commandPanel": {
+        "custom": "⇧⌘P",
+        "default": "⌥⇧P"
+      },
+      "config": {
+        "custom": "⌥⌘S",
+        "default": "⌥P"
+      },
+      "dailyNote": {
+        "custom": "⌥5",
+        "default": "⌥5"
+      },
+      "dataHistory": {
+        "custom": "⌥H",
+        "default": "⌥H"
+      },
+      "editReadonly": {
+        "custom": "⇧⌘G",
+        "default": "⇧⌘G"
+      },
+      "enter": {
+        "custom": "⌥→",
+        "default": "⌥→"
+      },
+      "enterBack": {
+        "custom": "⌥←",
+        "default": "⌥←"
+      },
+      "fileTree": {
+        "custom": "⌥1",
+        "default": "⌥1"
+      },
+      "globalGraph": {
+        "custom": "⌥9",
+        "default": "⌥9"
+      },
+      "globalSearch": {
+        "custom": "⌘P",
+        "default": "⌘P"
+      },
+      "goBack": {
+        "custom": "⌘[",
+        "default": "⌘["
+      },
+      "goForward": {
+        "custom": "⌘]",
+        "default": "⌘]"
+      },
+      "goToEditTabNext": {
+        "custom": "⌃⇥",
+        "default": "⌃⇥"
+      },
+      "goToEditTabPrev": {
+        "custom": "⌃⇧⇥",
+        "default": "⌃⇧⇥"
+      },
+      "goToTab1": {
+        "custom": "⌘1",
+        "default": "⌘1"
+      },
+      "goToTab2": {
+        "custom": "⌘2",
+        "default": "⌘2"
+      },
+      "goToTab3": {
+        "custom": "⌘3",
+        "default": "⌘3"
+      },
+      "goToTab4": {
+        "custom": "⌘4",
+        "default": "⌘4"
+      },
+      "goToTab5": {
+        "custom": "⌘5",
+        "default": "⌘5"
+      },
+      "goToTab6": {
+        "custom": "⌘6",
+        "default": "⌘6"
+      },
+      "goToTab7": {
+        "custom": "⌘7",
+        "default": "⌘7"
+      },
+      "goToTab8": {
+        "custom": "⌘8",
+        "default": "⌘8"
+      },
+      "goToTab9": {
+        "custom": "⌘9",
+        "default": "⌘9"
+      },
+      "goToTabNext": {
+        "custom": "⇧⌘]",
+        "default": "⇧⌘]"
+      },
+      "goToTabPrev": {
+        "custom": "⇧⌘[",
+        "default": "⇧⌘["
+      },
+      "graphView": {
+        "custom": "⌥8",
+        "default": "⌥8"
+      },
+      "inbox": {
+        "custom": "⌥6",
+        "default": "⌥6"
+      },
+      "lockScreen": {
+        "custom": "⌥N",
+        "default": "⌥N"
+      },
+      "mainMenu": {
+        "custom": "⌥\\",
+        "default": "⌥\\"
+      },
+      "move": {
+        "custom": "",
+        "default": ""
+      },
+      "newFile": {
+        "custom": "⌘N",
+        "default": "⌘N"
+      },
+      "outline": {
+        "custom": "⌥2",
+        "default": "⌥2"
+      },
+      "recentDocs": {
+        "custom": "⌘E",
+        "default": "⌘E"
+      },
+      "replace": {
+        "custom": "⌘R",
+        "default": "⌘R"
+      },
+      "riffCard": {
+        "custom": "⌥0",
+        "default": "⌥0"
+      },
+      "search": {
+        "custom": "⌘F",
+        "default": "⌘F"
+      },
+      "selectOpen1": {
+        "custom": "",
+        "default": ""
+      },
+      "splitLR": {
+        "custom": "",
+        "default": ""
+      },
+      "splitMoveB": {
+        "custom": "",
+        "default": ""
+      },
+      "splitMoveR": {
+        "custom": "",
+        "default": ""
+      },
+      "splitTB": {
+        "custom": "",
+        "default": ""
+      },
+      "stickSearch": {
+        "custom": "⇧⌘F",
+        "default": "⇧⌘F"
+      },
+      "syncNow": {
+        "custom": "F9",
+        "default": "F9"
+      },
+      "tabToWindow": {
+        "custom": "",
+        "default": ""
+      },
+      "tag": {
+        "custom": "⌥4",
+        "default": "⌥4"
+      },
+      "toggleDock": {
+        "custom": "",
+        "default": ""
+      },
+      "toggleWin": {
+        "custom": "⌥M",
+        "default": "⌥M"
+      },
+      "unsplit": {
+        "custom": "",
+        "default": ""
+      },
+      "unsplitAll": {
+        "custom": "",
+        "default": ""
+      }
+    },
+    "plugin": {
+      "syplugin-hierarchyNavigate": {
+        "go_down": {
+          "custom": "⌥⌘→",
+          "default": "⌥⌘→"
+        },
+        "go_to_next_doc": {
+          "custom": "⌥⌘↓",
+          "default": "⌥⌘↓"
+        },
+        "go_to_previous_doc": {
+          "custom": "⌥⌘↑",
+          "default": "⌥⌘↑"
+        },
+        "go_up": {
+          "custom": "⌥⌘←",
+          "default": "⌥⌘←"
+        },
+        "insert_lcd": {
+          "custom": "",
+          "default": ""
+        },
+        "make_navigation_top": {
+          "custom": "",
+          "default": ""
+        },
+        "show_switch_panel": {
+          "custom": "⌥⌘E",
+          "default": "⌥⌘E"
+        }
+      }
+    }
+  },
+  "sync": {
+    "cloudName": "main",
+    "enabled": false,
+    "perception": false,
+    "mode": 1,
+    "interval": 30,
+    "synced": 0,
+    "stat": "",
+    "generateConflictDoc": false,
+    "provider": 2,
+    "s3": {
+      "endpoint": "",
+      "accessKey": "",
+      "secretKey": "",
+      "bucket": "",
+      "region": "",
+      "pathStyle": true,
+      "skipTlsVerify": true,
+      "timeout": 60,
+      "concurrentReqs": 8
+    },
+    "webdav": {
+      "endpoint": "",
+      "username": "",
+      "password": "",
+      "skipTlsVerify": true,
+      "timeout": 60,
+      "concurrentReqs": 1
+    },
+    "local": {
+      "endpoint": "",
+      "timeout": 60,
+      "concurrentReqs": 16
+    }
+  },
+  "search": {
+    "document": true,
+    "heading": true,
+    "list": false,
+    "listItem": false,
+    "codeBlock": true,
+    "mathBlock": true,
+    "table": true,
+    "blockquote": false,
+    "superBlock": false,
+    "paragraph": true,
+    "htmlBlock": true,
+    "embedBlock": false,
+    "databaseBlock": true,
+    "audioBlock": false,
+    "videoBlock": false,
+    "iframeBlock": false,
+    "widgetBlock": false,
+    "limit": 64,
+    "caseSensitive": false,
+    "name": true,
+    "alias": true,
+    "memo": true,
+    "ial": false,
+    "indexAssetPath": true,
+    "backlinkMentionName": true,
+    "backlinkMentionAlias": false,
+    "backlinkMentionAnchor": true,
+    "backlinkMentionDoc": true,
+    "backlinkMentionKeywordsLimit": 512,
+    "virtualRefName": true,
+    "virtualRefAlias": false,
+    "virtualRefAnchor": true,
+    "virtualRefDoc": true
+  },
+  "flashcard": {
+    "newCardLimit": 20,
+    "reviewCardLimit": 200,
+    "mark": true,
+    "list": true,
+    "superBlock": true,
+    "heading": true,
+    "deck": false,
+    "reviewMode": 0,
+    "requestRetention": 0.9,
+    "maximumInterval": 36500,
+    "weights": "0.40, 1.18, 3.17, 15.69, 7.19, 0.53, 1.46, 0.00, 1.55, 0.12, 1.02, 1.94, 0.11, 0.30, 2.27, 0.23, 2.99, 0.52, 0.66"
+  },
+  "ai": {
+    "openAI": {
+      "apiKey": "sk-839e50c80df944dba70fde2ec7dff5c3",
+      "apiTimeout": 300,
+      "apiProxy": "",
+      "apiModel": "deepseek-chat",
+      "apiMaxTokens": 4000,
+      "apiTemperature": 1,
+      "apiMaxContexts": 7,
+      "apiBaseURL": "https://api.deepseek.com",
+      "apiUserAgent": "SiYuan/3.1.20 std/windows",
+      "apiProvider": "OpenAI",
+      "apiVersion": ""
+    }
+  },
+  "bazaar": {
+    "trust": true,
+    "petalDisabled": false
+  },
+  "stat": {
+    "treeCount": 69,
+    "cTreeCount": 100,
+    "blockCount": 3598,
+    "cBlockCount": 5000,
+    "dataSize": 132832430,
+    "cDataSize": 209715200,
+    "assetsSize": 73972470,
+    "cAssetsSize": 104857600
+  },
+  "api": {
+    "token": "MCWJSWDDJWK"
+  },
+  "repo": {
+    "key": "nOcqJy4CyiSvQKVGZSqWchIMxXgAW6wSX11/SUSmsrw=",
+    "syncIndexTiming": 12000,
+    "indexRetentionDays": 180,
+    "retentionIndexesDaily": 2
+  },
+  "publish": {
+    "enable": false,
+    "port": 6808,
+    "auth": {
+      "enable": false,
+      "accounts": []
+    }
+  },
+  "openHelp": false,
+  "showChangelog": false,
+  "cloudRegion": 0,
+  "snippet": {
+    "enabledCSS": true,
+    "enabledJS": true
+  },
+  "dataIndexState": 0
+}
