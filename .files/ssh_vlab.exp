@@ -1,0 +1,11 @@
+#!/bin/expect
+
+set timeout 10
+
+spawn ssh -i ~/.ssh/vlab-vm5941.pem shuaikai@vlab.ustc.edu.cn
+
+expect "shuaikai@vlab.ustc.edu.cn's password:"
+
+send "225200\r"
+
+interact
