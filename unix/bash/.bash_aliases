@@ -61,6 +61,16 @@ alias bat='batcat'
 
 # functions
 
+ipshow() {
+	echo -en '[IPV4]: '
+	curl 4.ipw.cn
+	echo -en '\n[IPV6]: '
+	curl 6.ipw.cn
+	echo -en '\n[PREFERRED]: '
+	curl test.ipw.cn
+	echo ''
+}
+
 gitcntt() {
     git log --author="${1:-shuaikai}" --pretty=tformat: --numstat | awk '{add+=$1;sub+=$2} END {printf "add: %s sub: %s total: %s\n", add, sub, add - sub}'
 }
