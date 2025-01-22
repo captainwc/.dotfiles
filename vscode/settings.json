@@ -9,9 +9,11 @@
     "git.confirmSync": false,
     "git.enableSmartCommit": true,
     "remote.SSH.configFile": "~/.ssh/config",
-    "remote.SSH.remotePlatform": {},
+    "remote.SSH.remotePlatform": {
+        "vm-debian": "linux"
+    },
     // terminal
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.profiles.windows": {
         "Ubuntu (WSL)": {
             "path": "C:\\WINDOWS\\System32\\wsl.exe",
@@ -53,7 +55,7 @@
     "markdown.styles": [
         "~/.files/spring.css"
     ],
-    "workbench.colorTheme": "One Dark Modern",
+    "workbench.colorTheme": "Evondev Dracula High Contrast",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.editor.wrapTabs": true,
@@ -357,7 +359,7 @@
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "[python]": {
-        "editor.defaultFormatter": "charliermarsh.ruff"
+        "editor.defaultFormatter": "ms-python.autopep8"
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -562,7 +564,5 @@
         }
         // }
     },
-    "fittencode.languagePreference.displayPreference": "zh-cn",
-    "fittencode.Unit Test Framework.C/C++": "gtest",
-    "fittencode.Unit Test Framework.Python": "pytest"
+    "qt-core.qtInstallationRoot": "d:\\software\\Qt",
 }

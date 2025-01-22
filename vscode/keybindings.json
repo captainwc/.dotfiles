@@ -260,5 +260,9 @@
         "key": "ctrl+k ctrl+r",
         "command": "-git.revertSelectedRanges",
         "when": "isInDiffEditor && !operationInProgress"
+    },
+    {
+        "key": "ctrl+alt+oem_3",
+        "command": "workbench.action.toggleMaximizedPanel"
     }
 ]

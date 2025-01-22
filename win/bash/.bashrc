@@ -124,6 +124,17 @@ ossdowndatevscode() {
 }
 
 # functions
+
+ipshow() {
+    echo -en '[IPV4]: '
+    curl 4.ipw.cn
+    echo -en '\n[IPV6]: '
+    curl 6.ipw.cn
+    echo -en '\n[PREFERRED]: '
+    curl test.ipw.cn
+    echo ''
+} 
+
 bak() {
     for file in "$@"; do
         if [ -d ${file} ]; then

@@ -40,14 +40,6 @@ qossfetch(){
 
 alias sshvlab='ssh -i ~/.ssh/vlab-vm5941.pem shuaikai@vlab.ustc.edu.cn'
 
-export C_INCLUDE_PATH="/c/ENV/box/include:$C_INCLUDE_PATH"
-export LIBRARY_PATH="/c/ENV/box/libs:$LIBRARY_PATH"
-
-# export VIM="/c/Users/wddjwk"
-# export HOME="/c/Users/wddjwk"
-# export VIMRUNTIME="/d/env/editor/vim"
-
-
 # build() {
 #     local line_number=${1:-1}  # 获取第一个参数，默认为1
 #     local mk_file=$(find . -maxdepth 1 -type f -name "mk" -print -quit)
