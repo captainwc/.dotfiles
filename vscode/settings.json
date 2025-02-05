@@ -22,7 +22,7 @@
     "explorer.confirmDragAndDrop": false,
     "editor.fontSize": 20,
     "editor.fontWeight": "normal",
-    "editor.fontFamily": "'Maple Mono Normal NF CN', Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "'Maple Mono NF CN', Consolas, 'Courier New', monospace",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.tabCompletion": "on",
@@ -59,7 +59,7 @@
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.fontSize": 17,
     "terminal.integrated.fontWeight": "normal",
-    "terminal.integrated.fontFamily": "'Maple Mono Normal NF CN','DroidSansM Nerd Font Mono'",
+    "terminal.integrated.fontFamily": "'Maple Mono NF CN','DroidSansM Nerd Font Mono'",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.env.windows": {
         "LANG": "en_US.UTF-8"
