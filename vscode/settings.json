@@ -2,7 +2,7 @@
     // 外观
     "window.commandCenter": false,
     "workbench.activityBar.location": "top",
-    "workbench.colorTheme": "Default Light+",
+    "workbench.colorTheme": "Evondev Dracula New Colour",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.editor.wrapTabs": true,
@@ -23,6 +23,8 @@
     "editor.fontSize": 20,
     "editor.fontWeight": "normal",
     "editor.fontFamily": "'Maple Mono NF CN', Consolas, 'Courier New', monospace",
+    "editor.mouseWheelZoom": true,
+    "editor.multiCursorModifier": "alt",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.tabCompletion": "on",
@@ -107,6 +109,7 @@
     "debug.onTaskErrors": "abort",
     "debug.allowBreakpointsEverywhere": true,
     "debug.autoExpandLazyVariables": "on",
+    "debug.terminal.clearBeforeReusing": true,
     // cpp
     "C_Cpp.intelliSenseEngine": "disabled",
     "C_Cpp.errorSquiggles": "enabled",

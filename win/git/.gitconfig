@@ -1,5 +1,5 @@
 [core]
-        editor = nvim
+        editor = vim
 		autocrlf = true
 [user]
         name = wddjwk

@@ -16,16 +16,6 @@
         "when": "textInputFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+q",
-        "command": "editor.action.triggerSuggest",
-        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
-    },
-    {
-        "key": "alt+q",
-        "command": "editor.action.triggerSuggest",
-        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
-    },
-    {
         "key": "shift+alt+f",
         "command": "editor.action.formatDocument",
         "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor"
@@ -141,7 +131,7 @@
         "when": "activeEditorGroupEmpty && multipleEditorGroups"
     },
     {
-        "key": "alt+q",
+        "key": "ctrl+shift+oem_2",
         "command": "editor.action.triggerParameterHints",
         "when": "editorHasSignatureHelpProvider && editorTextFocus"
     },
@@ -269,5 +259,14 @@
         "key": "alt+2",
         "command": "workbench.action.gotoSymbol",
         "when": "!accessibilityHelpIsShown && !accessibleViewIsShown"
+    },
+    {
+        "key": "ctrl+shift+oem_2",
+        "command": "editor.action.triggerSuggest",
+        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.showAllSymbols"
     }
 ]
