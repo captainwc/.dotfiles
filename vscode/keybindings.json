@@ -131,7 +131,7 @@
         "when": "activeEditorGroupEmpty && multipleEditorGroups"
     },
     {
-        "key": "ctrl+shift+oem_2",
+        "key": "alt+p",
         "command": "editor.action.triggerParameterHints",
         "when": "editorHasSignatureHelpProvider && editorTextFocus"
     },
@@ -261,12 +261,22 @@
         "when": "!accessibilityHelpIsShown && !accessibleViewIsShown"
     },
     {
-        "key": "ctrl+shift+oem_2",
+        "key": "alt+l",
         "command": "editor.action.triggerSuggest",
         "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
     },
     {
         "key": "alt+q",
         "command": "workbench.action.showAllSymbols"
+    },
+    {
+        "key": "ctrl+shift+oem_2",
+        "command": "editor.action.blockComment",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+alt+a",
+        "command": "-editor.action.blockComment",
+        "when": "editorTextFocus && !editorReadonly"
     }
 ]
