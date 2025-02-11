@@ -97,10 +97,6 @@
         "command": "-workbench.action.closeActiveEditor"
     },
     {
-        "key": "ctrl+m ctrl+r",
-        "command": "cmake.cleanConfigure"
-    },
-    {
         "key": "ctrl+m ctrl+d",
         "command": "cmake.cleanConfigure"
     },
@@ -210,10 +206,6 @@
         "command": "-workbench.action.zoomIn"
     },
     {
-        "key": "alt+g",
-        "command": "lazygit.openLazygit"
-    },
-    {
         "key": "ctrl+k ctrl+r",
         "command": "-workbench.action.keybindingsReference"
     },
@@ -278,5 +270,28 @@
         "key": "shift+alt+a",
         "command": "-editor.action.blockComment",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+a",
+        "command": "cursorEnd",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "alt+i",
+        "command": "cursorHome",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+m ctrl+r",
+        "command": "cmake.launchTarget",
+        "when": "cmake:enableFullFeatureSet && !cmake:hideDebugCommand && !inDebugMode"
+    },
+    {
+        "key": "alt+g",
+        "command": "lazygit-vscode.toggle"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "-lazygit-vscode.toggle"
     }
 ]

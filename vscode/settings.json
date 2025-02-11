@@ -1,8 +1,7 @@
 {
     // 外观
     "window.commandCenter": false,
-    "workbench.activityBar.location": "top",
-    "workbench.colorTheme": "Evondev Dracula New Colour",
+    "workbench.colorTheme": "Quiet Light",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.editor.wrapTabs": true,
@@ -14,6 +13,9 @@
         "*.png": "cweijan.officeViewer",
         "{git,gitlens}:/**/*.{md,csv}": "default",
         "{git,gitlens,git-graph}:/**/*.{md,csv,svg}": "default"
+    },
+    "files.associations": {
+        "*.cmake": "cmake"
     },
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 300,
@@ -54,7 +56,8 @@
     "git.enableSmartCommit": true,
     "remote.SSH.configFile": "~/.ssh/config",
     "remote.SSH.remotePlatform": {
-        "vm-debian": "linux"
+        "vm-debian": "linux",
+        "vm-ubuntu24": "linux"
     },
     // terminal
     "terminal.integrated.enableImages": true,
@@ -66,7 +69,7 @@
     "terminal.integrated.env.windows": {
         "LANG": "en_US.UTF-8"
     },
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
     "terminal.integrated.automationProfile.windows": {
         "path": "powershell",
     },
@@ -127,6 +130,11 @@
     ],
     "clang-format.executable": "clang-format",
     "clang-format.fallbackStyle": "Google",
+    // bazel
+    "bazel.executable": "bazel",
+    "bazel.buildifierExecutable": "buildifier",
+    "bazel.lsp.command": "starpls", // alternatively: bazel-lsp
+    "bazel.enableCodeLens": true,
     // cmake
     "cmake.showOptionsMovedNotification": false,
     "cmake.showNotAllDocumentsSavedQuestion": false,
@@ -376,7 +384,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.json-language-features"
     },
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
@@ -504,11 +512,10 @@
     // "latex-workshop.latex.autoClean.run": "onBuilt",
     // 背景图片
     "winopacity.opacity": 220,
-    "background.enabled": true,
+    "background.enabled": false,
     "background.fullscreen": {
         "images": [
             "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1061.jpg",
-            "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1087.jpg",
             "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1094.jpg",
             "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/PNG_2008.png",
         ],
@@ -527,39 +534,38 @@
     // color theme
     "editor.semanticTokenColorCustomizations": {
         "enabled": true,
-        // "[One Dark Modern]": {
-        "rules": {
-            "macro": {
-                "foreground": "#f9f274b7",
-                "fontStyle": "italic bold"
-            },
-            "*.readonly": {
-                "foreground": "#f5c812b7",
-                "fontStyle": "bold"
-            },
-            "*.static": {
-                "foreground": "#955cfe",
-                "fontStyle": "italic bold"
-            },
-            "templateType": "#ff0000",
-            "namespace": "#91ecb2f8",
-            "property": {
-                "foreground": "#de6872",
-                "fontStyle": "italic"
-            },
-            "method": {
-                "foreground": "#0ec0f6",
-                "fontStyle": "italic"
-            },
-            "typeParameter": {
-                "foreground": "#C1AE75",
-                "fontStyle": "bold"
-            },
+        "[Evondev Dracula New Colour]": {
+            "rules": {
+                "macro": {
+                    "foreground": "#f9f274b7",
+                    "fontStyle": "italic bold"
+                },
+                "*.readonly": {
+                    "foreground": "#f5c812b7",
+                    "fontStyle": "bold"
+                },
+                "*.static": {
+                    "foreground": "#955cfe",
+                    "fontStyle": "italic bold"
+                },
+                "templateType": "#ff0000",
+                "namespace": "#91ecb2f8",
+                "property": {
+                    "foreground": "#de6872",
+                    "fontStyle": "italic"
+                },
+                "method": {
+                    "foreground": "#0ec0f6",
+                    "fontStyle": "italic"
+                },
+                "typeParameter": {
+                    "foreground": "#C1AE75",
+                    "fontStyle": "bold"
+                },
+            }
         }
-        // }
     },
     // 小插件们
-    "bazel.enableCodeLens": true,
     "lldb.suppressUpdateNotifications": true,
     "qt-core.qtInstallationRoot": "d:\\software\\Qt",
     "vscode-office.editorTheme": "Auto",
