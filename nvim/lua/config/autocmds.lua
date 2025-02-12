@@ -2,6 +2,39 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- 判断操作系统
+function OsIsWindows()
+    -- return package.config:sub(1, 1) == "\\"
+    return jit.os == "Windows"
+end
+
+-- 包装命令以适应不同平台
+function WrapCommandForDiffOS(cmd)
+    local tool_mapping = {
+        gdb = { windows = "gdb", linux = "cgdb" },
+        pdb = { windows = "pdb", linux = "pudb" },
+    }
+    local is_win = OsIsWindows()
+    -- 命令映射
+    if tool_mapping[cmd] then
+        return is_win and tool_mapping[cmd].windows or tool_mapping[cmd].linux
+    end
+    -- 其余的，linux上加上 ./
+    return is_win and cmd or "./" .. cmd
+end
+
+-- 规则化路径分隔符
+function NormalizePath(path)
+    local sep = "/"
+    if OsIsWindows() then
+        sep = "\\"
+    else
+        sep = "/"
+    end
+    local normalPath = path:gsub("[/\\]", sep)
+    return normalPath
+end
+
 -- toggleFT func: 存在对应名称的窗口则toggle，否则新建
 function ToggleFT(name, cmd)
     if vim.fn["floaterm#terminal#get_bufnr"](name) ~= -1 then
@@ -20,9 +53,9 @@ function RunFile()
     if run_cmd[ft] then
         ToggleFT("RUN", run_cmd[ft] .. " %")
     elseif ft == "c" then
-        ToggleFT("RUN", "gcc % -o %< && ./%< && rm %<")
+        ToggleFT("RUN", "gcc % -o %< && " .. WrapCommandForDiffOS("%<") .. " && rm %<")
     elseif ft == "cpp" then
-        ToggleFT("RUN", "g++ % -o %< -std=c++20 -fmodules-ts && ./%< && rm %<")
+        ToggleFT("RUN", "g++ % -o %< -std=c++20 -fmodules-ts && " .. WrapCommandForDiffOS("%<") .. " && rm %<")
     elseif ft == "java" then
         ToggleFT("RUN", "javac % && java %<")
     end
@@ -37,7 +70,7 @@ function DebugFile()
             string.format(
                 "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
                 "DEBUG",
-                'bash -c "gcc % -o %< -g && cgdb -q %< && rm %<"'
+                string.format("bash -c 'gcc %% -o %%< -g && %s -q %%< && rm %%<'", WrapCommandForDiffOS("gdb"))
             )
         )
     elseif ft == "cpp" then
@@ -45,7 +78,10 @@ function DebugFile()
             string.format(
                 "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
                 "DEBUG",
-                'bash -c "g++ % -o %< -g -std=c++20 -fmodules-ts && cgdb -q %< && rm %<"'
+                string.format(
+                    "bash -c 'g++ %% -o %%< -g -std=c++20 -fmodules-ts && %s -q %%< && rm %%<'",
+                    WrapCommandForDiffOS("gdb")
+                )
             )
         )
     elseif ft == "python" then
@@ -53,7 +89,7 @@ function DebugFile()
             string.format(
                 "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
                 "DEBUG",
-                'bash -c "pudb %"'
+                string.format("bash -c '%s %%'", WrapCommandForDiffOS("pdb"))
             )
         )
     elseif ft == "go" then
@@ -96,20 +132,6 @@ end
 --     pattern = "*",
 --     callback = Set_transparent_background,
 -- })
-
--- 规则化路径分隔符
-function NormalizePath(path)
-    local osType = jit.os
-    local sep
-    if osType == "Windows" then
-        sep = "\\"
-    else
-        sep = "/"
-    end
-    local normalPath = path:gsub("[/\\]", sep)
-    return normalPath
-end
-
 -- 文件路径相关
 function ShowFilePath()
     local fullpath = vim.fn.expand("%:p")
@@ -122,10 +144,6 @@ end
 
 -- 寻找根CMakeLists.txt路径
 function FindCMakeRoot()
-    -- vim.ui.input({ prompt = "Enter your name:" }, function(input)
-    --     print("[input]: " .. input)
-    -- end)
-    -- ShowFilePath()
     local path = vim.fn.expand("%:p:h") -- 获取当前文件所在目录
     local last_cmake_file = nil
 
@@ -142,92 +160,88 @@ function FindCMakeRoot()
     return NormalizePath(last_cmake_file) or nil
 end
 
--- CMAKE 运行当前文件同名的 target， 会重新配置cmake
+-- 获取target名称和路径相关的信息
+function GetCMakeTargetInfo()
+    local cmakeRoot = FindCMakeRoot()
+    local buildDir = NormalizePath(cmakeRoot .. "/build")
+
+    local defaultTargetName = vim.fn.expand("%:p:t:r")
+    local userInput = vim.fn.input("Target('" .. defaultTargetName .. "'): ")
+    local targetName = userInput ~= "" and userInput or defaultTargetName
+
+    local targetPath = ""
+    local binPath = NormalizePath(buildDir .. "/bin")
+    if vim.fn.isdirectory(binPath) == 1 then
+        targetPath = NormalizePath("bin/" .. targetName)
+    else
+        targetPath = NormalizePath(targetName)
+    end
+
+    return buildDir, targetName, targetPath
+end
+
+-- 生成cmake构建+执行target的命令
+function ExecuteCMakeCommand(cmakeBuildType, isRebuildNeeded, isDebugTargetNeeded, isUseNinja)
+    local buildDir, targetName, targetPath = GetCMakeTargetInfo()
+    local para_nums = 8
+    local cmakeGenerator = isUseNinja and '-G"Ninja"' or ""
+    -- cmake 构建命令
+    local cmakeBuildTargetCmd = ""
+    if isRebuildNeeded then
+        cmakeBuildTargetCmd = string.format(
+            "((rm -rf %s && mkdir %s) || (mkdir %s)) && cd %s && cmake .. %s -DCMAKE_BUILD_TYPE=%s && cmake --build . --target=%s -j%s",
+            buildDir,
+            buildDir,
+            buildDir,
+            buildDir,
+            cmakeGenerator,
+            cmakeBuildType,
+            targetName,
+            para_nums
+        )
+    else
+        cmakeBuildTargetCmd = string.format(
+            -- "cd %s && cmake .. -DCMAKE_BUILD_TYPE=%s && cmake --build . --target=%s -j%s",
+            "cd %s && cmake --build . --target=%s -j%s",
+            buildDir,
+            targetName,
+            para_nums
+        )
+    end
+    -- 运行target命令（run or debug)
+    local runTargetCmd = ""
+    if isDebugTargetNeeded then
+        runTargetCmd = string.format("clear && %s %s", WrapCommandForDiffOS("gdb"), targetPath)
+    else
+        runTargetCmd = string.format("clear && %s", WrapCommandForDiffOS(targetPath))
+    end
+    -- 组合构建和执行命令
+    local fullCommand = cmakeBuildTargetCmd .. " && " .. runTargetCmd
+    -- 设置floatterm参数
+    local floatermTitle = isDebugTargetNeeded and "CMakeDebugTarget" or "CMakeRunTarget"
+    local floatermOptions = ""
+    if isDebugTargetNeeded then
+        floatermOptions = "--autoclose=1 --width=0.9 --height=0.85"
+    else
+        floatermOptions = "--autoclose=0"
+    end
+
+    vim.cmd("w")
+    vim.cmd(string.format("FloatermNew --title=%s:%s %s %s", floatermTitle, targetName, floatermOptions, fullCommand))
+end
+
 function CMakeRunTarget()
-    local targetName = vim.fn.expand("%:p:t:r")
-    local cmakeRoot = FindCMakeRoot()
-    local buildDir = NormalizePath(cmakeRoot .. "/build")
-    local relativeBin = NormalizePath("bin/" .. targetName)
-    vim.cmd("w")
-    vim.cmd(
-        string.format(
-            "FloatermNew --title=CMakeRunTarget:%s --autoclose=0 %s",
-            targetName,
-            string.format(
-                "((rm -rf %s && mkdir %s) || (mkdir %s)) && cd %s && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target=%s && clear && %s",
-                buildDir,
-                buildDir,
-                buildDir,
-                buildDir,
-                targetName,
-                relativeBin
-            )
-        )
-    )
+    ExecuteCMakeCommand("Release", true, false, true)
 end
 
--- CMAKE 调试当前文件同名的 target， 会重新配置cmake
 function CMakeDebugTarget()
-    local targetName = vim.fn.expand("%:p:t:r")
-    local cmakeRoot = FindCMakeRoot()
-    local buildDir = NormalizePath(cmakeRoot .. "/build")
-    local relativeBin = NormalizePath("bin/" .. targetName)
-    vim.cmd("w")
-    vim.cmd(
-        string.format(
-            "FloatermNew --title=CMakeDebugTarget:%s --autoclose=1 --width=0.9 --height=0.85 %s",
-            targetName,
-            string.format(
-                "((rm -rf %s && mkdir %s) || (mkdir %s)) && cd %s && cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build . --target=%s && clear && cgdb %s",
-                buildDir,
-                buildDir,
-                buildDir,
-                buildDir,
-                targetName,
-                relativeBin
-            )
-        )
-    )
+    ExecuteCMakeCommand("Debug", true, true, true)
 end
 
--- CMAKE 运行当前文件同名的 target，不会重新配置cmake
 function CMakeRunTargetNonClean()
-    local targetName = vim.fn.expand("%:p:t:r")
-    local cmakeRoot = FindCMakeRoot()
-    local buildDir = NormalizePath(cmakeRoot .. "/build")
-    local relativeBin = NormalizePath("bin/" .. targetName)
-    vim.cmd("w")
-    vim.cmd(
-        string.format(
-            "FloatermNew --title=CMakeRunTarget:%s --autoclose=0 %s",
-            targetName,
-            string.format(
-                "cd %s && cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build . --target=%s && clear && %s",
-                buildDir,
-                targetName,
-                relativeBin
-            )
-        )
-    )
+    ExecuteCMakeCommand("Release", false, false, true)
 end
 
--- CMAKE 调试当前文件同名的target，不会重新配置cmake
 function CMakeDebugTargetNonClean()
-    local targetName = vim.fn.expand("%:p:t:r")
-    local cmakeRoot = FindCMakeRoot()
-    local buildDir = NormalizePath(cmakeRoot .. "/build")
-    local relativeBin = NormalizePath("bin/" .. targetName)
-    vim.cmd("w")
-    vim.cmd(
-        string.format(
-            "FloatermNew --title=CMakeDebugTarget:%s --autoclose=1 --width=0.9 --height=0.85 %s",
-            targetName,
-            string.format(
-                "cd %s && cmake .. -DCMAKE_BUILD_TYPE=Debug && cmake --build . --target=%s && clear && cgdb %s",
-                buildDir,
-                targetName,
-                relativeBin
-            )
-        )
-    )
+    ExecuteCMakeCommand("Debug", false, true, true)
 end
