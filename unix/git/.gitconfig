@@ -6,11 +6,11 @@
         email = wddjwk@qq.com
 [init]
         defaultBranch = main
-[credential "helperselector"]
-        selected = manager
 ; [url "https://gitclone.com/"]
 ;         insteadOf = https://
 [pull]
 	rebase = false
 [diff]
 	tool = vimdiff
+[credential]
+	helper = store
