@@ -7,6 +7,8 @@ import re
 
 
 class PipeLine():
+    """ 可以批量执行的Rules。用于组合有一定关联、顺序的Rules """
+
     def __init__(self, transformers: List['Rule']) -> None:
         self.transformers = transformers
 
@@ -17,12 +19,15 @@ class PipeLine():
 
 
 class Rule(ABC):
+    """ 接口类：描述对字符串的一种修改，也即是对错误信息的一次编辑、过滤 """
     @abstractmethod
     def compose(self, msg: str) -> str:
         pass
 
 
 class ErrorMsg:
+    """  错误信息封装类，方便对错误信息进行流式处理 """
+
     def __init__(self, msg: str) -> None:
         self.data = msg
 
@@ -44,6 +49,13 @@ class ErrorMsg:
 # ===============  Concreates ===============
 
 class StdContainerRule(Rule):
+    """
+    STL容器的处理规则，实际上适用于任意满足`std:xxx<...>`形式的片段\n
+    作用: `std::{container_name}<...>` => `alias_name`\n
+    \t\t`container_name`: 容器类型，比如 "vector"、"unordered_map"\n
+    \t\t`alias_name`: 想替换的别名，如 "VECTOR"、"MAP"
+    """
+
     def __init__(self, container_name: str, alias_name: str = "") -> None:
         self.name = container_name
         if alias_name == "":
@@ -62,6 +74,8 @@ class StdContainerRule(Rule):
 
 
 class FixedStrRule(Rule):
+    """ 固定字符串替换 `pattern` => `replacement`"""
+
     def __init__(self, pattern: str, replacement: str) -> None:
         self.pattern = pattern
         self.replacement = replacement
@@ -71,6 +85,8 @@ class FixedStrRule(Rule):
 
 
 class RegexStrRule(Rule):
+    """ 正则表达式替换 `re.sub(pattern, replacement, msg) """
+
     def __init__(self, pattern: str, replacement: str) -> None:
         self.pattern = pattern
         self.replacement = replacement
@@ -80,6 +96,8 @@ class RegexStrRule(Rule):
 
 
 class ColorfulRule(Rule):
+    """ 为满足正则表达式`pattern`的片段添加ANSI颜色 """
+
     def __init__(self, pattern: str, color: str) -> None:
         self.pattern = pattern
         self.color = color
@@ -135,7 +153,10 @@ class Utils:
 
     @staticmethod
     def GetStdContainerPipeline() -> 'PipeLine':
-        # TODO: 容器类型可以改为从参数指定，不然可能会折叠过多
+        """
+        定义需要处理的标准库组件
+        `TODO`: 容器类型可以改为从参数指定，不然可能会折叠过多
+        """
         return PipeLine(
             [
                 StdContainerRule("__cxx11::basic_string", "STRING"),
@@ -151,6 +172,7 @@ class Utils:
 
     @staticmethod
     def GetDetailRecudePileLine() -> 'PipeLine':
+        """ 折叠所有的detail命名空间中内容: `std::__detail<...>` => `DETAIL` """
         return PipeLine(
             [
                 RegexStrRule(r"(std::__detail.*?)(\<)", r"std::DETAIL\2"),
@@ -158,7 +180,8 @@ class Utils:
             ])
 
     @staticmethod
-    def GetColorfulPipeLine() -> 'PipeLine':
+    def GetColorfulLogPatternPipeLine() -> 'PipeLine':
+        """ 为类似日志的片段添加高亮，比如 路径、error、warning 等"""
         return PipeLine(
             [
                 ColorfulRule(r"((([CD]:)|(/usr)|(/home)).*?:(\d+(:)?)*)",
@@ -167,10 +190,18 @@ class Utils:
                 ColorfulRule(r"([Ff]ail(ed)?:?)", Utils.FG_RED),
                 ColorfulRule(r"([Ww]arn(ing)?(s)?[:]?)", Utils.BG_YELLOW),
                 ColorfulRule(r"([Nn]ote[:]?)", Utils.BG_BLUE),
+            ]
+        )
+
+    @staticmethod
+    def GetColorfulRecgonizedPatternPipeLine() -> 'PipeLine':
+        """ 高亮一些错误信息中 `固定的`、`带有提示性意味`的短语或片段。可以不断更新 """
+        return PipeLine(
+            [
                 ColorfulRule(r"([~]*\^[~]*)", Utils.FG_PURPLE),
                 ColorfulRule(r"(no matching function)", Utils.FG_YELLOW),
                 ColorfulRule(r"(required( by)?( from)?)", Utils.FG_BLUE),
-                ColorfulRule(r"(In .*? of)", Utils.FG_BLUE)
+                ColorfulRule(r"(In .*? of\s)", Utils.FG_BLUE)
             ]
         )
 
@@ -183,5 +214,6 @@ if __name__ == '__main__':
     msg \
         .reduce_pipe(Utils.GetStdContainerPipeline()) \
         .reduce_pipe(Utils.GetDetailRecudePileLine()) \
-        .reduce_pipe(Utils.GetColorfulPipeLine()) \
+        .reduce_pipe(Utils.GetColorfulLogPatternPipeLine()) \
+        .reduce_pipe(Utils.GetColorfulRecgonizedPatternPipeLine()) \
         .dump()
