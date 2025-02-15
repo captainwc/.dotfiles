@@ -69,43 +69,31 @@ Set-PSReadLineKeyHandler -Chord 'Ctrl+a' -Function BeginningOfLine
 # ==============================================
 
 function List-AllItems {
-    & "D:\env\box\bin\lsd.exe" -alhF
+    lsd.exe -alhF
 }
 
 function Open-ProfileInSublime {
-    D:\software\Sublime\subl.exe $PROFILE
+    subl.exe $PROFILE
 }
 
-function Start-VM-Ubuntu24-Gui {
-    C:\software\vmware\vmrun.exe -T ws start D:\VM\Ubuntu24\vm-ubuntu24.vmx
+function Open-LocalProfileInSublime {
+    subl.exe "$(Split-Path $PROFILE)\local_profile.ps1"
 }
 
-function Start-VM-Ubuntu24 {
-    C:\software\vmware\vmrun.exe -T ws start D:\VM\Ubuntu24\vm-ubuntu24.vmx nogui
-    Write-Host "Waiting For ssh to vm-ubuntu24(192.168.5.135)"
-    ssh shuaikai@vm-ubuntu24
-}
 
-function Stop-VM-Ubuntu24 {
-    C:\software\vmware\vmrun.exe -T ws stop D:\VM\Ubuntu24\vm-ubuntu24.vmx soft
-}
-
-Set-Alias -Name ls -Value D:\env\box\bin\lsd.exe
+Set-Alias -Name ls -Value lsd.exe
 Set-Alias -Name ll -Value List-AllItems
-Set-Alias -Name rm -Value D:\env\git\usr\bin\rm.exe
-Set-Alias -Name du -Value D:\env\box\bin\dust.exe
-Set-Alias -Name df -Value D:\env\box\bin\duf.exe
+Set-Alias -Name rm -Value rm.exe
+Set-Alias -Name du -Value dust.exe
+Set-Alias -Name df -Value duf.exe
 
 Set-Alias -Name vimb -Value Open-ProfileInSublime
+Set-Alias -Name vimal -Value Open-LocalProfileInSublime
 Set-Alias -Name sb -Value $PROFILE
 
-Set-Alias -Name vim -Value D:\software\Sublime\subl.exe
-Set-Alias -Name nvim -Value D:\software\Sublime\subl.exe
-Set-Alias -Name subl -Value D:\software\Sublime\subl.exe
-
-Set-Alias -Name vmstart-gui-ubuntu24 -Value Start-VM-Ubuntu24-Gui
-Set-Alias -Name vmstart-ubuntu24 -Value Start-VM-Ubuntu24
-Set-Alias -Name vmstop-ubuntu24 -Value Stop-VM-Ubuntu24
+Set-Alias -Name vim -Value subl.exe
+Set-Alias -Name nvim -Value subl.exe
+Set-Alias -Name subl -Value subl.exe
 
 # ==============================================
 #  功能函数
@@ -140,10 +128,11 @@ function fsubl {
         Write-Host "${ANSI_RGB_SUNSET}No selection made.$ANSI_RGB_EMERALD"
         return
     }
-    D:\software\Sublime\subl.exe $selected
+    subl.exe $selected
 }
 
 Set-Alias -Name fvim -Value fsubl
+Set-Alias -Name fnvim -Value fsubl
 
 # ==============================================
 #  自定义函数
@@ -154,7 +143,7 @@ function ErrorReducer {
         [Parameter(ValueFromPipeline = $true)]
         $InputObject
     )
-    $InputObject | python D:\env\box\scripts\python\ErrorReducer.py
+    $InputObject | python $HOME\.dotfiles\scripts\py\ErrorReducer.py
 }
 
 # ==============================================
@@ -179,3 +168,12 @@ function global:prompt {
 
 # Oh-my-posh, [Themes See](https://ohmyposh.dev/docs/themes)
 # oh-my-posh init pwsh --config "C:\Users\wddjwk\AppData\Local\Programs\oh-my-posh\themes\pararussel.omp.json" | Invoke-Expression
+
+
+# ==============================================
+#  加载本地配置文件
+# ==============================================
+
+if (Test-Path "$(Split-Path $PROFILE)\local_profile.ps1") {
+    . "$(Split-Path $PROFILE)\local_profile.ps1"
+}
