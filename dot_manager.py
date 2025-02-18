@@ -130,8 +130,11 @@ def _get_conf_path(type: str, conf: str) -> Optional[str]:
         pt = mapper[conf]
     except KeyError:
         _warn(
-            f"""There is no item about {COMMON_FILE_LINK_COLOR} \"{conf}\" {RESET} in {FG_YELLOW}map2{
-                BG_BLUE}{BOLD}{type}{RESET}{FG_YELLOW}path.json{RESET} file, please check it."""
+            f"""There is no item about {COMMON_FILE_LINK_COLOR} \"{conf}\" {RESET} in {
+                FG_YELLOW
+            }map2{BG_BLUE}{BOLD}{type}{RESET}{FG_YELLOW}path.json{
+                RESET
+            } file, please check it."""
         )
         return None
     return os.path.normpath(pt)
@@ -180,8 +183,11 @@ def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=
     # check repo
     if repo_source is None or not os.path.exists(repo_source):
         _warn(
-            f"""{FG_YELLOW}[CONF-MAPPED,REPO-MISS]{RESET}: {COMMON_FILE_LINK_COLOR}{repo_source}{
-                RESET} unexists, skip create this file's symbolink to {COMMON_FILE_LINK_COLOR}{local_link}{RESET}"""
+            f"""{FG_YELLOW}[CONF-MAPPED,REPO-MISS]{RESET}: {COMMON_FILE_LINK_COLOR}{
+                repo_source
+            }{RESET} unexists, skip create this file's symbolink to {
+                COMMON_FILE_LINK_COLOR
+            }{local_link}{RESET}"""
         )
         return
 
@@ -194,7 +200,7 @@ def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=
 
     if os.path.islink(local_link):
         old_target = os.readlink(local_link)
-        if os.path.samefile(old_target, repo_source):
+        if os.path.exists(old_target) and os.path.samefile(old_target, repo_source):
             _log(
                 f"{FG_GREEN}[Link exist]{RESET} {SUCCESS_FILE_LINK_COLOR}{local_link}{RESET} => {SUCCESS_FILE_LINK_COLOR}{old_target}{RESET}"
             )
@@ -227,7 +233,10 @@ def _make_link(repo_source: Optional[str], local_link: Optional[str], del_exist=
     except OSError as e:
         _warn(
             f"""{FG_RED}[Exception]{RESET}: Please check if you have {BOLD}sudo mode{
-    RESET} to create symbollink.\n\t {type(e).__name__} Occurrs when create link at {COMMON_FILE_LINK_COLOR}{local_link}{RESET}\n\tDetail:{e}"""
+                RESET
+            } to create symbollink.\n\t {type(e).__name__} Occurrs when create link at {
+                COMMON_FILE_LINK_COLOR
+            }{local_link}{RESET}\n\tDetail:{e}"""
         )
         return
     except Exception as e:
