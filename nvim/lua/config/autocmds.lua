@@ -2,6 +2,16 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
+-- 朴素的执行命令
+function RunCommand()
+    local currDir = vim.fn.getcwd()
+    local command = vim.fn.input("[" .. currDir .. "]$ ")
+    if command ~= "" then
+        -- vim.cmd(command)
+        vim.cmd(string.format("FloatermNew --autoclose=0 --title=COMMANDLINE %s", command))
+    end
+end
+
 -- 判断操作系统
 function OsIsWindows()
     -- return package.config:sub(1, 1) == "\\"
