@@ -44,6 +44,18 @@ function ToggleFT(name, cmd)
     end
 end
 
+function GetCompileOptions(type)
+    local defaultOptionsMap = {
+        CPP = "-std=c++20 ",
+        CPP_Debug = "-g -O0 -std=c++20 ",
+        C = "",
+        C_Debug = "-g ",
+    }
+
+    local compileOptions = vim.fn.input("[" .. type .. "] Compile Options", defaultOptionsMap[type])
+    return compileOptions
+end
+
 -- Run File
 function RunFile()
     vim.cmd("w")
@@ -53,9 +65,12 @@ function RunFile()
     if run_cmd[ft] then
         ToggleFT("RUN", run_cmd[ft] .. " %")
     elseif ft == "c" then
-        ToggleFT("RUN", "gcc % -o %< && " .. WrapCommandForDiffOS("%<") .. " && rm %<")
+        ToggleFT("RUN", "gcc % " .. GetCompileOptions("C") .. " -o %< && " .. WrapCommandForDiffOS("%<") .. " && rm %<")
     elseif ft == "cpp" then
-        ToggleFT("RUN", "g++ % -o %< -std=c++20 -fmodules-ts && " .. WrapCommandForDiffOS("%<") .. " && rm %<")
+        ToggleFT(
+            "RUN",
+            "g++ % -o %< " .. GetCompileOptions("CPP") .. " && " .. WrapCommandForDiffOS("%<") .. " && rm %<"
+        )
     elseif ft == "java" then
         ToggleFT("RUN", "javac % && java %<")
     end
@@ -70,7 +85,11 @@ function DebugFile()
             string.format(
                 "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
                 "DEBUG",
-                string.format("bash -c 'gcc %% -o %%< -g && %s -q %%< && rm %%<'", WrapCommandForDiffOS("gdb"))
+                string.format(
+                    "bash -c 'gcc %% -o %%< %s && %s -q %%< && rm %%<'",
+                    GetCompileOptions("C_Debug"),
+                    WrapCommandForDiffOS("gdb")
+                )
             )
         )
     elseif ft == "cpp" then
@@ -79,7 +98,8 @@ function DebugFile()
                 "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
                 "DEBUG",
                 string.format(
-                    "bash -c 'g++ %% -o %%< -g -std=c++20 -fmodules-ts && %s -q %%< && rm %%<'",
+                    "bash -c 'g++ %% -o %%< %s && %s -q %%< && rm %%<'",
+                    GetCompileOptions("CPP_Debug"),
                     WrapCommandForDiffOS("gdb")
                 )
             )
@@ -133,12 +153,13 @@ end
 --     callback = Set_transparent_background,
 -- })
 -- 文件路径相关
-function ShowFilePath()
+function ShowPath()
     local fullpath = vim.fn.expand("%:p")
     local folder = vim.fn.expand("%:p:h")
     local filename = vim.fn.expand("%:p:t")
     local fullbase = vim.fn.expand("%:p:r")
     local extension = vim.fn.expand("%:p:e")
+    print(NormalizePath(filename))
     print(NormalizePath(fullpath))
 end
 
