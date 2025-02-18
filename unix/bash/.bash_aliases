@@ -59,16 +59,27 @@ alias bat='batcat'
 # mycli    mysql 命令行带自动补全
 # --------------------------------
 
+# 彩色的less（彩色man手册）
+export LESS_TERMCAP_mb=$'\e[01;31m'    # 开始加粗（红色）
+export LESS_TERMCAP_md=$'\e[01;31m'    # 加粗（红色）
+export LESS_TERMCAP_me=$'\e[0m'        # 结束加粗
+export LESS_TERMCAP_so=$'\e[01;44;33m' # 高亮背景（黄色文字，蓝色背景）
+export LESS_TERMCAP_se=$'\e[0m'        # 结束高亮
+export LESS_TERMCAP_us=$'\e[01;32m'    # 下划线（绿色）
+export LESS_TERMCAP_ue=$'\e[0m'        # 结束下划线
+export LESS_TERMCAP_mr=$'\e[01;31m'    # 反显（红色）
+export LESS_TERMCAP_mh=$'\e[01;34m'    # 半高亮（蓝色）
+
 # functions
 
 ipshow() {
-	echo -en '[IPV4]: '
-	curl 4.ipw.cn
-	echo -en '\n[IPV6]: '
-	curl 6.ipw.cn
-	echo -en '\n[PREFERRED]: '
-	curl test.ipw.cn
-	echo ''
+    echo -en '[IPV4]: '
+    curl 4.ipw.cn
+    echo -en '\n[IPV6]: '
+    curl 6.ipw.cn
+    echo -en '\n[PREFERRED]: '
+    curl test.ipw.cn
+    echo ''
 }
 
 gitcntt() {
@@ -270,6 +281,11 @@ fkill() {
     if [ "x$pid" != "x" ]; then
         echo $pid | xargs kill -${1:-9}
     fi
+}
+
+lnvim() {
+    local file
+    file=$(locate $@ | fzf) && nvim $file
 }
 
 pyserver() {
