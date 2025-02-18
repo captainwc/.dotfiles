@@ -100,16 +100,6 @@ augroup remember_folds
     autocmd BufWinEnter *.* silent! loadview
 augroup END
 
-
-" (2): 检测文件类型并调用相应的格式化工具
-" 创建一个名为 MyEnter 的映射组，避免与其他插件冲突
-augroup format_on_enter
-  autocmd!
-  autocmd FileType c,cpp,h,hpp nnoremap <buffer> <CR> :CocCommand editor.action.formatDocument<CR>:w<cr>
-  " autocmd FileType c,cpp,h,hpp nnoremap <buffer> <CR> :w<CR> :%! clang-format -style='file:C:/Users/wddjwk/.clang-format'<CR> :w<cr>
-  autocmd FileType py,python nnoremap <buffer> <CR> :w<CR> :%! autopep8 %<CR> :w<CR>
-augroup END
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -134,7 +124,6 @@ nnoremap > >>
 
 
 nnoremap <leader>e :edit<space><c-r>=getcwd()<cr>/
-" nnoremap <cr> :CocCommand editor.action.formatDocument<CR>:w<cr>
 
 nnoremap <leader>b :Tlist<CR>
 nnoremap <leader>cs :Tlist<CR>
@@ -220,6 +209,13 @@ endfunction
 function! NormalizePath(path)
     let sep = GetOsType() == "OS_WINDOWS" ? '\\' : '/'
     return substitute(a:path, '[/\\]', sep, 'g')
+endfunction
+
+function! AsyncExecuteCommand(cmd)
+    call job_start(a:cmd, {
+                \ 'out_cb': {_, data -> execute('echo "' . data . '"')},
+                \ 'exit_cb': {_, status -> execute('echo "Command exited with status: ' . status . '"')}
+                \ })
 endfunction
 
 function! ExecuteCommand(cmd)
