@@ -349,59 +349,13 @@ let g:coc_user_config = {
 \}
 " nnoremap <silent> <leader>r :call CocAction('rename')<CR>
 
-" ================================= FloatTerm  ================================================
-"
-" Function to toggle or create a new Floaterm window with a specific name
-" This func cannot handle '&&' correctly, the only found is use bash -c 
-" function! ToggleFT(name, cmd)
-"   if floaterm#terminal#get_bufnr(a:name) != -1
-"     exec "FloatermToggle " . a:name
-"   else
-"     exec "FloatermNew --name=" . a:name . " " . a:cmd
-"   endif
-" endfunction
+" ===================================== LeaderF  ============================================
+nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
+nnoremap <leader><leader>b :Buffers<CR>
 
-" Function to run the current file based on its filetype
-function! RunFile()
-  write
-  let ft = &filetype
-  if ft ==# 'python'
-	FloatermNew --autoclose=1 bash -c "python -u % && read -n 1"
-  elseif ft ==# 'javascript'
-	FloatermNew --autoclose=1 bash -c "node % && read -n 1"
-  elseif ft ==# 'go'
-	FloatermNew --autoclose=1 bash -c "go run % && read -n 1"
-  elseif ft ==# 'lua'
-	FloatermNew --autoclose=1 bash -c "lua % && read -n 1"
-  elseif ft ==# 'sh'
-	FloatermNew --autoclose=1 bash -c "bash % && read -n 1"
-  elseif ft ==# 'c'
-    FloatermNew --autoclose=1 bash -c "gcc % -o %< && ./%< && rm %< && read -n 1"
-  elseif ft ==# 'cpp'
-    FloatermNew --autoclose=1 bash -c "g++ % -o %< -std=c++20 && ./%< && rm %< && read -n 1"
-  elseif ft ==# 'rust'
-	FloatermNew --autoclose=1 bash -c "rustc % -o %< && ./%< && rm %< && read -n 1"
-  endif
-endfunction
+" ================================= FloatTerm ================================================
 
-" Function to debug the current file based on its filetype
-function! DebugFile()
-  write
-  let ft = &filetype
-  if ft ==# 'c'
-    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "gcc % -o %< -g && ./%< && cgdb -q %< && rm %<"
-  elseif ft ==# 'cpp'
-    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "g++ % -o %< -std=c++20 -g && cgdb -q %< && rm %<"
-  elseif ft ==# 'python'
-	  FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "pudb %"
-  elseif ft ==# 'go'
-    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "cd %:p:h && go build -gcflags='-N -l' -o %:t:r %:t && cgdb -q %:t:r && rm %:t:r"
-  elseif ft ==# 'rust'
-    FloatermNew --width=0.9 --height=0.85 --autoclose=1 --title="DEBUG" bash -c "rustc -g % -o %< && gdb -q %< && rm %<"
-  endif
-endfunction
-
-" Configuration for floaterm
+" FloatTerm 配置
 let g:floaterm_width = 0.6
 let g:floaterm_height = 0.6
 let g:floaterm_autoclose = 0
@@ -419,10 +373,262 @@ nnoremap <silent> <leader>k :FloatermKill<CR>
 tnoremap <silent> <leader>k <C-\><C-n>:FloatermKill<CR>
 tnoremap <silent> <C-n> <C-\><C-n>:FloatermNext<CR>
 tnoremap <silent> <F7> <C-\><C-n>:FloatermHide<CR>
-nnoremap <leader>r :call RunFile()<CR>
-nnoremap <F5> :call RunFile()<CR>
-nnoremap <leader>d :call DebugFile()<CR>
 
-" ===================================== LeaderF  ============================================
-nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
-nnoremap <leader><leader>b :Buffers<CR>
+" ToggleFT 函数
+function! ToggleFT(name, cmd)
+    if floaterm#terminal#get_bufnr(a:name) != -1
+        exec "FloatermToggle " . a:name
+    else
+        exec "FloatermNew --name=" . a:name . " " . a:cmd
+    endif
+endfunction
+
+" ================================= 构建 & 运行 & 调试命令 ====================================
+
+" 显示路径信息
+function! ShowPath()
+    let fullpath = expand("%:p")
+    let folder = expand("%:p:h")
+    let filename = expand("%:p:t")
+    let fullbase = expand("%:p:r")
+    let extension = expand("%:p:e")
+
+    echo NormalizePath(filename)
+    echo NormalizePath(folder)
+    echo NormalizePath(fullpath)
+endfunction
+
+" 判断操作系统
+function! GetOsType()
+    if exists('$OS') && $OS =~? 'Windows_NT'
+        if has('win32') || has('win64')
+            return "OS_WINDOWS"
+        else
+            return "OS_GITBASH"
+        endif
+    endif
+    return "OS_LINUX"
+endfunction
+
+" 包装命令以适应不同平台
+function! WrapCommandForDiffOS(cmd)
+    let tool_mapping = {
+                \ 'gdb': { 'windows': 'gdb', 'gitbash': 'gdb', 'linux': 'cgdb' },
+                \ 'pdb': { 'windows': 'pdb', 'gitbash': 'pdb', 'linux': 'pudb' }
+                \ }
+    let ostype = GetOsType()
+    if ostype == "OS_WINDOWS"
+        return has_key(tool_mapping, a:cmd) ? tool_mapping[a:cmd]['windows'] : a:cmd
+    endif
+    if ostype == "OS_GITBASH"
+        return has_key(tool_mapping, a:cmd) ? tool_mapping[a:cmd]['gitbash'] : './' . a:cmd
+    endif
+    if ostype == "OS_LINUX"
+        return has_key(tool_mapping, a:cmd) ? tool_mapping[a:cmd]['linux'] : './' . a:cmd
+    endif
+endfunction
+
+" 规则化路径分隔符
+function! NormalizePath(path)
+    let sep = GetOsType() == "OS_WINDOWS" ? '\\' : '/'
+    return substitute(a:path, '[/\\]', sep, 'g')
+endfunction
+
+" 命令行
+function! RunCommand()
+    let l:currdir = NormalizePath(expand("%:p:h"))
+    let l:cmd = input("[" . currdir . "]$ ")
+    exec "FloatermNew --autoclose=0 --title=COMMANDLINE --width=0.9 --height=0.85 " . l:cmd
+endfunction
+
+" 获取编译选项
+function! GetCompileOptions(type)
+    let defaultOptionsMap = {
+                \ 'CPP': '-std=c++20 ',
+                \ 'CPP_Debug': '-g -O0 -std=c++20 ',
+                \ 'C': '',
+                \ 'C_Debug': '-g '
+                \ }
+    return input("[" . a:type . "] Compile Options: ", get(defaultOptionsMap, a:type, ''))
+endfunction
+
+" 运行文件 (RunFile)
+function! RunFile()
+    write
+    let ft = &filetype
+    let run_cmd = {
+                \ 'javascript': 'node',
+                \ 'typescript': 'ts-node',
+                \ 'python': 'python',
+                \ 'go': 'go run',
+                \ 'sh': 'bash',
+                \ 'lua': 'lua'
+                \ }
+
+    if has_key(run_cmd, ft)
+        call ToggleFT("RUN", run_cmd[ft] . " %")
+    elseif ft ==# 'c'
+        let cmd = printf(
+                    \ 'bash -c "gcc %% -o %%< %s && %s && rm %%<"',
+                    \ GetCompileOptions("C"),
+                    \ WrapCommandForDiffOS("%<")
+                    \ )
+        call ToggleFT("RUN", cmd)
+    elseif ft ==# 'cpp'
+        let cmd = printf(
+                    \ 'bash -c "g++ %% -o %%< %s && %s && rm %%<"',
+                    \ GetCompileOptions("CPP"),
+                    \ WrapCommandForDiffOS("%<")
+                    \ )
+        call ToggleFT("RUN", cmd)
+    elseif ft ==# 'java'
+        let cmd = 'bash -c "javac % && java %< && rm %<"'
+        call ToggleFT("RUN", cmd)
+    endif
+endfunction
+
+" 调试文件 (DebugFile)
+function! DebugFile()
+    write
+    let ft = &filetype
+
+    if ft ==# 'c'
+        let cmd = printf(
+                    \ 'bash -c "gcc %% -o %%< %s && %s -q %%< && rm %%<"',
+                    \ GetCompileOptions("C_Debug"),
+                    \ WrapCommandForDiffOS("gdb")
+                    \ )
+        exec "FloatermNew --autoclose=1 --title=DEBUG --width=0.9 --height=0.85 " . cmd
+    elseif ft ==# 'cpp'
+        let cmd = printf(
+                    \ 'bash -c "g++ %% -o %%< %s && %s -q %%< && rm %%<"',
+                    \ GetCompileOptions("CPP_Debug"),
+                    \ WrapCommandForDiffOS("gdb")
+                    \ )
+        exec "FloatermNew --autoclose=1 --title=DEBUG --width=0.9 --height=0.85 " . cmd
+    elseif ft ==# 'python'
+        let cmd = printf(
+                    \ 'bash -c "%s %% && read -n 1"',
+                    \ WrapCommandForDiffOS("pdb")
+                    \ )
+        exec "FloatermNew --autoclose=1 --title=DEBUG --width=0.9 --height=0.85 " . cmd
+    elseif ft ==# 'go'
+        let title = "DEBUG"
+        let dirname = expand("%:p:h")
+        let fileBaseName = expand("%:t")
+        let baseNameNoExt = expand("%:t:r")
+        let flags = "-gcflags='-N -l' -o"
+        let suffix = "&& cgdb -q " . baseNameNoExt . " && rm " . baseNameNoExt
+        let command = printf(
+                    \ 'bash -c "cd %s && go build %s %s %s %s"',
+                    \ dirname, flags, baseNameNoExt, fileBaseName, suffix
+                    \ )
+        exec "FloatermNew --autoclose=1 --title=" . title . " --width=0.9 --height=0.85 " . command
+    endif
+endfunction
+
+" 寻找根CMakeLists.txt路径
+function! FindCMakeRoot()
+    let l:path = expand("%:p:h")  " 获取当前文件所在目录
+    let l:last_cmake_file = ''
+
+    while 1
+        " 检查CMakeLists.txt是否存在（注意//CMakeLists.txt 会被认为是当前目录，进而总是找到根目录）
+        if l:path != '/' && filereadable(l:path . "/CMakeLists.txt")
+            let l:last_cmake_file = l:path
+        endif
+
+        " 获取父目录
+        let l:parent = fnamemodify(l:path, ":h")
+
+        " 如果已经到达根目录则退出循环
+        if l:parent ==# l:path
+            break
+        endif
+
+        let l:path = l:parent
+    endwhile
+
+    return !empty(l:last_cmake_file) ? last_cmake_file : v:null
+endfunction
+
+" 获取 CMake 目标信息
+function! GetCMakeTargetInfo()
+    let cmakeRoot = FindCMakeRoot()
+    let buildDir = NormalizePath(cmakeRoot . "/build")
+    let defaultTargetName = expand("%:p:t:r")
+    let userInput = input("Target('" . defaultTargetName . "'): ")
+    let targetName = empty(userInput) ? defaultTargetName : userInput
+    let binPath = NormalizePath(buildDir . "/bin")
+    let targetPath = isdirectory(binPath) ? NormalizePath("bin/" . targetName) : NormalizePath(targetName)
+
+	echo targetPath
+    return [buildDir, targetName, targetPath]
+endfunction
+
+" 执行 CMake 命令
+function! ExecuteCMakeCommand(cmakeBuildType, isRebuildNeeded, isDebugTargetNeeded, isUseNinja)
+    " 获取 CMake 目标信息
+    let [buildDir, targetName, targetPath] = GetCMakeTargetInfo()
+
+    " 检查 buildDir 是否存在
+    if !isdirectory(buildDir)
+        echo "Error: Build directory does not exist: " . buildDir
+        return
+    endif
+
+    " 并行构建的核心数
+    let para_nums = 8
+
+    " CMake 生成器（可选 Ninja）
+    let cmakeGenerator = a:isUseNinja ? '-G"Ninja"' : ''
+
+    " 构建命令
+    let cmakeBuildTargetCmd = ''
+    if a:isRebuildNeeded
+        let cmakeBuildTargetCmd = printf(
+                    \ '((rm -rf %s && mkdir %s) || (mkdir %s)) && cd %s && cmake .. %s -DCMAKE_BUILD_TYPE=%s && cmake --build . --target=%s -j%s',
+                    \ buildDir, buildDir, buildDir, buildDir, cmakeGenerator, a:cmakeBuildType, targetName, para_nums
+                    \ )
+    else
+        let cmakeBuildTargetCmd = printf(
+                    \ 'cd %s && cmake --build . --target=%s -j%s',
+                    \ buildDir, targetName, para_nums
+                    \ )
+    endif
+
+    " 运行目标命令
+    let runTargetCmd = a:isDebugTargetNeeded
+                \ ? printf('clear && cd %s && %s %s', buildDir, WrapCommandForDiffOS("gdb"), targetPath)
+                \ : printf('clear && cd %s && %s', buildDir, WrapCommandForDiffOS(targetPath))
+
+    " 组合构建和运行命令
+    let fullCommand = printf(
+                \ 'bash -c "%s && %s"',
+                \ cmakeBuildTargetCmd,
+                \ runTargetCmd
+                \ )
+
+    " 设置 floatterm 参数
+    let floatermTitle = a:isDebugTargetNeeded ? "CMakeDebugTarget" : "CMakeRunTarget"
+    let floatermOptions = a:isDebugTargetNeeded ? '--autoclose=1 --width=0.9 --height=0.85' : '--autoclose=0'
+
+    " 保存文件并执行命令
+    write
+    exec "FloatermNew --title=" . floatermTitle . ":" . targetName . " " . floatermOptions . " " . fullCommand
+endfunction
+
+" 定义快捷命令
+command! CMakeRunTarget call ExecuteCMakeCommand("Release", v:true, v:false, v:true)
+command! CMakeDebugTarget call ExecuteCMakeCommand("Debug", v:true, v:true, v:true)
+command! CMakeRunTargetNonClean call ExecuteCMakeCommand("Release", v:false, v:false, v:true)
+command! CMakeDebugTargetNonClean call ExecuteCMakeCommand("Debug", v:false, v:true, v:true)
+
+nnoremap <leader><leader>r :call RunCommand()<CR>
+nnoremap <F5> :call RunFile()<CR>
+nnoremap <leader>r :call RunFile()<CR>
+nnoremap <leader>d :call DebugFile()<CR>
+nnoremap <leader>mcr :CMakeRunTarget<CR>
+nnoremap <leader>mcd :CMakeDebugTarget<CR>
+nnoremap <leader>mr :CMakeRunTargetNonClean<CR>
+nnoremap <leader>md :CMakeDebugTargetNonClean<CR>
