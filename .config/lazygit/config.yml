@@ -1,0 +1,15 @@
+# ref https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+gui:
+  language: en
+  # language: zh-CN
+  nerdFontsVersion: "3"
+
+refresher:
+  # File/submodule refresh interval in seconds.
+  # Auto-refresh can be disabled via option 'git.autoRefresh'.
+  refreshInterval: 10000
+
+  # Re-fetch interval in seconds.
+  # Auto-fetch can be disabled via option 'git.autoFetch'.
+  fetchInterval: 60000
