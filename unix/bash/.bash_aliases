@@ -3,7 +3,6 @@ alias ls='lsd'
 alias ll='ls -alhF --color=auto'
 alias la='ls -aF --color=auto'
 alias l='ls -ahF --color=none'
-alias python='python3'
 
 # git
 alias gita='git add'
