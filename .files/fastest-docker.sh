@@ -12,63 +12,29 @@
 ## GitHub: https://github.com/SuperManito/LinuxMirrors
 ## Website: https://linuxmirrors.cn
 
-
 ## Docker Registry 镜像仓库列表
 # 格式："软件源名称@软件源地址"
 mirror_list_registry=(
-    #"上海交通大学@docker.mirrors.sjtug.sjtu.edu.cn"
-    #"网易@hub-mirror.c.163.com"
-    #"腾讯云@mirror.ccs.tencentyun.com"
-    #"道客-DaoCloud@f1361db2.m.daocloud.io"
-    #"微软-Azure（中国）@dockerhub.azk8s.cn"
-    #"阿里云（杭州）@registry.cn-hangzhou.aliyuncs.com"
-    #"阿里云（上海）@registry.cn-shanghai.aliyuncs.com"
-    #"阿里云（青岛）@registry.cn-qingdao.aliyuncs.com"
-    #"阿里云（北京）@registry.cn-beijing.aliyuncs.com"
-    #"阿里云（张家口）@registry.cn-zhangjiakou.aliyuncs.com"
-    #"阿里云（呼和浩特）@registry.cn-huhehaote.aliyuncs.com"
-    #"阿里云（乌兰察布）@registry.cn-wulanchabu.aliyuncs.com"
-    #"阿里云（深圳）@registry.cn-shenzhen.aliyuncs.com"
-    #"阿里云（河源）@registry.cn-heyuan.aliyuncs.com"
-    #"阿里云（广州）@registry.cn-guangzhou.aliyuncs.com"
-    #"阿里云（成都）@registry.cn-chengdu.aliyuncs.com"
-    #"阿里云（香港）@registry.cn-hongkong.aliyuncs.com"
-    #"阿里云（日本-东京）@registry.ap-northeast-1.aliyuncs.com"
-    #"阿里云（新加坡）@registry.ap-southeast-1.aliyuncs.com"
-    #"阿里云（澳大利亚-悉尼）@registry.ap-southeast-2.aliyuncs.com"
-    #"阿里云（马来西亚-吉隆坡）@registry.ap-southeast-3.aliyuncs.com"
-    #"阿里云（印度尼西亚-雅加达）@registry.ap-southeast-5.aliyuncs.com"
-    #"阿里云（印度-孟买）@registry.ap-south-1.aliyuncs.com"
-    #"阿里云（德国-法兰克福）@registry.eu-central-1.aliyuncs.com"
-    #"阿里云（英国-伦敦）@registry.eu-west-1.aliyuncs.com"
-    #"阿里云（美国西部-硅谷）@registry.us-west-1.aliyuncs.com"
-    #"阿里云（美国东部-弗吉尼亚）@registry.us-east-1.aliyuncs.com"
-    #"阿里云（阿联酋-迪拜）@registry.me-east-1.aliyuncs.com"
-    #"阿里云（hinas海纳斯）@z0nkeoyx.mirror.aliyuncs.com"
-    #"谷歌云@mirror.gcr.io"
-    #"官方@registry.hub.docker.com"
-    #"uuuadc@hub.uuuadc.top"
+
     "1panel.live@docker.1panel.live"
     "rat@hub.rat.dev"
-    #"anyhub@docker.anyhub.us.kg"
-    #"chenby@docker.chenby.cn"
-    #"jobcher@dockerhub.jobcher.com"
-    #"dockerhub@dockerhub.icu"
-    #"ckyl@docker.ckyl.me"
-    #"awsl9527@docker.awsl9527.cn"
-    #"hpcloud@docker.hpcloud.cloud"
-    #"nastool@docker.nastool.de"
-    #"daocloud@docker.m.daocloud.io"
-    "aidenxin@docker.aidenxin.xyz"
-    "littlediary@hub.littlediary.cn"
-    #"dockerpull@dockerpull.org"
-    #"unsee@docker.unsee.tech"
-    #"hub-geekery@hub.geekery.cn"
     "1ms@docker.1ms.run"
-    "wanpeng@docker.wanpeng.top"
-    #"fxxk-dedyn@docker.fxxk.dedyn.io"
     "1panel.top@docker.1panel.top"
     "k-docker@k-docker.asia"
+    "func@func.ink"
+    "proxy.1panel@proxy.1panel.live"
+    "unsee@docker-0.unsee.tech"
+    "zhai@docker.zhai.cm"
+    "ussh@a.ussh.net"
+    "melikeme@docker.melikeme.cn"
+    "lispy@lispy.org"
+    "hlmirror@docker.hlmirror.com"
+    "xiaogenban1993@docker.xiaogenban1993.com"
+    "kejilion@docker.kejilion.pro"
+    "dockerpull@dockerpull.cn"
+    "xuanyuan@docker.xuanyuan.me"
+    "anye@docker.anye.in"
+    "fast360@hub.fast360.xyz"
 )
 
 ## 定义拉取的镜像,使用一个很小的镜像来测试速度
@@ -125,7 +91,8 @@ function StartTitle() {
     # echo -e " | \033[0;1;35;95m⡇\033[0m  \033[0;1;33;93m⠄\033[0m \033[0;1;32;92m⣀⡀\033[0m \033[0;1;36;96m⡀\033[0;1;34;94m⢀\033[0m \033[0;1;35;95m⡀⢀\033[0m \033[0;1;31;91m⡷\033[0;1;33;93m⢾\033[0m \033[0;1;32;92m⠄\033[0m \033[0;1;36;96m⡀⣀\033[0m \033[0;1;34;94m⡀\033[0;1;35;95m⣀\033[0m \033[0;1;31;91m⢀⡀\033[0m \033[0;1;33;93m⡀\033[0;1;32;92m⣀\033[0m \033[0;1;36;96m⢀⣀\033[0m |"
     # echo -e " | \033[0;1;31;91m⠧\033[0;1;33;93m⠤\033[0m \033[0;1;32;92m⠇\033[0m \033[0;1;36;96m⠇⠸\033[0m \033[0;1;34;94m⠣\033[0;1;35;95m⠼\033[0m \033[0;1;31;91m⠜⠣\033[0m \033[0;1;33;93m⠇\033[0;1;32;92m⠸\033[0m \033[0;1;36;96m⠇\033[0m \033[0;1;34;94m⠏\033[0m  \033[0;1;35;95m⠏\033[0m  \033[0;1;33;93m⠣⠜\033[0m \033[0;1;32;92m⠏\033[0m  \033[0;1;34;94m⠭⠕\033[0m |"
     # echo -e ' +-----------------------------------+'
-    text_art=$(cat <<'EOF'
+    text_art=$(
+        cat <<'EOF'
                                    ..
                                   ....                       
                                .:----=:                      
@@ -176,7 +143,7 @@ function PermissionJudgment() {
 
 ## 检查Docker是否安装
 function CheckInstallDocker() {
-    if ! docker --version &> /dev/null; then
+    if ! docker --version &>/dev/null; then
         echo -e "\n$ERROR docker 未安装，请先安装docker\n"
         exit 1
     fi
@@ -291,7 +258,7 @@ function EnvJudgment() {
 
 # 检查是否安装了bc，如果没有安装，则进行安装
 CheckBc() {
-    if ! command -v bc &> /dev/null; then
+    if ! command -v bc &>/dev/null; then
         echo "找不到bc，正在尝试安装它。。。"
         sudo apt-get update
         if ! sudo apt-get install -y bc; then
@@ -309,73 +276,70 @@ test_speed() {
     SECONDS=0
 
     # 使用指定的镜像源拉取xjxjin/alist-sync镜像
-    docker rmi $source/$IMAGE > /dev/null 2>&1
+    docker rmi $source/$IMAGE >/dev/null 2>&1
     #timeout 300 docker pull $source/$IMAGE > /dev/null 2>&1
-    docker pull $source/$IMAGE > /dev/null 2>&1
+    docker pull $source/$IMAGE >/dev/null 2>&1
     local status=$?
     if [ $status -eq 124 ]; then
         # 超时错误
         # echo "Docker pull timed out, exit status: $status"
-        docker rmi "$source/$image" > /dev/null 2>&1
+        docker rmi "$source/$image" >/dev/null 2>&1
         echo "300"
         return
     elif [ $status -ne 0 ]; then
         # 其他错误
         # echo "Docker pull failed, exit status: $status"
-        docker rmi "$source/$image" > /dev/null 2>&1
+        docker rmi "$source/$image" >/dev/null 2>&1
         echo "300"
         return
     fi
-    docker rmi $source/$IMAGE > /dev/null 2>&1
+    docker rmi $source/$IMAGE >/dev/null 2>&1
 
     # 计算下载时间（秒）
     echo $SECONDS
 }
 
+# 定义一个函数，用于等待一个进程在给定的时间内完成，否则返回超时
+# wait_timeout() {
+#     local pid=$1
+#     local timeout=$2
+#     local kill_signal=TERM  # 默认发送TERM信号
 
-# 定义一个函数，用于等待一个进程在给定的时间内完成，否则返回超时  
-# wait_timeout() {  
-#     local pid=$1  
-#     local timeout=$2  
-#     local kill_signal=TERM  # 默认发送TERM信号  
-  
-#     # 使用timeout命令等待子进程结束，或者超时后发送信号  
-#     timeout $timeout bash -c "while kill -0 $pid 2>/dev/null; do sleep 1; done" || kill -$kill_signal $pid  
-#     wait $pid 2>/dev/null  # 等待进程真正结束，忽略任何错误  
-#     return $?  # 返回子进程的退出状态  
-# }  
+#     # 使用timeout命令等待子进程结束，或者超时后发送信号
+#     timeout $timeout bash -c "while kill -0 $pid 2>/dev/null; do sleep 1; done" || kill -$kill_signal $pid
+#     wait $pid 2>/dev/null  # 等待进程真正结束，忽略任何错误
+#     return $?  # 返回子进程的退出状态
+# }
 
-# 定义一个函数来测试镜像源的下载速度	
-# test_speed() {  
-#     local source=$1  
-#     local image="xjxjin/alist-sync:1.0.1"  
-#     local start_time  
-#     local timeout_seconds=30  
-  
-#     # 拉取镜像前记录当前时间  
-#     start_time=$(date +%s.%N)  
-  
-#     # 将docker pull放入后台运行  
-#     docker pull "$source/$image" > /dev/null 2>&1 &  
-#     local pull_pid=$!  # 获取后台进程的PID  
-  
-#     # 等待docker pull完成或者超时  
-#     if ! wait_timeout $pull_pid $timeout_seconds; then  
-#         # 如果超时，则设置download_time为30秒（作为超时指示）  
-#         local download_time=30  
-#         echo "下载超时"  
-#     else  
-#         # 拉取镜像后记录当前时间  
-#         local end_time=$(date +%s.%N)  
-  
-#         # 计算下载时间（秒）  
-#         local download_time=$(echo "$end_time - $start_time" | bc -l)  
-#     fi  
-  
-#     echo "$download_time"  
-# }  
+# 定义一个函数来测试镜像源的下载速度
+# test_speed() {
+#     local source=$1
+#     local image="xjxjin/alist-sync:1.0.1"
+#     local start_time
+#     local timeout_seconds=30
 
+#     # 拉取镜像前记录当前时间
+#     start_time=$(date +%s.%N)
 
+#     # 将docker pull放入后台运行
+#     docker pull "$source/$image" > /dev/null 2>&1 &
+#     local pull_pid=$!  # 获取后台进程的PID
+
+#     # 等待docker pull完成或者超时
+#     if ! wait_timeout $pull_pid $timeout_seconds; then
+#         # 如果超时，则设置download_time为30秒（作为超时指示）
+#         local download_time=30
+#         echo "下载超时"
+#     else
+#         # 拉取镜像后记录当前时间
+#         local end_time=$(date +%s.%N)
+
+#         # 计算下载时间（秒）
+#         local download_time=$(echo "$end_time - $start_time" | bc -l)
+#     fi
+
+#     echo "$download_time"
+# }
 
 function ChooseMirrors() {
     ## 打印软件源列表
@@ -434,7 +398,7 @@ function ChooseMirrors() {
         echo -e " 系统时间 ${BLUE}${date} ${timezone}${PLAIN}"
         echo -e " 国内环境可用docker镜像源上报: https://gitee.com/xjxjin/scripts/issues"
         echo -e " 国际环境可用docker镜像源上报: https://github.com/xjxjin/scripts/issues"
-        echo -e " 2025-01-10  感谢【@Yxini-p】小哥提供的镜像源，新增可用docker源2个，剔除部分无效源"
+        echo -e " 2025-03-08  新增可用docker源17个，剔除部分无效源"
     }
 
     Title
@@ -448,7 +412,7 @@ function ChooseMirrors() {
         # 初始化一个数组来存储每个源的速度
         declare -A speed_array
 
-        declare -A speed_index_array  # 用来存储每个源在列表中的索引  
+        declare -A speed_index_array # 用来存储每个源在列表中的索引
         local fastest_mirrors=()
         # 测试每个源的速度并打印结果
         echo -e "\n${BOLD}测试中，可能需要10min, 请稍候...${PLAIN}"
@@ -466,13 +430,12 @@ function ChooseMirrors() {
         if [ -x /usr/bin/printf ]; then
             for ((i = 0; i < ${#list_arr[@]}; i++)); do
                 tmp_mirror_name=$(echo "${list_arr[i]}" | awk -F '@' '{print$1}') # 软件源名称
-                tmp_mirror_url=$(echo "${list_arr[i]}" | awk -F '@' '{print$2}') # 软件源地址
+                tmp_mirror_url=$(echo "${list_arr[i]}" | awk -F '@' '{print$2}')  # 软件源地址
 
                 local speed=$(test_speed "$tmp_mirror_url")
                 speed_array[$tmp_mirror_name]=$speed
-                speed_index_array[$tmp_mirror_name]=$((i+1))
+                speed_index_array[$tmp_mirror_name]=$((i + 1))
                 # local speed=$(test_speed "$tmp_mirror_url")
-
 
                 arr_num=$((i + 1))
                 default_mirror_name_length=${2:-"30"} # 默认软件源名称打印长度
@@ -488,17 +451,17 @@ function ChooseMirrors() {
                 for ((j = 1; j <= ${tmp_spaces_nums}; j++)); do
                     tmp_mirror_name="${tmp_mirror_name} "
                 done
-                
-                # speed_index_array[$tmp_mirror_name]=$((i+1))  # 存储源的id值
-                #if (( $(echo "scale=1; $speed < 1" | bc -l) )); then  
-                    #printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s 下载速度: %s 秒\n" "$arr_num" "${tmp_mirror_name}" "0${speed}"  
-                    # speed_index_array[$source]=$((i+1))
-                    #speed_index_array[$tmp_mirror_name]="$(printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s \n" "$arr_num" "${tmp_mirror_name}")"
 
-                #else  
+                # speed_index_array[$tmp_mirror_name]=$((i+1))  # 存储源的id值
+                #if (( $(echo "scale=1; $speed < 1" | bc -l) )); then
+                #printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s 下载速度: %s 秒\n" "$arr_num" "${tmp_mirror_name}" "0${speed}"
+                # speed_index_array[$source]=$((i+1))
+                #speed_index_array[$tmp_mirror_name]="$(printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s \n" "$arr_num" "${tmp_mirror_name}")"
+
+                #else
                 speed_index_array[$tmp_mirror_name]="$(printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s \n" "$arr_num" "${tmp_mirror_name}")"
 
-                printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s 下载速度: %s 秒\n" "$arr_num" "${tmp_mirror_name}" "${speed}"  
+                printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s 下载速度: %s 秒\n" "$arr_num" "${tmp_mirror_name}" "${speed}"
                 #fi
             done
         else
@@ -510,18 +473,18 @@ function ChooseMirrors() {
             done
         fi
 
-        # 使用sort命令的-k选项对速度和源的配对进行排序，-t选项定义字段分隔符为空格  
-        # 注意：这里我们使用process substitution <(...)来避免使用临时文件  
-         
-        sorted_pairs=$(for source in "${!speed_array[@]}"; do echo "${speed_array[$source]} $source ${speed_index_array[$source]}"; done | sort -k1,1n -t' ' -s)  
+        # 使用sort命令的-k选项对速度和源的配对进行排序，-t选项定义字段分隔符为空格
+        # 注意：这里我们使用process substitution <(...)来避免使用临时文件
 
-        # 提取速度最小的三个源 
-        local count=0  
+        sorted_pairs=$(for source in "${!speed_array[@]}"; do echo "${speed_array[$source]} $source ${speed_index_array[$source]}"; done | sort -k1,1n -t' ' -s)
+
+        # 提取速度最小的三个源
+        local count=0
         echo ""
-        echo "速度最快的三个源："  
-        while IFS=' ' read -r speed tmp_mirror_name arr_num && [[ $count -lt 3 ]]; do  
+        echo "速度最快的三个源："
+        while IFS=' ' read -r speed tmp_mirror_name arr_num && [[ $count -lt 3 ]]; do
             default_mirror_name_length=${2:-"30"} # 默认软件源名称打印长度
-                ## 补齐长度差异（中文的引号在等宽字体中占1格而非2格）
+            ## 补齐长度差异（中文的引号在等宽字体中占1格而非2格）
             [[ $(echo "${tmp_mirror_name}" | grep -c "“") -gt 0 ]] && let default_mirror_name_length+=$(echo "${tmp_mirror_name}" | grep -c "“")
             [[ $(echo "${tmp_mirror_name}" | grep -c "”") -gt 0 ]] && let default_mirror_name_length+=$(echo "${tmp_mirror_name}" | grep -c "”")
             [[ $(echo "${tmp_mirror_name}" | grep -c "‘") -gt 0 ]] && let default_mirror_name_length+=$(echo "${tmp_mirror_name}" | grep -c "‘")
@@ -534,14 +497,14 @@ function ChooseMirrors() {
                 tmp_mirror_name="${tmp_mirror_name} "
             done
 
-            # if (( $(echo "scale=1; $speed < 1" | bc -l) )); then  
-                #printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s ${RED}下载速度: %s${PLAIN} 秒\n" "$arr_num" "${tmp_mirror_name}" "0${speed}"  
-            #else  
-            printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s ${RED}下载速度: %s${PLAIN} 秒\n" "$arr_num" "${tmp_mirror_name}" "${speed}"  
+            # if (( $(echo "scale=1; $speed < 1" | bc -l) )); then
+            #printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s ${RED}下载速度: %s${PLAIN} 秒\n" "$arr_num" "${tmp_mirror_name}" "0${speed}"
+            #else
+            printf "源%2s %-$(($default_mirror_name_length + ${tmp_mirror_name_length}))s ${RED}下载速度: %s${PLAIN} 秒\n" "$arr_num" "${tmp_mirror_name}" "${speed}"
             #fi
-            ((count++))  
-        done <<< "$sorted_pairs"  
-        
+            ((count++))
+        done <<<"$sorted_pairs"
+
         while true; do
             read -p "${CHOICE_C}" INPUT
             case "${INPUT}" in
@@ -593,7 +556,6 @@ function CloseFirewall() {
     fi
 }
 
-
 ## 安装 Docker Engine
 function DockerEngine() {
 
@@ -631,34 +593,33 @@ function DockerEngine() {
             systemctl daemon-reload
         fi
     }
-    
+
     RegistryMirror
     systemctl stop docker >/dev/null 2>&1
     systemctl enable --now docker >/dev/null 2>&1
 }
 
-
 ## 重启Docker
 function RestartDocker() {
     # 询问用户是否需要重启Docker服务以应用配置更改
-  local CHOICE_BACKUP=$(echo -e "\n${BOLD}└─ 是否重启Docker以使配置文件生效? [Y/n] ${PLAIN}")  
-  read -p "${CHOICE_BACKUP}" INPUT  
-  [[ -z "${INPUT}" ]] && INPUT=Y  
-  case $INPUT in  
-      [Yy]|[Yy][Ee][Ss])  
-          echo ''  
-          echo "重启Docker服务以应用配置更改..."  
-          systemctl restart docker  
-          echo "重启Docker服务完成"  
-          ;;  
-      [Nn]|[Nn][Oo])  
-          echo "Docker服务未重启。配置更改将不会立即生效。"  
-          ;;  
-      *)  
-          # echo "未知输入，Docker服务未重启。配置更改将不会立即生效。"  
-          echo "Docker服务未重启。配置更改将不会立即生效。"  
-          ;;  
-  esac
+    local CHOICE_BACKUP=$(echo -e "\n${BOLD}└─ 是否重启Docker以使配置文件生效? [Y/n] ${PLAIN}")
+    read -p "${CHOICE_BACKUP}" INPUT
+    [[ -z "${INPUT}" ]] && INPUT=Y
+    case $INPUT in
+    [Yy] | [Yy][Ee][Ss])
+        echo ''
+        echo "重启Docker服务以应用配置更改..."
+        systemctl restart docker
+        echo "重启Docker服务完成"
+        ;;
+    [Nn] | [Nn][Oo])
+        echo "Docker服务未重启。配置更改将不会立即生效。"
+        ;;
+    *)
+        # echo "未知输入，Docker服务未重启。配置更改将不会立即生效。"
+        echo "Docker服务未重启。配置更改将不会立即生效。"
+        ;;
+    esac
 
 }
 
@@ -713,7 +674,6 @@ function RunEnd() {
     # echo -e "     \033[1;34mPowered by linuxmirrors.cn\033[0m\n"
 }
 
-
 function PrintXJXJin() {
     echo -e "\n     ------ xjxjin ------"
     echo -e ' \033[0;1;35m┌─\033[0;1;31m──\033[0;1;33m──\033[0;1;32m──\033[0;1;36m──\033[0;1;34m──\033[0;1;35m──\033[0;1;31m──\033[0;1;33m──\033[0;1;32m──\033[0;1;36m──\033[0;1;34m──\033[0;1;35m──\033[0;1;31m──\033[0;1;33m──\033[0;1;32m──\033[0m'
@@ -724,7 +684,6 @@ function PrintXJXJin() {
     echo -e ' \033[0;1;34m└─\033[0;1;35m──\033[0;1;31m──\033[0;1;33m──\033[0;1;32m──\033[0;1;36m──\033[0;1;34m──\033[0;1;35m──\033[0;1;31m──\033[0;1;33m──\033[0;1;32m──\033[0;1;36m──\033[0;1;34m──\033[0;1;35m──\033[0;1;31m──\033[0;1;33m──\033[0;1;32m──\033[0m'
     echo -e "     \033[1;34mPowered by linuxmirrors.cn\033[0m\n"
 }
-
 
 ## 处理命令选项
 function CommandOptions() {
