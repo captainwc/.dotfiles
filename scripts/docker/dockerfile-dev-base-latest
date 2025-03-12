@@ -1,0 +1,66 @@
+FROM ubuntu:latest
+
+# env
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 基本工具
+RUN sed -i 's@http://archive.ubuntu.com@http://mirrors.ustc.edu.cn@g' /etc/apt/sources.list \
+    && sed -i 's@http://security.ubuntu.com@http://mirrors.ustc.edu.cn@g' /etc/apt/sources.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    openssl \
+    openssh-server \
+    bash-completion \
+    build-essential \
+    busybox \
+    cgdb \
+    clangd-19 \
+    clang-format-19 \
+    clang-tidy-19 \
+    cmake \
+    curl \
+    gcc-14 g++-14 \
+    gdb \
+    git \
+    make \
+    ninja-build \
+    python-is-python3 \
+    sudo \
+    unzip \
+    vim \
+    wget \
+    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 140 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 140 \
+    && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 190 \
+    && update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 190 \
+    && update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-19 190 \
+    && update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-19 190 \
+    && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-19 190
+
+# 配置与moderntools
+RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" >> $HOME/.bashrc \
+    && echo "\nif [ -f $HOME/.bash_aliases_local ]; then\n    . $HOME/.bash_aliases_local\nfi" >> $HOME/.bashrc \
+    && echo "\nif [ -f $HOME/.bash_env ]; then\n    . $HOME/.bash_env\nfi" >> $HOME/.bashrc \
+    && echo '\nexport PS1="\[\e[32;1m\][\[\e[33;1m\]\u\[\e[31;1m\]@\[\e[33;1m\]\h \[\e[36;1m\]\w\[\e[32;1m\]]\[\e[34;1m\]\$ \[\e[0m\]"' >> $HOME/.bashrc \
+    && echo 'export PATH="$HOME/.local/modernunix":${PATH}' >> $HOME/.bash_env \
+    && echo 'export PATH="$HOME/.local/bin":${PATH}' >> $HOME/.bash_env \
+    && echo "alias ls='lsd'" >> $HOME/.bash_aliases_local \
+    && echo "alias gdb='cgdb -q'" >> $HOME/.bash_aliases_local \
+    && echo "PermitRootLogin yes\nPasswordAuthentication no\nPubkeyAuthentication yes" >> /etc/ssh/sshd_config \
+    && git clone https://gitee.com/kaikaixixi/.dotfiles.git $HOME/.dotfiles \
+    && chmod +x $HOME/.dotfiles/run.sh \
+    && cd $HOME/.dotfiles && ./run.sh \
+    && rm $HOME/.vimrc && ln -s $HOME/.dotfiles/vim/vim8/light.vimrc $HOME/.vimrc \
+    && git clone https://gitee.com/kaikaixixi/modernunix.git /tmp/modernunix \
+    && mkdir -p $HOME/.local/modernunix \
+    && mv /tmp/modernunix/linux-x86_64/static/* $HOME/.local/modernunix/ \
+    && mv /tmp/modernunix/linux-x86_64/bazel/* $HOME/.local/modernunix/ \
+    && mv /tmp/modernunix/linux-x86_64/uv/* $HOME/.local/modernunix/ \
+    && ln -s /usr/bin/vim $HOME/.local/modernunix/nvim \
+    && ln -s $HOME/.local/modernunix/bazelisk $HOME/.local/modernunix/bazel \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*  /tmp/*
+
+WORKDIR /workspace
+CMD ["/bin/bash"]
+
