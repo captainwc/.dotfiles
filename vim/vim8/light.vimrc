@@ -5,6 +5,49 @@
 autocmd VimEnter * call timer_start(100, { tid -> execute(':u0')})
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件调用
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"【用法】 :Plugstatus 查看插件状态；直接在此加入[Plug]行然后 :PlugInstall 安装；去掉[Plug]行后sv，:PlugClean 删除
+call plug#begin('~/.vim/plugged')
+
+" <FZF> ：需要python
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" <AirLine>
+Plug 'vim-airline/vim-airline'
+
+" <NERDTREE> 目录
+" [Usages] <leader>n
+Plug 'scrooloose/nerdtree'
+    " File tree manager
+Plug 'jistr/vim-nerdtree-tabs'
+    " enhance nerdtree's tabs
+Plug 'ryanoasis/vim-devicons'
+    " add beautiful icons besides files
+Plug 'Xuyuanp/nerdtree-git-plugin'
+    " display git status within Nerdtree
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    " enhance devicons
+
+" <Nerdcommenter> 自动识别文件类型并添加对应注释
+"【用法】 先进入可视模式，然后：<leader>cc 注释；<leader>c<space> 切换注释状态
+Plug 'scrooloose/nerdcommenter'
+
+" <tag list> 显示源码大纲，要配合ctags使用
+" [Usages] <leader>b
+" Plug 'vim-scripts/taglist.vim'
+
+" coc
+" [Usages] CocInstall coc-cland等安装对不同语言的支持，CocCommand补全来查看各种命令
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" 浮动终端
+Plug 'voldikss/vim-floaterm'
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible         " 设置不兼容原始vi模式
@@ -107,6 +150,16 @@ augroup remember_folds
     autocmd BufWinEnter *.* silent! loadview
 augroup END
 
+
+" (2): 检测文件类型并调用相应的格式化工具
+" 创建一个名为 MyEnter 的映射组，避免与其他插件冲突
+augroup format_on_enter
+  autocmd!
+  autocmd FileType c,cpp,h,hpp nnoremap <buffer> <CR> :CocCommand editor.action.formatDocument<CR>:w<cr>
+  " autocmd FileType c,cpp,h,hpp nnoremap <buffer> <CR> :w<CR> :%! clang-format -style='file:C:/Users/wddjwk/.clang-format'<CR> :w<cr>
+  autocmd FileType py,python nnoremap <buffer> <CR> :w<CR> :%! autopep8 %<CR> :w<CR>
+augroup END
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -131,13 +184,14 @@ nnoremap > >>
 
 
 nnoremap <leader>e :edit<space><c-r>=getcwd()<cr>/
+" nnoremap <cr> :CocCommand editor.action.formatDocument<CR>:w<cr>
 
 nnoremap <leader>b :Tlist<CR>
 nnoremap <leader>cs :Tlist<CR>
 nnoremap <leader>ct :Tlist<CR>
 nnoremap <leader><leader>c :set nonumber norelativenumber nolist wrap<CR>
 nnoremap <leader><leader>v :set number relativenumber nowrap<CR>
-nnoremap <leader>h :nohlsearch<CR> 
+nnoremap <leader>h :nohlsearch<CR>
 nnoremap <leader>w :if &wrap \| set nowrap \| else \| set wrap \| endif<CR>
 nnoremap <leader>q :wq<CR>
 nnoremap <leader><leader>q :q!<CR>
@@ -166,6 +220,175 @@ nnoremap <c-s-up> <c-w>K
 nnoremap <c-s-down> <c-w>J
 nnoremap <c-s-left> <c-w>H
 nnoremap <c-s-right> <c-w>L
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 别处配置映射，此处汇总
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" "---------<NerdTree>----
+" nnoremap <leader>n :NERDTreeToggle<CR>
+"
+" "---------<Comment>-----
+" "<leader>cc 注释；<leader>c<space> 切换注释状态
+"
+" "---------<LeaderF>-----
+" "<leader><leader>f
+"
+" "---------<Coc>--------
+" "<leader>f
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 插件配置
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" <Nerdtree>-------------------{
+"   >> Basic settings
+"        let g:NERDTr:eChDirMode = 2  "Change current folder as root
+"        autocmDTree:nter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) |cd %:p:h |endif
+    nnoremap <leader>n :NERDTreeToggle<CR>
+"   >> UI settings
+        let NERDTreeQuitOnOpen=1   " Close NERDtree when files was opened
+        let NERDTreeMinimalUI=1    " Start NERDTree in minimal UI mode (No help lines)
+        let NERDTreeDirArrows=1    " Display arrows instead of ascii art in NERDTree
+        let NERDTreeChDirMode=2    " Change current working directory based on root directory in NERDTree
+        let g:NERDTreeHidden=1     " Don't show hidden files
+        let NERDTreeWinSize=30     " Initial NERDTree width
+        let NERDTreeAutoDeleteBuffer = 1  " Auto delete buffer deleted with NerdTree
+        "let NERDTreeShowBookmarks=0   " Show NERDTree bookmarks
+        let NERDTreeIgnore = ['\.pyc$', '\.swp', '\.swo', '__pycache__']   " Hide temp files in NERDTree
+        "let g:NERDTreeShowLineNumbers=1  " Show Line Number
+    " Open Nerdtree when there's no file opened
+        autocmd vimenter * if !argc()|NERDTree|endif
+    " Or, auto-open Nerdtree
+        "autocmd vimenter * NERDTree
+    " Close NERDTree when there's no other windows
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " Customize icons on Nerdtree
+        let g:NERDTreeDirArrowExpandable = '▸'
+        let g:NERDTreeDirArrowCollapsible = '▾'
+
+"   >> NERDTREE-GIT
+"   Special characters
+    let g:NERDTreeGitStatusIndicatorMapCustom = {
+        \ "Modified"  : "✹",
+        \ "Staged"    : "✚",
+        \ "Untracked" : "✭",
+        \ "Renamed"   : "➜",
+        \ "Unmerged"  : "═",
+        \ "Deleted"   : "✖",
+        \ "Dirty"     : "✗",
+        \ "Clean"     : "✔︎",
+        \ 'Ignored'   : '☒',
+        \ "Unknown"   : "?"
+    \ }
+
+    ">> NERDTree-Tabs
+        "let g:nerdtree_tabs_open_on_console_startup=1 "Auto-open Nerdtree-tabs on VIM enter
+" }----<NerdTree>
+
+" ===============================  NredCommenter  ==================================
+" <NredCommenter>-----------{ // Copy from github directly //
+    " Create default mappings
+    let g:NERDCreateDefaultMappings = 1
+
+    " Add spaces after comment delimiters by default
+    let g:NERDSpaceDelims = 1
+
+    " Use compact syntax for prettified multi-line comments
+    let g:NERDCompactSexyComs = 1
+
+    " Align line-wise comment delimiters flush left instead of following code indentation
+    let g:NERDDefaultAlign = 'left'
+
+    " Set a language to use its alternate delimiters by default
+    let g:NERDAltDelims_java = 1
+
+    " Add your own custom formats or override the defaults
+    let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+    " Allow commenting and inverting empty lines (useful when commenting a region)
+    let g:NERDCommentEmptyLines = 1
+
+    " Enable trimming of trailing whitespace when uncommenting
+    let g:NERDTrimTrailingWhitespace = 1
+
+    " Enable NERDCommenterToggle to check all selected lines is commented or not
+    let g:NERDToggleCheckAllLines = 1
+" }----------<NerdCommenter>
+
+" ==================================   RainBow   ===================================
+" <Rainbow>------{ // Copy from https://github.com/luochen1990/rainbow/blob/master/README_zh.md //------
+" 本插件较为古老，不是通过VimPlug安装的。共有三个文件，直接删除掉就好。分别是：
+" autoload/rainbow.vim & autoload/rainbow_main.vim & plugin/rainbow_main.vim
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+let g:rainbow_conf = {
+\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       'tex': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\       },
+\       'lisp': {
+\           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'css': 0,
+\       'nerdtree': 0,
+\   }
+\}
+" NERDTree与Rainbow会冲突，产生多余的括号，所以有 nerdtree:0一项
+" }---------<Rainbow>
+
+" ================================= Coc ================================================
+" inoremap <silent> <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+" inoremap <silent> <expr> <Tab> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+" inoremap <silent> <expr> <C-Space> coc#refresh()
+" nnoremap <silent> <leader>f :CocCommand editor.action.formatDocument<CR>
+" let g:coc_disable_startup_warning = 1
+" let g:coc_user_config = {
+" \ 'python.formatting.provider': 'autopep8',
+" \}
+" nnoremap <silent> <leader>r :call CocAction('rename')<CR>
+
+" ===================================== LeaderF  ============================================
+nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
+nnoremap <leader><leader>b :Buffers<CR>
+
+" ================================= FloatTerm ================================================
+
+" FloatTerm 配置
+let g:floaterm_width = 0.6
+let g:floaterm_height = 0.6
+let g:floaterm_autoclose = 0
+let g:floaterm_opener = 'edit'
+let g:floaterm_wintype = 'float'
+let g:floaterm_position = 'center'
+let g:floaterm_title = 'floaterm: $1/$2'
+
+let g:floaterm_keymap_new = '<Leader>t'
+let g:floaterm_keymap_toggle = '<Leader>tt'
+let g:floaterm_keymap_toggle = '<Leader><Leader>t'
+
+nnoremap <silent> <leader>t :FloatermNew --autoclose=1 <CR>
+nnoremap <silent> <leader>k :FloatermKill<CR>
+tnoremap <silent> <leader>k <C-\><C-n>:FloatermKill<CR>
+tnoremap <silent> <C-n> <C-\><C-n>:FloatermNext<CR>
+tnoremap <silent> <F7> <C-\><C-n>:FloatermHide<CR>
+
+" ToggleFT 函数
+function! ToggleFT(name, cmd)
+    if floaterm#terminal#get_bufnr(a:name) != -1
+        exec "FloatermToggle " . a:name
+    else
+        exec "FloatermNew --name=" . a:name . " " . a:cmd
+    endif
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 构建 & 运行 & 调试命令
@@ -220,22 +443,11 @@ function! NormalizePath(path)
     return substitute(a:path, '[/\\]', sep, 'g')
 endfunction
 
-function! AsyncExecuteCommand(cmd)
-    call job_start(a:cmd, {
-                \ 'out_cb': {_, data -> execute('echo "' . data . '"')},
-                \ 'exit_cb': {_, status -> execute('echo "Command exited with status: ' . status . '"')}
-                \ })
-endfunction
-
-function! ExecuteCommand(cmd)
-    execute '!' . a:cmd
-endfunction
-
 " 命令行
 function! RunCommand()
     let l:currdir = NormalizePath(expand("%:p:h"))
     let l:cmd = input("[" . currdir . "]$ ")
-    call ExecuteCommand(l:cmd)
+    exec "FloatermNew --autoclose=0 --title=COMMANDLINE --width=0.9 --height=0.85 " . l:cmd
 endfunction
 
 " 获取编译选项
@@ -263,24 +475,24 @@ function! RunFile()
                 \ }
 
     if has_key(run_cmd, ft)
-        call ExecuteCommand(run_cmd[ft] . " %")
+        call ToggleFT("RUN", run_cmd[ft] . " %")
     elseif ft ==# 'c'
         let cmd = printf(
                     \ 'bash -c "gcc %% -o %%< %s && %s && rm %%<"',
                     \ GetCompileOptions("C"),
                     \ WrapCommandForDiffOS("%<")
                     \ )
-        call ExecuteCommand(cmd)
+        call ToggleFT("RUN", cmd)
     elseif ft ==# 'cpp'
         let cmd = printf(
                     \ 'bash -c "g++ %% -o %%< %s && %s && rm %%<"',
                     \ GetCompileOptions("CPP"),
                     \ WrapCommandForDiffOS("%<")
                     \ )
-        call ExecuteCommand(cmd)
+        call ToggleFT("RUN", cmd)
     elseif ft ==# 'java'
         let cmd = 'bash -c "javac % && java %< && rm %<"'
-        call ExecuteCommand(cmd)
+        call ToggleFT("RUN", cmd)
     endif
 endfunction
 
@@ -295,20 +507,20 @@ function! DebugFile()
                     \ GetCompileOptions("C_Debug"),
                     \ WrapCommandForDiffOS("gdb")
                     \ )
-        call ExecuteCommand(cmd)
+        exec "FloatermNew --autoclose=1 --title=DEBUG --width=0.9 --height=0.85 " . cmd
     elseif ft ==# 'cpp'
         let cmd = printf(
                     \ 'bash -c "g++ %% -o %%< %s && %s -q %%< && rm %%<"',
                     \ GetCompileOptions("CPP_Debug"),
                     \ WrapCommandForDiffOS("gdb")
                     \ )
-        call ExecuteCommand(cmd)
+        exec "FloatermNew --autoclose=1 --title=DEBUG --width=0.9 --height=0.85 " . cmd
     elseif ft ==# 'python'
         let cmd = printf(
                     \ 'bash -c "%s %% && read -n 1"',
                     \ WrapCommandForDiffOS("pdb")
                     \ )
-        call ExecuteCommand(cmd)
+        exec "FloatermNew --autoclose=1 --title=DEBUG --width=0.9 --height=0.85 " . cmd
     elseif ft ==# 'go'
         let title = "DEBUG"
         let dirname = expand("%:p:h")
@@ -320,7 +532,7 @@ function! DebugFile()
                     \ 'bash -c "cd %s && go build %s %s %s %s"',
                     \ dirname, flags, baseNameNoExt, fileBaseName, suffix
                     \ )
-        call ExecuteCommand(command)
+        exec "FloatermNew --autoclose=1 --title=" . title . " --width=0.9 --height=0.85 " . command
     endif
 endfunction
 
@@ -359,7 +571,7 @@ function! GetCMakeTargetInfo()
     let binPath = NormalizePath(buildDir . "/bin")
     let targetPath = isdirectory(binPath) ? NormalizePath("bin/" . targetName) : NormalizePath(targetName)
 
-	echo targetPath
+    echo targetPath
     return [buildDir, targetName, targetPath]
 endfunction
 
@@ -406,9 +618,13 @@ function! ExecuteCMakeCommand(cmakeBuildType, isRebuildNeeded, isDebugTargetNeed
                 \ runTargetCmd
                 \ )
 
+    " 设置 floatterm 参数
+    let floatermTitle = a:isDebugTargetNeeded ? "CMakeDebugTarget" : "CMakeRunTarget"
+    let floatermOptions = a:isDebugTargetNeeded ? '--autoclose=1 --width=0.9 --height=0.85' : '--autoclose=0'
+
     " 保存文件并执行命令
     write
-    call ExecuteCommand(fullCommand)
+    exec "FloatermNew --title=" . floatermTitle . ":" . targetName . " " . floatermOptions . " " . fullCommand
 endfunction
 
 " 定义快捷命令
@@ -425,4 +641,3 @@ nnoremap <leader>mcr :CMakeRunTarget<CR>
 nnoremap <leader>mcd :CMakeDebugTarget<CR>
 nnoremap <leader>mr :CMakeRunTargetNonClean<CR>
 nnoremap <leader>md :CMakeDebugTargetNonClean<CR>
-

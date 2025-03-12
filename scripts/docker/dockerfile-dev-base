@@ -51,7 +51,7 @@ RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" 
     && git clone https://gitee.com/kaikaixixi/.dotfiles.git $HOME/.dotfiles \
     && chmod +x $HOME/.dotfiles/run.sh \
     && cd $HOME/.dotfiles && ./run.sh \
-    && rm $HOME/.vimrc && ln -s $HOME/.dotfiles/vim/vim8/basic.vimrc $HOME/.vimrc \
+    && rm $HOME/.vimrc && ln -s $HOME/.dotfiles/vim/vim8/light.vimrc $HOME/.vimrc \
     && git clone https://gitee.com/kaikaixixi/modernunix.git /tmp/modernunix \
     && mkdir -p $HOME/.local/modernunix \
     && mv /tmp/modernunix/linux-x86_64/static/* $HOME/.local/modernunix/ \
