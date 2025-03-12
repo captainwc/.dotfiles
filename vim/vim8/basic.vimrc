@@ -1,4 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bug fix
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bug of [xtem&vim]: 避免打开 vim 的时候添加奇怪的 'g' ref: https://stackoverflow.com/questions/77685838/letter-g-added-to-beginning-of-line-when-editing-in-vim-and-using-xterm-cygwin
+autocmd VimEnter * call timer_start(100, { tid -> execute(':u0')})
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible         " 设置不兼容原始vi模式

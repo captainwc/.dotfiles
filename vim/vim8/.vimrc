@@ -1,4 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bug fix
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bug of [xtem&vim]: 避免打开 vim 的时候添加奇怪的 'g' ref: https://stackoverflow.com/questions/77685838/letter-g-added-to-beginning-of-line-when-editing-in-vim-and-using-xterm-cygwin
+autocmd VimEnter * call timer_start(100, { tid -> execute(':u0')})
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件调用
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "【用法】 :Plugstatus 查看插件状态；直接在此加入[Plug]行然后 :PlugInstall 安装；去掉[Plug]行后sv，:PlugClean 删除
