@@ -76,7 +76,7 @@ def _mapper(type: str) -> Dict[str, str]:
 {FG_YELLOW} You should config your windows-user-home first! {RESET}
 
 By create a file named {BOLD}{FG_GREEN} <<{local_conf}>> {RESET}at the root of this git repo,
-    in which specify your "win-user-home":"C:/msys2/home/xxx".
+    in which specify your "bash-home":"C:/msys2/home/xxx".
     and you can also just use "~"
 
 This is because the difference below:
@@ -92,13 +92,13 @@ And the file {local_conf} you will create, won't added to the repo,
                 else:
                     win_home = ""
                     with open(local_conf, "r") as f:
-                        win_home = json.load(f)["win-user-home"]
+                        win_home = json.load(f)["bash-home"]
                     win_home = os.path.expanduser(win_home)
                     tmp = json.load(file)[_os_type()]
                     for k, val in tmp.items():
                         tmp[k] = os.path.normpath(
                             os.path.expanduser(
-                                val.replace("${win-user-home}", win_home)
+                                val.replace("${bash-home}", win_home)
                             )
                         )
                     return tmp
