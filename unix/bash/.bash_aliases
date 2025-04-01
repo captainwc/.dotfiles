@@ -143,7 +143,24 @@ mk() {
     esac
 }
 
-## fzf
+## rg + fzf
+rvim() {
+    local file
+    file=$(rg $@ -l | fzf) && vim "$file"
+}
+
+rnvim() {
+    local file
+    file=$(rg $@ -l | fzf) && nvim "$file"
+}
+
+## locate + fzf
+lnvim() {
+    local file
+    file=$(locate $@ | fzf) && nvim $file
+}
+
+## fd + fzf
 fcd() {
     local dir
     dir=$(fd . $@ | fzf)
@@ -186,12 +203,6 @@ fkill() {
     if [ "x$pid" != "x" ]; then
         echo $pid | xargs kill -${1:-9}
     fi
-}
-
-# use locate instead of fzf
-lnvim() {
-    local file
-    file=$(locate $@ | fzf) && nvim $file
 }
 
 ### perf
