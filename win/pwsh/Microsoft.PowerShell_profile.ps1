@@ -88,6 +88,7 @@ Set-Alias -Name du -Value dust.exe
 Set-Alias -Name df -Value duf.exe
 
 Set-Alias -Name vimb -Value Open-ProfileInSublime
+Set-Alias -Name vima -Value Open-ProfileInSublime
 Set-Alias -Name vimal -Value Open-LocalProfileInSublime
 Set-Alias -Name sb -Value $PROFILE
 
@@ -131,8 +132,23 @@ function fsubl {
     subl.exe $selected
 }
 
+function rsubl {
+    param (
+        [Parameter(ValueFromRemainingArguments = $true)] # 将所有未明确声明的参数收集到一个数组中
+        [string[]]$args                                  # 实现类似 $@ 的效果
+    )
+    $selected = rg -l @args | fzf +m
+    if (-not $selected) {
+        Write-Host "${ANSI_RGB_SUNSET}No selection made.$ANSI_RGB_EMERALD"
+        return
+    }
+    subl.exe $selected
+}
+
 Set-Alias -Name fvim -Value fsubl
 Set-Alias -Name fnvim -Value fsubl
+Set-Alias -Name rvim -Value rsubl
+Set-Alias -Name rnvim -Value rsubl
 
 # ==============================================
 #  自定义函数

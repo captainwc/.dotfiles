@@ -9,9 +9,6 @@ alias gitl='git log'
 alias gitlg='git log --graph'
 alias gitlo='git log --oneline'
 alias gitlog='git log --oneline --graph'
-gitcntt() {
-    git log --author="${1:-shuaikai}" --pretty=tformat: --numstat | awk '{add+=$1;sub+=$2} END {printf "add: %s sub: %s total: %s\n", add, sub, add - sub}'
-}
 
 # convinence
 alias PATH='echo $PATH | xargs -d: -n1'
@@ -71,10 +68,6 @@ color() {
 
 install() {
     sudo mv $@ /usr/local/bin/
-}
-
-topk() {
-    cat $1 | tr -s ' ' '\n' | sort | uniq -c | sort -nr | awk '{print $1, $2}' | head -$2
 }
 
 # 编译运行
