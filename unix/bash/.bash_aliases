@@ -136,6 +136,49 @@ mk() {
     esac
 }
 
+## quick tmux
+
+alias tmuxkillall='tmux kill-server'
+# alias tmuxkillall="tmux list-sessions | awk -F: '{print $1}' | xargs -n 1 tmux kill-session -t"
+
+tmux2() {
+    if [ $# -ne 2 ]; then
+        echo "Give me TWO executables to split the tmux"
+        return
+    fi
+
+    session_name="$(basename "$1" .${1##*.})_$(basename "$2" .${2##*.})"
+    tmux kill-session -t ${session_name} 2>/dev/null
+    tmux new-session -d -s "cs_${session_name}"
+    tmux split-window -h
+    tmux select-pane -t 1
+    tmux send-keys "$1" C-m
+    tmux select-pane -t 2
+    tmux send-keys "$2" C-m
+    tmux attach-session -t "cs_${session_name}"
+}
+
+tmux3() {
+    if [ $# -ne 3 ]; then
+        echo "Give me THREE executables to split the tmux"
+        return
+    fi
+
+    session_name="$(basename "$1" .${1##*.})_$(basename "$2" .${2##*.})_$(basename "$3" .${3##*.})"
+    tmux kill-session -t ${session_name} 2>/dev/null
+    tmux new-session -d -s "cs_${session_name}"
+    tmux split-window -h
+    tmux select-pane -t 2
+    tmux split-window -v
+    tmux select-pane -t 1
+    tmux send-keys "$1" C-m
+    tmux select-pane -t 2
+    tmux send-keys "$2" C-m
+    tmux select-pane -t 3
+    tmux send-keys "$3" C-m
+    tmux attach-session -t "cs_${session_name}"
+}
+
 ## rg + fzf
 rvim() {
     local file
@@ -154,6 +197,21 @@ lnvim() {
 }
 
 ## fd + fzf
+ftmux2() {
+    local server client
+    server=$(fd -t f -uu . $@ | fzf)
+    client=$(fd -t f -uu . $@ | fzf)
+    tmux2 ${server} ${client}
+}
+
+ftmux3() {
+    local server client1 client2
+    server=$(fd -t f -uu . $@ | fzf)
+    client1=$(fd -t f -uu . $@ | fzf)
+    client2=$(fd -t f -uu . $@ | fzf)
+    tmux3 ${server} ${client1} ${client2}
+}
+
 fcd() {
     local dir
     dir=$(fd . $@ | fzf)
@@ -229,8 +287,6 @@ perf_flame() {
 ########################################
 # DEPRECATED
 ########################################
-
-alias tmuxkillall="tmux ls | awk -F ':' '{print \$1}' | tee >(xargs -I{} echo 'kill session: {}') | xargs -I{} tmux kill-session -t {}"
 
 ### redis : redisc [host] [port]  &  redisrun  &  redisstop
 AUTH=shuaikaisredis
