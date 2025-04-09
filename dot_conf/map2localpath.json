@@ -15,7 +15,8 @@
         "helix": "~/AppData/Roaming/helix/config.toml",
         "vscode_setting": "~/AppData/Roaming/Code/User/settings.json",
         "vscode_key": "~/AppData/Roaming/Code/User/keybindings.json",
-        "vscode_snippets": "~/AppData/Roaming/Code/User/snippets"
+        "vscode_snippets": "~/AppData/Roaming/Code/User/snippets",
+        "yazi": "~/AppData/Roaming/yazi/config"
     },
     "linux": {
         "bash": "",
@@ -34,6 +35,7 @@
         "redis": "~/.redis/redis.conf",
         "clangd": "~/.config/clangd/config.yaml",
         "tmux": "~/.config/tmux/tmux.conf",
-        "tmux_local": "~/.config/tmux/tmux.conf.local"
+        "tmux_local": "~/.config/tmux/tmux.conf.local",
+        "yazi": "~/.config/yazi"
     }
 }
