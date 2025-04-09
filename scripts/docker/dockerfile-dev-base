@@ -58,6 +58,7 @@ RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" 
     && mv /tmp/modernunix/linux-x86_64/static/* $HOME/.local/modernunix/ \
     && mv /tmp/modernunix/linux-x86_64/bazel/* $HOME/.local/modernunix/ \
     && mv /tmp/modernunix/linux-x86_64/uv/* $HOME/.local/modernunix/ \
+    && mv /tmp/modernunix/linux-x86_64/soar $HOME/.local/modernunix/ \
     && ln -s /usr/bin/vim $HOME/.local/modernunix/nvim \
     && ln -s $HOME/.local/modernunix/bazelisk $HOME/.local/modernunix/bazel \
     && apt-get clean && rm -rf /var/lib/apt/lists/*  /tmp/*

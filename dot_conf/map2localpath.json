@@ -16,7 +16,7 @@
         "vscode_setting": "~/AppData/Roaming/Code/User/settings.json",
         "vscode_key": "~/AppData/Roaming/Code/User/keybindings.json",
         "vscode_snippets": "~/AppData/Roaming/Code/User/snippets",
-        "yazi": "~/AppData/yazi/config"
+        "yazi": "~/AppData/Roaming/yazi/config"
     },
     "linux": {
         "bash": "",
