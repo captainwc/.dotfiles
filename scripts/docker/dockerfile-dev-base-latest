@@ -39,7 +39,10 @@ RUN sed -i 's@http://archive.ubuntu.com@http://mirrors.ustc.edu.cn@g' /etc/apt/s
     && update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 190 \
     && update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-19 190 \
     && update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-19 190 \
-    && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-19 190
+    && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-19 190 \
+    && update-alternatives --install /usr/bin/scan-build scan-build /usr/bin/scan-build-19 190 \
+    && update-alternatives --install /usr/bin/scan-build-py scan-build-py /usr/bin/scan-build-py-19 190 \
+    && update-alternatives --install /usr/bin/scan-view scan-view /usr/bin/scan-view-19 190
 
 # 配置与moderntools
 RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" >> $HOME/.bashrc \
