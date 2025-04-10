@@ -40,7 +40,9 @@ Plug 'preservim/tagbar'
 
 " coc
 " [Usages] CocInstall coc-cland等安装对不同语言的支持，CocCommand补全来查看各种命令
+" 指定commit是因为最新版的coc不支持vim8.2了，泪目了
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'commit': '9fd857818977ce9f9f6f7271034fc917dede7035'}
 
 " 浮动终端
 Plug 'voldikss/vim-floaterm'
