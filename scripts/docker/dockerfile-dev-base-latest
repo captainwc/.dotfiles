@@ -50,15 +50,17 @@ RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" 
     && echo "\nif [ -f $HOME/.bash_aliases_local ]; then\n    . $HOME/.bash_aliases_local\nfi" >> $HOME/.bashrc \
     && echo "\nif [ -f $HOME/.bash_env ]; then\n    . $HOME/.bash_env\nfi" >> $HOME/.bashrc \
     && echo '\nexport PS1="\[\e[32;1m\][\[\e[33;1m\]\u\[\e[31;1m\]@\[\e[33;1m\]\h \[\e[36;1m\]\w\[\e[32;1m\]]\[\e[34;1m\]\$ \[\e[0m\]"' >> $HOME/.bashrc \
+    && wget -O /tmp/node22.tar.xz https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz && tar xf /tmp/node22.tar.xz -C /opt \
     && echo 'export PATH="$HOME/.local/modernunix":${PATH}' >> $HOME/.bash_env \
     && echo 'export PATH="$HOME/.local/bin":${PATH}' >> $HOME/.bash_env \
+    && echo 'export PATH="/opt/node-v22.14.0-linux-x64/bin":${PATH}' >> $HOME/.bash_env \
     && echo "alias ls='lsd'" >> $HOME/.bash_aliases_local \
     && echo "alias gdb='cgdb -q'" >> $HOME/.bash_aliases_local \
     && echo "PermitRootLogin yes\nPasswordAuthentication no\nPubkeyAuthentication yes" >> /etc/ssh/sshd_config \
     && git clone https://gitee.com/kaikaixixi/.dotfiles.git $HOME/.dotfiles \
     && chmod +x $HOME/.dotfiles/run.sh \
     && cd $HOME/.dotfiles && ./run.sh \
-    && rm $HOME/.vimrc && ln -s $HOME/.dotfiles/vim/vim8/light.vimrc $HOME/.vimrc \
+    && vim -c "PlugInstall" -c "qa!" && vim -c "CocInstall coc-clangd" -c "qa!" \
     && git clone https://gitee.com/kaikaixixi/modernunix.git /tmp/modernunix \
     && mkdir -p $HOME/.local/modernunix \
     && mv /tmp/modernunix/linux-x86_64/static/* $HOME/.local/modernunix/ \
