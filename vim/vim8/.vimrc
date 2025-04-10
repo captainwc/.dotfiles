@@ -361,7 +361,7 @@ nnoremap <leader><leader>b :Buffers<CR>
 " ===================================== tagbar ============================================
 nnoremap <leader>b :TagbarToggle<CR>
 " let g:tagbar_ctags_bin='/usr/bin/ctags'
-let g:tagbar_width=50
+let g:tagbar_width=36
 " 下列文件自动打开tagbar
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
