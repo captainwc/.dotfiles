@@ -34,9 +34,9 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 "【用法】 先进入可视模式，然后：<leader>cc 注释；<leader>c<space> 切换注释状态
 Plug 'scrooloose/nerdcommenter'
 
-" <tag list> 显示源码大纲，要配合ctags使用
+" <tagbar> 显示源码大纲，要配合ctags使用(推荐 universal-ctags)
 " [Usages] <leader>b
-" Plug 'vim-scripts/taglist.vim'
+Plug 'preservim/tagbar'
 
 " coc
 " [Usages] CocInstall coc-cland等安装对不同语言的支持，CocCommand补全来查看各种命令
@@ -80,6 +80,7 @@ set mouse=a              " 设置允许使用鼠标
 set linebreak
 " 背景透明
 " hi Normal guibg=NONE ctermbg=NONE
+set updatetime=200       " 自动存盘的时间间隔ms,（tagbar受此影响）
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码缩进和排版
@@ -186,9 +187,6 @@ nnoremap > >>
 nnoremap <leader>e :edit<space><c-r>=getcwd()<cr>/
 " nnoremap <cr> :CocCommand editor.action.formatDocument<CR>:w<cr>
 
-nnoremap <leader>b :Tlist<CR>
-nnoremap <leader>cs :Tlist<CR>
-nnoremap <leader>ct :Tlist<CR>
 nnoremap <leader><leader>c :set nonumber norelativenumber nolist wrap<CR>
 nnoremap <leader><leader>v :set number relativenumber nowrap<CR>
 nnoremap <leader>h :nohlsearch<CR>
@@ -359,6 +357,13 @@ let g:rainbow_conf = {
 " ===================================== LeaderF  ============================================
 nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
 nnoremap <leader><leader>b :Buffers<CR>
+
+" ===================================== tagbar ============================================
+nnoremap <leader>b :TagbarToggle<CR>
+" let g:tagbar_ctags_bin='/usr/bin/ctags'
+let g:tagbar_width=50
+" 下列文件自动打开tagbar
+autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 " ================================= FloatTerm ================================================
 
