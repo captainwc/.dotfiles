@@ -1,16 +1,32 @@
-[core]
-        editor = nvim
-		autocrlt = input
 [user]
-        name = shuaikai
-        email = wddjwk@qq.com
+    name = shuaikai
+    email = wddjwk@qq.com
+
 [init]
-        defaultBranch = main
-; [url "https://gitclone.com/"]
-;         insteadOf = https://
+    defaultBranch = main
+
+[core]
+    editor = nvim
+    autocrlt = input
+    pager = delta
+
 [pull]
 	rebase = false
+
+[merge]
+    conflictstyle = zdiff3
+
 [diff]
 	tool = vimdiff
+
+[interactive]
+    diffFilter = delta --color-only
+
 [credential]
 	helper = store
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true
+    side-by-side = true
+    line-numbers = true
