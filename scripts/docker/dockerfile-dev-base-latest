@@ -73,9 +73,9 @@ RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" 
 RUN wget -O /tmp/node22.tar.xz https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz && tar xf /tmp/node22.tar.xz -C /opt \
     && echo 'export PATH="/opt/node-v22.14.0-linux-x64/bin":${PATH}' >> $HOME/.bash_env \
     && ln -sf $HOME/.dotfiles/vim/vim8/.vimrc $HOME/.vimrc \
-    && wget -O /tmp/plugged.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/pic_bed/2025_4/vim-plugged.zip \
-    && wget -O /tmp/coc-clangd.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/pic_bed/2025_4/coc-extensions-clangd.zip \
-    && mkdir -p $HOME/.vim/plugged && unzip /tmp/plugged.zip -d $HOME/.vim/plugged \
+    && wget -O /tmp/plugged.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/vim-plugged.zip \
+    && wget -O /tmp/coc-clangd.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/coc-extensions-clangd.zip \
+    && unzip /tmp/plugged.zip -d $HOME/.vim \
     && mkdir -p $HOME/.config/coc && unzip /tmp/coc-clangd.zip -d $HOME/.config/coc \
     && rm -rf /tmp/*
 
