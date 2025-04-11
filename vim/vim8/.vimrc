@@ -47,6 +47,16 @@ Plug 'neoclide/coc.nvim', {'commit': '9fd857818977ce9f9f6f7271034fc917dede7035'}
 " 浮动终端
 Plug 'voldikss/vim-floaterm'
 
+" <vim-sneak> 快速跳转（nvim中的leap.nvim更好用）
+" [Usage] s{char}{char}前向跳转， S{char}{char}后向；";"下一个; ","上一个
+Plug 'justinmk/vim-sneak'
+
+" <vim-surround> 环绕添加（nvim中的mini.surround各有千秋。本个功能更全，nvim的更直观）
+" [Usage] （1） [c]更改，[y]添加，[d]删除 （2）后跟[s][移动]（3）左括号空格，右括号紧贴
+"          比如：【cs"'】换引号；【ysiw)】单词添加紧贴圆括号；【ds"】删除"；【ys$}】到行末，添加大括号；【ysiw<p class="xx">】自动闭合html块。
+"          此外还可以用visual模式
+Plug 'tpope/vim-surround'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -359,6 +369,9 @@ let g:coc_user_config = {
 " ===================================== LeaderF  ============================================
 nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
 nnoremap <leader><leader>b :Buffers<CR>
+
+" ===================================== vim-sneak  ============================================
+let g:sneak#label = 1    " 给所有可跳转位置都加上标签
 
 " ===================================== tagbar ============================================
 nnoremap <leader>b :TagbarToggle<CR>
