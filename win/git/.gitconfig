@@ -13,8 +13,8 @@
 [pull]
 	rebase = false
 
-[merge]
-    conflictstyle = zdiff3
+; [merge]
+;     conflictstyle = zdiff3
 
 [diff]
 	tool = vimdiff
