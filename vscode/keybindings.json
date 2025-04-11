@@ -293,5 +293,14 @@
     {
         "key": "ctrl+shift+l",
         "command": "-lazygit-vscode.toggle"
+    },
+    {
+        "key": "shift+alt+t",
+        "command": "-clangd.typeHierarchy",
+        "when": "editorTextFocus && resourceLangId == 'cpp' || editorTextFocus && resourceLangId == 'cuda-cpp' || editorTextFocus && resourceLangId == 'objective-c' || editorTextFocus && resourceLangId == 'objective-cpp'"
+    },
+    {
+        "key": "shift+alt+t",
+        "command": "references-view.showTypeHierarchy"
     }
 ]
