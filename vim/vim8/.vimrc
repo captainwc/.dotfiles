@@ -11,6 +11,7 @@ autocmd VimEnter * call timer_start(100, { tid -> execute(':u0')})
 call plug#begin('~/.vim/plugged')
 
 " <FZF> ：需要python
+" [Usage] <leader>f show files; <leader>b show buffers
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -18,7 +19,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 
 " <NERDTREE> 目录
-" [Usages] <leader>n
+" [Usages] <leader>e
 Plug 'scrooloose/nerdtree'
 	" File tree manager
 Plug 'jistr/vim-nerdtree-tabs'
@@ -35,7 +36,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'scrooloose/nerdcommenter'
 
 " <tagbar> 显示源码大纲，要配合ctags使用(推荐 universal-ctags)
-" [Usages] <leader>b
+" [Usages] <leader>o
 Plug 'preservim/tagbar'
 
 " coc
@@ -176,11 +177,8 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let mapleader="\<space>"
-let mapleader=","
-
-" nnoremap <F5> :wa<CR>:!g++ % -o a.out -std=c++20 && ./a.out<CR>
-nnoremap <F6> :wa<CR>:!g++ % -o a.out -std=c++20 -g && gdb a.out<CR>
+let mapleader="\<space>"
+" let mapleader=","
 
 map <c-s-v> <C-v>
 map <s-h> <C-W>h
@@ -188,21 +186,20 @@ map <s-l> <C-W>l
 map <s-j> <C-W>j
 map <s-k> <C-W>k
 
+nnoremap U <C-r>
+nnoremap gb <C-o>     " go back
+nnoremap gp <C-i>     " go preview
 nnoremap gh ^
 nnoremap gl $<right>
+
 inoremap {<CR> {}<ESC>i<CR><ESC>O
-" inoremap {} {}
 nnoremap < <<
 nnoremap > >>
-
-
-nnoremap <leader>e :edit<space><c-r>=getcwd()<cr>/
-" nnoremap <cr> :CocCommand editor.action.formatDocument<CR>:w<cr>
 
 nnoremap <leader><leader>c :set nonumber norelativenumber nolist wrap<CR>
 nnoremap <leader><leader>v :set number relativenumber nowrap<CR>
 nnoremap <leader>h :nohlsearch<CR> 
-nnoremap <leader>w :if &wrap \| set nowrap \| else \| set wrap \| endif<CR>
+nnoremap <leader>uw :if &wrap \| set nowrap \| else \| set wrap \| endif<CR>
 nnoremap <leader>q :wq<CR>
 nnoremap <leader><leader>q :q!<CR>
 
@@ -232,28 +229,13 @@ nnoremap <c-s-left> <c-w>H
 nnoremap <c-s-right> <c-w>L
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 别处配置映射，此处汇总
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" "---------<NerdTree>----
-" nnoremap <leader>n :NERDTreeToggle<CR>
-"
-" "---------<Comment>-----
-" "<leader>cc 注释；<leader>c<space> 切换注释状态
-"
-" "---------<LeaderF>-----
-" "<leader><leader>f
-"
-" "---------<Coc>--------
-" "<leader>f
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 插件配置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " <Nerdtree>-------------------{
 "   >> Basic settings
 "        let g:NERDTr:eChDirMode = 2  "Change current folder as root
 "        autocmDTree:nter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) |cd %:p:h |endif
-	nnoremap <leader>n :NERDTreeToggle<CR>
+	nnoremap <leader>e :NERDTreeToggle<CR>
 "   >> UI settings
         let NERDTreeQuitOnOpen=1   " Close NERDtree when files was opened
         let NERDTreeMinimalUI=1    " Start NERDTree in minimal UI mode (No help lines)
@@ -297,7 +279,7 @@ nnoremap <c-s-right> <c-w>L
 " ===============================  NredCommenter  ==================================
 " <NredCommenter>-----------{ // Copy from github directly //
 	" Create default mappings
-	let g:NERDCreateDefaultMappings = 1
+	let g:NERDCreateDefaultMappings = 0
 
 	" Add spaces after comment delimiters by default
 	let g:NERDSpaceDelims = 1
@@ -320,8 +302,16 @@ nnoremap <c-s-right> <c-w>L
 	" Enable trimming of trailing whitespace when uncommenting
 	let g:NERDTrimTrailingWhitespace = 1
 
-	" Enable NERDCommenterToggle to check all selected lines is commented or not 
+	" Enable NERDCommenterToggle to check all selected lines is commented or not
 	let g:NERDToggleCheckAllLines = 1
+
+    " gc 为切换注释
+    nmap gc <Plug>NERDCommenterToggle
+    vmap gc <Plug>NERDCommenterToggle
+
+    " <leader>c<space> 为注释（可注释空行）
+    nmap <Leader>c<Space> <Plug>NERDCommenterComment
+    vmap <Leader>c<Space> <Plug>NERDCommenterComment
 " }----------<NerdCommenter>
 
 " ==================================   RainBow   ===================================
@@ -356,32 +346,57 @@ let g:rainbow_conf = {
 " }---------<Rainbow>
 
 " ================================= Coc ================================================
-" inoremap <silent> <expr> <CR> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
-inoremap <silent> <expr> <Tab> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
-inoremap <silent> <expr> <C-Space> coc#refresh()
-nnoremap <silent> <leader>f :CocCommand editor.action.formatDocument<CR>
+" 支持json注释
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 let g:coc_disable_startup_warning = 1
 let g:coc_user_config = {
 \ 'python.formatting.provider': 'autopep8',
 \}
-" nnoremap <silent> <leader>r :call CocAction('rename')<CR>
+let g:coc_config_inlayHint = 0
 
-" ===================================== LeaderF  ============================================
-nnoremap <leader><leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
-nnoremap <leader><leader>b :Buffers<CR>
+inoremap <silent> <expr> <Tab> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+inoremap <silent> <expr> <C-Space> coc#refresh()
+
+nmap <leader>ca <Plug>(coc-codeaction-cursor)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <leader>cr <Plug>(coc-rename)
+nnoremap <silent> <leader>cf :call CocActionAsync('format')<CR>
+nnoremap <silent> <leader>chc :call CocActionAsync('showIncomingCalls')<CR>
+" nnoremap <silent> <leader>chc :call CocActionAsync('showOutgoingCalls')<CR>
+nnoremap <silent> <leader>cht :call CocActionAsync('showSubTypes')<CR>
+" nnoremap <silent> <leader>cht :call CocActionAsync('showSuperTypes')<CR>
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" ===================================== LeaderF ============================================
+nnoremap <leader>f :FloatermNew --title="FZF" --width=0.8 --autoclose=1 fzf<CR>
+nnoremap <leader>b :Buffers<CR>
 
 " ===================================== vim-sneak  ============================================
 let g:sneak#label = 1    " 给所有可跳转位置都加上标签
 
 " ===================================== tagbar ============================================
-nnoremap <leader>b :TagbarToggle<CR>
+nnoremap <leader>o :TagbarToggle<CR>
 " let g:tagbar_ctags_bin='/usr/bin/ctags'
 let g:tagbar_width=36
 " 下列文件自动打开tagbar
-autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
+" autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 
 " ================================= FloatTerm ================================================
-
 " FloatTerm 配置
 let g:floaterm_width = 0.6
 let g:floaterm_height = 0.6
