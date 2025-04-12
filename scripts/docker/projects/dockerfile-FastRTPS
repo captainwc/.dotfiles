@@ -1,0 +1,21 @@
+FROM dev-base:latest
+
+WORKDIR /workspace
+
+RUN apt update \
+    && apt install -y --no-install-recommends \
+    ncurses-dev \
+    uuid-dev \
+    libasio-dev \
+    libtinyxml2-dev \
+    && wget -O /tmp/fastrtps.patch https://raw.githubusercontent.com/captainwc/CyberRT/refs/heads/master/tools/install/FastRTPS_1.5.0.patch \
+    && git clone --single-branch --branch v1.5.0 --depth 1 https://github.com/eProsima/Fast-RTPS.git /workspace/fastRTPS \
+    && cd fastRTPS \
+    && git submodule update --init \
+    && patch -p1 < /tmp/fastrtps.patch \
+    && echo "rebuild:\n\t@rm -rf build 2>/dev/null; mkdir build\n\t@cd build && cmake .. \\\\\n\t\t-DEPROSIMA_BUILD=ON \\\\\n\t\t-DCMAKE_BUILD_TYPE=Debug \\\\\n\t\t-DCOMPILE_EXAMPLES=ON \\\\\n\t\t-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \\\\\n\t\t-G\"Ninja\"\n\t@cd build && ninja -j8" > makefile \
+    && git add . && git commit -m "setup" \
+    && apt clean && rm -rf /var/lib/apt/lists/*  /tmp/*
+
+WORKDIR /workspace/fastRTPS
+CMD [ "/bin/bash" ]
