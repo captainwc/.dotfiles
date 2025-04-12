@@ -15,6 +15,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" <vim-oscyank> 同步vim和系统的剪切板
+Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+
 " <AirLine>
 Plug 'vim-airline/vim-airline'
 
@@ -59,6 +62,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-surround'
 
 call plug#end()
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 通用设置
@@ -344,6 +348,23 @@ let g:rainbow_conf = {
 \}
 " NERDTree与Rainbow会冲突，产生多余的括号，所以有 nerdtree:0一项
 " }---------<Rainbow>
+
+" ================================= vim-oscyank ================================================
+" 自动同步vim和系统的剪切板
+if (!has('clipboard_working'))
+    let s:VimOSCYankPostRegisters = ['', '+', '*']
+    let s:VimOSCYankOperators = ['y', 'd']
+    function! s:VimOSCYankPostCallback(event)
+        if index(s:VimOSCYankPostRegisters, a:event.regname) != -1
+            \ && index(s:VimOSCYankOperators, a:event.operator) != -1
+            call OSCYankRegister(a:event.regname)
+        endif
+    endfunction
+    augroup VimOSCYankPost
+        autocmd!
+        autocmd TextYankPost * call s:VimOSCYankPostCallback(v:event)
+    augroup END
+endif
 
 " ================================= Coc ================================================
 " 支持json注释
