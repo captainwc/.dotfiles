@@ -58,21 +58,18 @@ RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" 
     && git clone https://gitee.com/kaikaixixi/.dotfiles.git $HOME/.dotfiles \
     && chmod +x $HOME/.dotfiles/run.sh \
     && cd $HOME/.dotfiles && ./run.sh \
-    && ln -sf $HOME/.dotfiles/vim/vim8/light.vimrc $HOME/.vimrc \
     && git clone https://gitee.com/kaikaixixi/modernunix.git /tmp/modernunix \
     && mkdir -p $HOME/.local/modernunix \
     && mv /tmp/modernunix/linux-x86_64/static/* $HOME/.local/modernunix/ \
     && mv /tmp/modernunix/linux-x86_64/bazel/* $HOME/.local/modernunix/ \
     && mv /tmp/modernunix/linux-x86_64/uv/* $HOME/.local/modernunix/ \
     && mv /tmp/modernunix/linux-x86_64/soar $HOME/.local/modernunix/ \
-    && ln -s /usr/bin/vim $HOME/.local/modernunix/nvim \
     && ln -s $HOME/.local/modernunix/bazelisk $HOME/.local/modernunix/bazel \
     && apt-get clean && rm -rf /var/lib/apt/lists/*  /tmp/*
 
 # vim插件等进一步配置
 RUN wget -O /tmp/node22.tar.xz https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz && tar xf /tmp/node22.tar.xz -C /opt \
     && echo 'export PATH="/opt/node-v22.14.0-linux-x64/bin":${PATH}' >> $HOME/.bash_env \
-    && ln -sf $HOME/.dotfiles/vim/vim8/.vimrc $HOME/.vimrc \
     && wget -O /tmp/plugged.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/vim-plugged.zip \
     && wget -O /tmp/coc-clangd.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/coc-extensions-clangd.zip \
     && unzip /tmp/plugged.zip -d $HOME/.vim \
