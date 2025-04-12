@@ -1,0 +1,5 @@
+//[CONF REF]     https://github.com/neoclide/coc.nvim/blob/master/doc/coc-config.txt
+//[SETTINGS REF] https://github.com/neoclide/coc.nvim/blob/master/doc/coc.txt
+{
+	"inlayHint.enable": false,
+}
