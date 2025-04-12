@@ -110,11 +110,8 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 按键映射
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let mapleader="\<space>"
-let mapleader=","
-
-" nnoremap <F5> :wa<CR>:!g++ % -o a.out -std=c++20 && ./a.out<CR>
-nnoremap <F6> :wa<CR>:!g++ % -o a.out -std=c++20 -g && gdb a.out<CR>
+let mapleader="\<space>"
+" let mapleader=","
 
 map <c-s-v> <C-v>
 map <s-h> <C-W>h
@@ -122,23 +119,20 @@ map <s-l> <C-W>l
 map <s-j> <C-W>j
 map <s-k> <C-W>k
 
+nnoremap U <C-r>
+nnoremap gb <C-o>     " go back
+nnoremap gp <C-i>     " go preview
 nnoremap gh ^
 nnoremap gl $<right>
+
 inoremap {<CR> {}<ESC>i<CR><ESC>O
-" inoremap {} {}
 nnoremap < <<
 nnoremap > >>
 
-
-nnoremap <leader>e :edit<space><c-r>=getcwd()<cr>/
-
-nnoremap <leader>b :Tlist<CR>
-nnoremap <leader>cs :Tlist<CR>
-nnoremap <leader>ct :Tlist<CR>
 nnoremap <leader><leader>c :set nonumber norelativenumber nolist wrap<CR>
 nnoremap <leader><leader>v :set number relativenumber nowrap<CR>
 nnoremap <leader>h :nohlsearch<CR> 
-nnoremap <leader>w :if &wrap \| set nowrap \| else \| set wrap \| endif<CR>
+nnoremap <leader>uw :if &wrap \| set nowrap \| else \| set wrap \| endif<CR>
 nnoremap <leader>q :wq<CR>
 nnoremap <leader><leader>q :q!<CR>
 
@@ -417,8 +411,6 @@ command! CMakeDebugTarget call ExecuteCMakeCommand("Debug", v:true, v:true, v:tr
 command! CMakeRunTargetNonClean call ExecuteCMakeCommand("Release", v:false, v:false, v:true)
 command! CMakeDebugTargetNonClean call ExecuteCMakeCommand("Debug", v:false, v:true, v:true)
 
-nnoremap <leader><leader>r :call RunCommand()<CR>
-nnoremap <F5> :call RunFile()<CR>
 nnoremap <leader>r :call RunFile()<CR>
 nnoremap <leader>d :call DebugFile()<CR>
 nnoremap <leader>mcr :CMakeRunTarget<CR>
