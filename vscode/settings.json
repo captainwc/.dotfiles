@@ -1,7 +1,7 @@
 {
     // 外观
     "window.commandCenter": false,
-    "workbench.colorTheme": "Quiet Light",
+    "workbench.colorTheme": "Dracula Theme",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.editor.wrapTabs": true,
@@ -24,7 +24,7 @@
     "explorer.confirmDragAndDrop": false,
     "editor.fontSize": 20,
     "editor.fontWeight": "normal",
-    "editor.fontFamily": "'Maple Mono NF CN', Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "'Maple Mono Normal NF CN', Consolas, 'Courier New', monospace",
     "editor.mouseWheelZoom": true,
     "editor.multiCursorModifier": "alt",
     "editor.formatOnSave": true,
@@ -39,6 +39,7 @@
     "editor.inlineSuggest.enabled": true,
     "editor.minimap.showSlider": "always",
     "editor.inlayHints.enabled": "offUnlessPressed",
+    "editor.stickyScroll.enabled": false,
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
     },
@@ -48,6 +49,7 @@
         "zh-hant": true
     },
     "diffEditor.codeLens": true,
+    "diffEditor.ignoreTrimWhitespace": false,
     "diffEditor.hideUnchangedRegions.enabled": true,
     // git
     "git.path": "git",
@@ -66,32 +68,25 @@
     "terminal.integrated.fontWeight": "normal",
     "terminal.integrated.fontFamily": "'Maple Mono NF CN','DroidSansM Nerd Font Mono'",
     "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.automationProfile.linux": {
+        "path": "zsh"
+    },
+    "terminal.integrated.automationProfile.windows": {
+        "path": "pwsh"
+    },
     "terminal.integrated.env.windows": {
         "LANG": "en_US.UTF-8"
     },
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
-    "terminal.integrated.automationProfile.windows": {
-        "path": "powershell",
-    },
     "terminal.integrated.profiles.windows": {
-        "Ubuntu (WSL)": {
-            "path": "C:\\WINDOWS\\System32\\wsl.exe",
-            "icon": "terminal-ubuntu",
-            "args": [
-                "-d",
-                "Ubuntu",
-                "-u",
-                "shuaikai"
-            ]
-        },
         "PowerShell": {
-            "path": "pwsh.exe",
+            "source": "PowerShell",
             "icon": "terminal-powershell",
+            "path": "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe",
             "args": [
                 "-NoExit",
                 "-nologo"
-                // "chcp 65001" // 设置utf-8编码，似乎没必要了
-            ],
+            ]
         },
         "Command Prompt": {
             "path": [
@@ -105,7 +100,17 @@
             "source": "Git Bash",
             "Path": "bash",
             "icon": "terminal-bash",
-            "args": [],
+            "args": []
+        },
+        "Ubuntu (WSL)": {
+            "path": "C:\\WINDOWS\\System32\\wsl.exe",
+            "icon": "terminal-ubuntu",
+            "args": [
+                "-d",
+                "Ubuntu",
+                "-u",
+                "shuaikai"
+            ]
         }
     },
     // debug
@@ -185,7 +190,7 @@
         "swift": "swift",
         "objective-c": "cd $dirWithoutTrailingSlash && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "ruby": "ruby",
-        "groovy": "groovy",
+        "groovy": "groovy"
     },
     "code-runner.executorMapByFileExtension": {
         ".g4": "cd $dirWithoutTrailingSlash && antlr $fileName",
@@ -193,7 +198,7 @@
         ".smt2": "cd $dirWithoutTrailingSlash && z3 $fileName",
         ".ahk": "autohotkey",
         ".lisp": "sbcl --script",
-        ".vb": "cd $dirWithoutTrailingSlash && vbc /nologo $fileName && $dir$fileNameWithoutExt",
+        ".vb": "cd $dirWithoutTrailingSlash && vbc /nologo $fileName && $dir$fileNameWithoutExt"
     },
     "code-runner.executorMapByGlob": {
         "pom.xml": "cd $dirWithoutTrailingSlash && mvn clean package"
@@ -271,39 +276,47 @@
             "backgroundColor": "transparent",
             "bold": false,
             "italic": false
-        },
+        }
+    ],
+    // todo-tree
+    "todo-tree.general.tags": [
+        "BUG",
+        "FIXME",
+        "TODO",
+        "[ ]",
+        "[x]",
+        "SKNOTE",
+        "SKQUESTION"
     ],
     // 插件inline BookMarks，可以用注释的方式添加标签
     "inline-bookmarks.expert.custom.words.mapping": {
         "blue": [
-            ">[\\s]*mark[\\s]",
-            "@[\\s]*mark[\\s]",
-            ">[\\s]*m[\\s]",
-            "@[\\s]*m[\\s]"
+            ">[\\s]*sk_mark[\\s:]",
+            "@[\\s]*sk_mark[\\s:]"
         ],
         "purple": [
-            ">[\\s]*panic[\\s]",
-            "@[\\s]*panic[\\s]"
+            ">[\\s]*sk_blog[\\s:]",
+            "@[\\s]*sk_blog[\\s:]",
         ],
         "green": [
-            ">[\\s]*note[\\s]",
-            "@[\\s]*note[\\s]"
+            ">[\\s]*sk_note[\\s:]",
+            "@[\\s]*sk_note[\\s:]"
         ],
         "red": [
-            ">[\\s]*warn[\\s]",
-            ">[\\s]*why[\\s]",
-            ">[\\s]*mind[\\s]",
-            "@[\\s]*warn[\\s]",
-            "@[\\s]*why[\\s]",
-            "@[\\s]*mind[\\s]"
+            ">[\\s]*sk_why[\\s:]",
+            ">[\\s]*sk_question[\\s:]",
+            "@[\\s]*sk_why[\\s:]",
+            "@[\\s]*sk_question[\\s:]"
         ],
         "warn": [
-            ">[\\s]*todo[\\s]",
-            ">[\\s]*TODO[\\s]",
-            "@[\\s]*todo[\\s]",
-            "@[\\s]*TODO[\\s]",
-            "@[\\s]*tmp[\\s]",
-            ">[\\s]*tmp[\\s]"
+            ">[\\s]*sk_todo[\\s:]",
+            ">[\\s]*sk_fixme[\\s:]",
+            ">[\\s]*sk_warn[\\s:]",
+            ">[\\s]*sk_tmp[\\s:]",
+            "@[\\s]*sk_todo[\\s:]",
+            "@[\\s]*sk_fixme[\\s:]",
+            "@[\\s]*sk_warn[\\s:]",
+            "@[\\s]*sk_tmp[\\s:]"
         ]
     },
     "inline-bookmarks.expert.custom.styles": {
@@ -353,7 +366,8 @@
                 "color": "Chocolate"
             }
         },
-        "warn": { // example custom style with yellow color
+        "warn": {
+            // example custom style with yellow color
             "gutterIconColor": "#F4F400",
             "overviewRulerColor": "#F4F400B0",
             "light": {
@@ -396,7 +410,7 @@
         "editor.defaultFormatter": "xaver.clang-format"
     },
     "[python]": {
-        "editor.defaultFormatter": "ms-python.autopep8"
+        "editor.defaultFormatter": "charliermarsh.ruff"
     },
     "[shellscript]": {
         "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -407,21 +421,25 @@
     "[cmake]": {
         "editor.defaultFormatter": "cheshirekow.cmake-format"
     },
-    // other plugins
+    // copilot
     "github.copilot.enable": {
         "*": true,
         "plaintext": false,
         "markdown": false,
         "scminput": false,
-        "cpp": false
+        "cpp": true
     },
+    "github.copilot.advanced": {
+        "authProvider": "github"
+    },
+    "github.copilot.nextEditSuggestions.enabled": false,
+    "github.copilot.editor.enableAutoCompletions": true,
     // update bellow... 20231121
     "hediet.vscode-drawio.resizeImages": null,
     "security.workspace.trust.untrustedFiles": "open",
     "liveServer.settings.donotShowInfoMsg": true,
     "liveServer.settings.donotVerifyTags": true,
     "redhat.telemetry.enabled": true,
-    "github.copilot.editor.enableAutoCompletions": true,
     "go.toolsManagement.autoUpdate": true,
     "hexeditor.columnWidth": 8,
     "hexeditor.showDecodedText": true,
@@ -442,7 +460,7 @@
             "name": "xe->bib",
             "tools": [
                 "xelatex",
-                "bibtex",
+                "bibtex"
             ]
         },
         {
@@ -464,7 +482,7 @@
             "tools": [
                 "texify"
             ]
-        },
+        }
     ],
     "latex-workshop.latex.tools": [
         {
@@ -517,7 +535,7 @@
         "images": [
             "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1061.jpg",
             "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/JPG_1094.jpg",
-            "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/PNG_2008.png",
+            "file:///C:/Users/wddjwk/Pictures/Saved%20Pictures/PNG_2008.png"
         ],
         "opacity": 0.18,
         "size": "cover",
@@ -529,12 +547,12 @@
     "apc.activityBar": {
         "size": 36,
         "itemSize": 36,
-        "itemMargin": 6,
+        "itemMargin": 6
     },
     // color theme
     "editor.semanticTokenColorCustomizations": {
         "enabled": true,
-        "[Evondev Dracula New Colour]": {
+        "[Dracula Theme]": {
             "rules": {
                 "macro": {
                     "foreground": "#f9f274b7",
@@ -561,7 +579,7 @@
                 "typeParameter": {
                     "foreground": "#C1AE75",
                     "fontStyle": "bold"
-                },
+                }
             }
         }
     },
@@ -570,4 +588,8 @@
     "qt-core.qtInstallationRoot": "d:\\software\\Qt",
     "vscode-office.editorTheme": "Auto",
     "cppref.lang": "zh",
+    "C_Cpp.intelliSenseCacheSize": 0,
+    "makefile.configureOnOpen": false,
+    "atomicviz.installed": true,
+    "atomicviz.layout.showInSidebar": false
 }
