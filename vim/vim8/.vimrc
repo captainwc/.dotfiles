@@ -83,7 +83,8 @@ set wrap                 " 设置长行自动换行
 set ruler                " 总是显示光标位置
 set laststatus=2         " 总是显示状态栏
 set number               " 开启行号显示
-set relativenumber       " 展示相对行号
+" set relativenumber       " 展示相对行号
+set norelativenumber     " 不 展示相对行号
 set cursorline           " 高亮显示当前行
 " set colorcolumn=80
 set whichwrap+=<,>,h,l   " 设置光标键跨行
@@ -200,8 +201,8 @@ inoremap {<CR> {}<ESC>i<CR><ESC>O
 nnoremap < <<
 nnoremap > >>
 
-nnoremap <leader><leader>c :set nonumber norelativenumber nolist wrap<CR>
-nnoremap <leader><leader>v :set number relativenumber nowrap<CR>
+" nnoremap <leader><leader>c :set nonumber norelativenumber nolist wrap<CR>
+" nnoremap <leader><leader>v :set number relativenumber nowrap<CR>
 nnoremap <leader>h :nohlsearch<CR> 
 nnoremap <leader>uw :if &wrap \| set nowrap \| else \| set wrap \| endif<CR>
 nnoremap <leader>q :wq<CR>
@@ -376,7 +377,7 @@ let g:coc_user_config = {
 \}
 let g:coc_config_inlayHint = 0
 
-inoremap <silent> <expr> <Tab> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+inoremap <silent> <expr> <Tab> coc#pum#visible() ? coc#_select_confirm() : "\<Tab>"
 inoremap <silent> <expr> <C-Space> coc#refresh()
 
 nmap <leader>ca <Plug>(coc-codeaction-cursor)

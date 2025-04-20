@@ -6,6 +6,7 @@
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+vim.o.relativenumber = false
 
 -- [插件]
 -- -- FLoatTerm
