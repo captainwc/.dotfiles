@@ -265,23 +265,23 @@ perf_report() {
 #（2） 生成火焰图，并可通过浏览器进行访问（主要针对虚拟机，没在正常平台上试验过）
 #       $1:命令, $2:svg文件无后缀名称, $3:port, $4:网卡名，如ens33
 perf_flame() {
-    path=$(pwd)
-    FlameGraphPath=/opt/FlameGraph
-    filename=${2:-perf-flamegraph}.svg
-    vm_ip=$(ip address show ${4:-eth0} | /usr/bin/grep -oP '(?<=inet\s)\d+\.\d+\.\d+\.\d+' | awk 'NR==1{print $1}')
-    vm_port=${3:-8000}
-    svg_link="http://${vm_ip}:${vm_port}/${filename}"
+    local SvgPath=$(pwd)
+    local FlameGraphSvgPath=/opt/FlameGraph
+    local filename=${2:-perf-flamegraph}.svg
+    local vm_ip=$(ip address show ${4:-eth0} | /usr/bin/grep -oP '(?<=inet\s)\d+\.\d+\.\d+\.\d+' | awk 'NR==1{print $1}')
+    local vm_port=${3:-8000}
+    local svg_link="http://${vm_ip}:${vm_port}/${filename}"
 
     sudo perf record -F 99 -g -- $1
     sudo perf script -f >perf.out
 
-    perl ${FlameGraphPath}/stackcollapse-perf.pl ${path}/perf.out | grep -v '^#' | perl ${FlameGraphPath}/flamegraph.pl >${path}/${filename}
+    perl ${FlameGraphSvgPath}/stackcollapse-perf.pl ${SvgPath}/perf.out | grep -v '^#' | perl ${FlameGraphSvgPath}/flamegraph.pl >${SvgPath}/${filename}
 
     echo -e "\n-----------------------------= PERF FLAME GRAPH =-----------------------------\n"
     echo -e "\e[1;33m Now you can view the SVG file by clicking \e[4;34m${svg_link}\e[0m"
     echo -e "\n------------------------------------------------------------------------------\n"
 
-    python3 -m http.server --directory ${path} --bind ${vm_ip} ${port}
+    python3 -m http.server --directory ${SvgPath} --bind ${vm_ip} ${vm_port}
 }
 
 ########################################
