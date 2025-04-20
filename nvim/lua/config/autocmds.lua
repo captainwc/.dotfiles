@@ -57,9 +57,9 @@ end
 function GetCompileOptions(type)
     local defaultOptionsMap = {
         CPP = "-std=c++20 ",
-        CPP_Debug = "-g -O0 -std=c++20 ",
+        CPP_Debug = "-g -O0 -fno-inline -std=c++20 ",
         C = "",
-        C_Debug = "-g ",
+        C_Debug = "-g -O0 -fno-inline",
     }
 
     local compileOptions = vim.fn.input("[" .. type .. "] Compile Options", defaultOptionsMap[type])
