@@ -302,5 +302,9 @@
     {
         "key": "shift+alt+t",
         "command": "references-view.showTypeHierarchy"
+    },
+    {
+        "key": "ctrl+m ctrl+y",
+        "command": "editor.action.toggleStickyScroll"
     }
 ]
