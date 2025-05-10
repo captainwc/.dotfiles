@@ -93,7 +93,6 @@ Set-Alias -Name vimal -Value Open-LocalProfileInSublime
 Set-Alias -Name sb -Value $PROFILE
 
 Set-Alias -Name vim -Value subl.exe
-Set-Alias -Name nvim -Value subl.exe
 Set-Alias -Name subl -Value subl.exe
 
 # ==============================================
@@ -146,9 +145,7 @@ function rsubl {
 }
 
 Set-Alias -Name fvim -Value fsubl
-Set-Alias -Name fnvim -Value fsubl
 Set-Alias -Name rvim -Value rsubl
-Set-Alias -Name rnvim -Value rsubl
 
 # ==============================================
 #  自定义函数

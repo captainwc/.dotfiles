@@ -1,7 +1,3 @@
-# forcely recommend use subl instead all other editor in windows
-alias vim='subl'
-alias nvim='subl'
-
 # tools
 alias ll='ls -alhF --color=auto'
 alias la='ls -aF --color=auto'
