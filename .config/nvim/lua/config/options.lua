@@ -6,14 +6,11 @@
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
+vim.o.relativenumber = false
 
 -- [插件]
 -- -- FLoatTerm
 vim.g.floaterm_width = 0.6
 vim.g.floaterm_height = 0.6
 vim.g.floaterm_autoclose = 0
-
--- -- Fittencode
-
--- -- 主题
--- vim.cmd.colorscheme("catppuccin")
+-- vim.opt.shell = "D:/env/msys2/usr/bin/bash.exe"
