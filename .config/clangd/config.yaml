@@ -1,13 +1,30 @@
+# [Attention] This user config has the HIGHEST precedence! (May cover your .clangd file in your project)
+
+CompileFlags:
+  Add: [
+      -xc++,
+      -Wall,
+      # -std=c++23
+    ]
+  Compiler: g++
+
 Index:
   Background: Build
 
-CompileFlags:
-  Add: [-xc++, -Wall, -std=c++23]
-  Compiler: clang++
+Completion:
+  ArgumentLists: Delimiters
+
+InlayHints:
+  Enabled: false
+  ParameterNames: true
+  DeducedTypes: true
+
+Hover:
+  ShowAKA: true
 
 Diagnostics:
   ClangTidy:
-    Add: ["*"]
+    # Add: ["*"]
     Remove: [
         abseil*,
         fuchsia*,
