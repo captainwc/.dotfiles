@@ -49,6 +49,8 @@ Diagnostics:
         hicpp-no-array-decay, # 防止数组传参退化为指针
         misc-no-recursion, #递归
         misc-non-private-member-variables-in-classes, # public成员变量，或许不该用，但是想用
+        misc-use-internal-linkage, # 不要总是建议给函数加上static实现内部链接
+        misc-use-anonymous-namespace, # 同上，加上static之后也不要总是再建议移入匿名namespace
         modernize-avoid-c-arrays, # 同上
         modernize-use-nodiscard, # 推荐使用 [[nodiscard]]
         modernize-use-trailing-return-type, # 不要每个都加上尾返回值类型
@@ -57,4 +59,5 @@ Diagnostics:
         readability-identifier-length, # 不检查变量名长度
         readability-implicit-bool-conversion, # 隐式布尔类型转换
         readability-magic-numbers, #同上
+        readability-identifier-naming, # 不要叫我命名
       ]
