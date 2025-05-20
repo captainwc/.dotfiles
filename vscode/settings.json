@@ -1,7 +1,7 @@
 {
     // 外观
     "window.commandCenter": false,
-    "workbench.colorTheme": "One Dark Pro",
+    "workbench.colorTheme": "Trae Light",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
     "workbench.editor.wrapTabs": true,
@@ -576,13 +576,61 @@
                     "foreground": "#0ec0f6",
                     "fontStyle": "italic"
                 },
+                "function": {
+                    "foreground": "#50FA7B",
+                    "fontStyle": "bold"
+                },
+                "parameter": {
+                    // "foreground": "#54adc8",
+                    "fontStyle": "underline"
+                },
                 "typeParameter": {
                     "foreground": "#C1AE75",
                     "fontStyle": "bold"
-                }
+                },
             }
         },
         "[Trae Light]": {
+            "rules": {
+                "variable": "#497194",
+                "macro": {
+                    "foreground": "#f8990aad",
+                    "fontStyle": "italic bold"
+                },
+                "*.readonly": {
+                    "foreground": "#bd970b",
+                    "fontStyle": "bold"
+                },
+                "*.static": {
+                    "foreground": "#723ac7",
+                    "fontStyle": "italic bold"
+                },
+                "templateType": "#b30000",
+                "namespace": {
+                    "foreground": "#a589ae",
+                    "fontStyle": ""
+                },
+                "property": {
+                    "foreground": "#b84852",
+                    "fontStyle": "italic"
+                },
+                "method": {
+                    "foreground": "#0a91b8",
+                    "fontStyle": "italic"
+                },
+                "function": {
+                    "fontStyle": "bold"
+                },
+                "parameter": {
+                    "fontStyle": "underline"
+                },
+                "typeParameter": {
+                    "foreground": "#9b8a5b",
+                    "fontStyle": "bold"
+                },
+            }
+        },
+        "[Quiet Light]": {
             "rules": {
                 "macro": {
                     "foreground": "#a8a12d",
@@ -597,7 +645,10 @@
                     "fontStyle": "italic bold"
                 },
                 "templateType": "#b30000",
-                "namespace": "#89b19a",
+                "namespace": {
+                    "foreground": "#a589ae",
+                    "fontStyle": ""
+                },
                 "property": {
                     "foreground": "#b84852",
                     "fontStyle": "italic"
@@ -606,10 +657,13 @@
                     "foreground": "#0a91b8",
                     "fontStyle": "italic"
                 },
+                "parameter": {
+                    "fontStyle": "underline"
+                },
                 "typeParameter": {
                     "foreground": "#9b8a5b",
                     "fontStyle": "bold"
-                }
+                },
             }
         }
     },
