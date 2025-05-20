@@ -143,6 +143,11 @@ fvim() {
     file=$(fd . $@ | fzf) && vim "$file"
 }
 
+fnvim() {
+    local file
+    file=$(fd . $@ | fzf) && nvim "$file"
+}
+
 fsubl() {
     local file
     file=$(fd . $@ | fzf) && subl $file
