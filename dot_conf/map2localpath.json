@@ -2,6 +2,7 @@
 	"win": {
 		"bash": "${bash-home}/.bashrc",
 		"bash_alias": "${bash-home}/.bash_aliases",
+		"editorconfig": "${bash-home}/.editorconfig",
 		"pwsh": "~/Documents/PowerShell/Microsoft.PowerShell_profile.ps1",
 		"vim": "${bash-home}/.vimrc",
 		"vim_autoload": "${bash-home}/.vim/autoload",
@@ -22,6 +23,7 @@
 	"linux": {
 		"bash": "",
 		"bash_alias": "~/.bash_aliases",
+		"editorconfig": "~/.editorconfig",
 		"vim": "~/.vimrc",
 		"vim_autoload": "~/.vim/autoload",
 		"vim_plugin": "~/.vim/plugin",
@@ -30,7 +32,6 @@
 		"git": "~/.gitconfig",
 		"lazygit": "~/.config/lazygit/config.yml",
 		"helix": "",
-		"files": "~/.files",
 		"cgdb": "~/.cgdb/cgdbrc",
 		"gdb": "~/.gdbinit",
 		"pip": "~/.pip/pip.conf",
