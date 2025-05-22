@@ -168,6 +168,11 @@ class Utils:
                 StdContainerRule("set"),
                 StdContainerRule("unordered_set"),
                 StdContainerRule("variant"),
+                StdContainerRule("basic_istream"),
+                StdContainerRule("basic_ostream"),
+                StdContainerRule("shared_ptr"),
+                StdContainerRule("unique_ptr"),
+                StdContainerRule("weak_ptr"),
             ])
 
     @staticmethod
