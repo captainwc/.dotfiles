@@ -256,6 +256,15 @@ fkill() {
     fi
 }
 
+### software manage (only for linux)
+update-nvim() {
+	wget -O /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+	sudo rm -rf /opt/nvim-linux-x86_64
+	sudo tar xf /tmp/nvim.tar.gz -C /opt
+	rm /tmp/nvim.tar.gz
+	echo "DONE!"
+}
+
 ### perf
 #（1） perf report：一步到位
 perf_report() {
