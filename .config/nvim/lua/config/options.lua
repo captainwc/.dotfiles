@@ -14,3 +14,18 @@ vim.g.floaterm_width = 0.6
 vim.g.floaterm_height = 0.6
 vim.g.floaterm_autoclose = 0
 -- vim.opt.shell = "D:/env/msys2/usr/bin/bash.exe"
+
+-- osc52 - for paste/yank with system
+local function copy(lines, _)
+    require("osc52").copy(table.concat(lines, "\n"))
+end
+
+local function paste()
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+end
+
+vim.g.clipboard = {
+    name = "osc52",
+    copy = { ["+"] = copy, ["*"] = copy },
+    paste = { ["+"] = paste, ["*"] = paste },
+}
