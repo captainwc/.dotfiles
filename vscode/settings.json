@@ -1,6 +1,7 @@
 {
     // 外观
     "window.commandCenter": false,
+    "window.zoomLevel": -1,
     "workbench.colorTheme": "Trae Light",
     "workbench.iconTheme": "material-icon-theme",
     "workbench.startupEditor": "none",
