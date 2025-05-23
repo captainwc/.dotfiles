@@ -1,3 +1,9 @@
+if vim.g.vscode then
+require("config.lazy")
+require("mini.surround").setup()
+require("vscode")
+else
+
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
@@ -10,3 +16,5 @@ vim.cmd([[colorscheme dracula]])
 
 -- 启用 true-color 支持
 vim.opt.termguicolors = true
+
+end
