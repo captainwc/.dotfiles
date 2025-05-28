@@ -551,6 +551,14 @@
         "itemMargin": 6
     },
     // color theme
+    "workbench.colorCustomizations": {
+        "[Trae Light]": {
+            "tab.inactiveBackground": "#eff1f5",
+            "tab.border": "#eff1f5",
+            "tab.activeBackground": "#f5f7fa",
+            "tab.activeBorderTop": "#007ACC",
+        }
+    },
     "editor.semanticTokenColorCustomizations": {
         "enabled": true,
         "[Dracula Theme]": {
