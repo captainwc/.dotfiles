@@ -1,0 +1,53 @@
+{
+    "Begin a Leetcode Project": {
+        "scope": "c++",
+        "prefix": "lc",
+        "body": [
+            "/**\n * BRIEF: $1\n * ",
+            " * IDEA: $3\n * ",
+            " * LINK: $2\n * ",
+            " * Create by shuaikai ${CURRENT_YEAR}/${CURRENT_MONTH}/${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}",
+            " * Copyright (c) shuaikai. All rights reserved.\n */\n",
+            "using namespace std;\n",
+            "class Solution {\npublic:",
+            "\t$0\n};",
+            "int main(){\n\tSolution su;\n\n\treturn 0;\n}"
+        ],
+        "description": "Begin a Leetcode Project"
+    },
+    "template<typename T>": {
+        "prefix": "tp",
+        "body": "template <typename ${1:T}>$0"
+    },
+    "leetcode main()": {
+        "prefix": "lcmain",
+        "body": [
+            "int main(int argc, char const *argv[]) {\n\tSolution su;\n\t$0\n\n\treturn 0;\n}"
+        ]
+    },
+    "Header Include-Guard": {
+        "prefix": "ifn",
+        "body": "#ifndef ${1:SYMBOL}\n#define $1\n\n$0\n\n#endif // $1\n"
+    },
+    "Namespace": {
+        "prefix": "ns",
+        "body": "namespace $1 {\n\n$0\n\n} //  namespace $1"
+    },
+    "Switch Statement": {
+        "prefix": "sw",
+        "body": "switch ($1) {\n$2default:\n\t${3:break;}\n}$0"
+    },
+    "case break": {
+        "prefix": "cs",
+        "body": "case $1:\n\t$2\n\tbreak;\n$0"
+    },
+    "write file": {
+        "prefix": "wf",
+        "body": "FILE *${1:fp};\n${1:fp} = fopen (\"${2:filename.txt}\",\"w\");\nif (${1:fp}!=NULL)\n{\n\tfprintf(${1:fp},\"${3:Some String\\\\n}\");\n\tfclose (${1:fp});\n}"
+    },
+    "read file": {
+        "prefix": "rf",
+        "body": "FILE *${1:fp};\n${1:fp} = fopen (\"${2:filename.txt}\",\"r\");\nif (${1:fp}!=NULL)\n{\n\tfscanf(${1:fp},\"${3:Some String\\\\n}\", ${3:&var});\n\tfclose (${1:fp});\n}",
+        "description": "read file opeartion including fopen, fscanf and fclose."
+    }
+}

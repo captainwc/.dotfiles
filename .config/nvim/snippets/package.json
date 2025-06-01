@@ -1,0 +1,29 @@
+{
+    "name": "shuaikai-snippets",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "plaintext",
+                    "markdown",
+                    "tex",
+                    "html",
+                    "global",
+                    "all"
+                ],
+                "path": "./vscode-snippets/all.json"
+            },
+            {
+                "language": "cpp",
+                "path": "./vscode-snippets/cpp.json"
+            },
+            {
+                "language": "cmake",
+                "path": "./vscode-snippets/cmake.json"
+            }
+        ]
+    }
+}
