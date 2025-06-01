@@ -1,6 +1,5 @@
 {
     "Begin a Leetcode Project": {
-        "scope": "c++",
         "prefix": "lc",
         "body": [
             "/**\n * BRIEF: $1\n * ",
