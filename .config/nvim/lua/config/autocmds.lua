@@ -276,3 +276,16 @@ end
 function CMakeDebugTargetNonClean()
     ExecuteCMakeCommand("Debug", false, true, true)
 end
+
+if vim.g.vscode then
+    -- More vscode api see https://code.visualstudio.com/api/references/vscode-api
+    function VscodeSayHello()
+        local vscode = require('vscode')
+        vscode.notify("hello from neovim")
+        local current_file = vscode.eval("return vscode.window.activeTextEditor.document.fileName")
+        vscode.notify(current_file)
+        local current_tab_is_pinned = vscode.eval("return vscode.window.tabGroups.activeTabGroup.activeTab.isPinned")
+        vscode.eval("await vscode.env.clipboard.writeText(args.text)", { args = { text = "hello from vscode-neovim" } })
+        vscode.notify("A msg have added to your clipboard")
+    end
+end
