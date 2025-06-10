@@ -15,7 +15,7 @@ Completion:
   ArgumentLists: Delimiters
 
 InlayHints:
-  Enabled: false
+  Enabled: true
   ParameterNames: true
   DeducedTypes: true
 
