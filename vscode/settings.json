@@ -682,6 +682,7 @@
     "vscode-office.editorTheme": "Auto",
     "cppref.lang": "zh",
     "C_Cpp.intelliSenseCacheSize": 0,
+    "python.analysis.typeCheckingMode": "standard",
     "makefile.configureOnOpen": false,
     "atomicviz.installed": true,
     "atomicviz.layout.showInSidebar": false,
@@ -696,6 +697,6 @@
     "vscode-neovim.ctrlKeysForNormalMode": [
         "d",
         "u",
-        "v", // for visual block mod, and can use "mi" "ma" for multi cursor
+        // "v", // for visual block mod, and can use "mi" "ma" for multi cursor
     ],
 }
