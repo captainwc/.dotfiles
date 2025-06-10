@@ -87,22 +87,17 @@ if vim.g.vscode then
         "<Cmd>lua require('vscode').action('code-runner.run')<CR>",
         { noremap = true, silent = true }
     )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>d",
-        "<Cmd>lua require('vscode').action('workbench.action.debug.start')<CR>",
-        { noremap = true, silent = true }
-    )
+    vim.api.nvim_set_keymap("n", "<leader>d", ":lua VscodeDebugSingleFile()<CR>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap(
         "n",
         "<leader>mr",
-        "<Cmd>lua require('vscode').action('cmake.debugTarget')<CR>",
+        "<Cmd>lua require('vscode').action('cmake.launchTarget')<CR>",
         { noremap = true, silent = true }
     )
     vim.api.nvim_set_keymap(
         "n",
         "<leader>md",
-        "<Cmd>lua require('vscode').action('cmake.launchTarget')<CR>",
+        "<Cmd>lua require('vscode').action('cmake.debugTarget')<CR>",
         { noremap = true, silent = true }
     )
     vim.api.nvim_set_keymap(

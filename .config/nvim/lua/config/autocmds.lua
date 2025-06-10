@@ -280,12 +280,30 @@ end
 if vim.g.vscode then
     -- More vscode api see https://code.visualstudio.com/api/references/vscode-api
     function VscodeSayHello()
-        local vscode = require('vscode')
+        local vscode = require("vscode")
         vscode.notify("hello from neovim")
         local current_file = vscode.eval("return vscode.window.activeTextEditor.document.fileName")
         vscode.notify(current_file)
         local current_tab_is_pinned = vscode.eval("return vscode.window.tabGroups.activeTabGroup.activeTab.isPinned")
         vscode.eval("await vscode.env.clipboard.writeText(args.text)", { args = { text = "hello from vscode-neovim" } })
         vscode.notify("A msg have added to your clipboard")
+    end
+
+    function VscodeDebugSingleFile()
+        -- Debug Singlefile, use "launch.json" for default. Specify specific command for specific language.
+        local vscode = require("vscode")
+        local current_file = vscode.eval("return vscode.window.activeTextEditor.document.fileName")
+        local dot_pos = current_file:reverse():find("%.")
+        if not dot_pos then
+            return nil
+        end
+        local file_ext = current_file:sub(-dot_pos)
+        if file_ext == ".py" then
+            vscode.action("debugpy.debugInTerminal")
+        elseif file_ext == ".cpp" or file_ext == ".cc" or file_ext == ".c" then
+            vscode.action("workbench.action.debug.start")
+        else
+            vscode.action("workbench.action.debug.start")
+        end
     end
 end
