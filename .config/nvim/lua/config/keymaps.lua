@@ -124,5 +124,11 @@ if vim.g.vscode then
         "<Cmd>lua require('vscode').call('workbench.explorer.fileView.focus')<CR>",
         { noremap = true, silent = true }
     )
+    vim.api.nvim_set_keymap(
+        "n",
+        "<leader>o",
+        "<Cmd>lua require('vscode').call('outline.focus')<CR>",
+        { noremap = true, silent = true }
+    )
     vim.api.nvim_set_keymap("n", "<leader>mv", ":lua VscodeSayHello()<CR>", { noremap = true, silent = true })
 end
