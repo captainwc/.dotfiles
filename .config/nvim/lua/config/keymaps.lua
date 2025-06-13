@@ -77,6 +77,12 @@ if vim.g.vscode then
     )
     vim.api.nvim_set_keymap(
         "n",
+        "<leader>uz",
+        "<Cmd>lua require('vscode').call('workbench.action.toggleZenMode')<CR>",
+        { noremap = true, silent = true }
+    )
+    vim.api.nvim_set_keymap(
+        "n",
         "<leader>gg",
         "<Cmd>lua require('vscode').call('lazygit-vscode.toggle')<CR>",
         { noremap = true, silent = true }
