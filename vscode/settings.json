@@ -53,6 +53,11 @@
     },
     "diffEditor.codeLens": true,
     "diffEditor.ignoreTrimWhitespace": false,
+    // zen mod
+    "zenMode.hideLineNumbers": false,
+    "zenMode.fullScreen": true,
+    "zenMode.centerLayout": false,
+    "zenMode.showTabs": "none",
     // git
     "git.path": "git",
     "git.openRepositoryInParentFolders": "never",
