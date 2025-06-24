@@ -306,5 +306,26 @@
     {
         "key": "ctrl+m ctrl+y",
         "command": "editor.action.toggleStickyScroll"
+    },
+    {
+        "key": "ctrl+l ctrl+t",
+        "command": "leetcode.testSolution"
+    },
+    {
+        "key": "ctrl+l ctrl+s",
+        "command": "leetcode.submitSolution"
+    },
+    {
+        "key": "ctrl+l ctrl+p",
+        "command": "leetCodeExplorer.focus"
+    },
+    {
+        "key": "ctrl+m ctrl+r",
+        "command": "code-runner.run",
+        "when": "!(cmake:enableFullFeatureSet && !cmake:hideDebugCommand && !inDebugMode)"
+    },
+    {
+        "key": "ctrl+l ctrl+f",
+        "command": "leetcode.searchProblem"
     }
 ]
