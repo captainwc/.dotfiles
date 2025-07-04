@@ -6,7 +6,8 @@ CompileFlags:
       -Wall,
       # -std=c++23
     ]
-  Compiler: g++
+  # Compiler: x86_64-w64-mingw32-g++
+  # Compiler: g++
 
 Index:
   Background: Build
