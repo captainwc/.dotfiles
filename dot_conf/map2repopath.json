@@ -36,6 +36,9 @@
 		"pip": ".pip/pip.conf",
 		"redis": ".redis/redis.conf",
 		"clangd": ".config/clangd/config.yaml",
+		"vscode_setting": "vscode/settings.json",
+		"vscode_key": "vscode/keybindings.json",
+		"vscode_snippets": "vscode/snippets",
 		"tmux": ".config/tmux/.tmux.conf",
 		"tmux_local": ".config/tmux/.tmux.conf.local",
 		"yazi": ".config/yazi"
