@@ -1,0 +1,66 @@
+customization:
+  distribution_code_name: Weasel
+  distribution_version: 0.17.4
+  generator: "Weasel::UIStyleSettings"
+  modified_time: "Sat Jul 12 15:09:53 2025"
+  rime_version: 1.13.1
+patch:
+  ### 通用
+  show_notifications: false # default true to enable all tips, false to disable all tips (except deployment's)
+  # show_notifications_time: 100
+  ### 主题
+  "preset_color_schemes/sk-win11":
+    author: shuaikai
+    back_color: 0xF3F3F3
+    border_color: 0xDBDCDC
+    candidate_text_color: 0x000000
+    hilited_candidate_back_color: 0xEAEAEA
+    hilited_label_color: 0x6F6F6F
+    hilited_mark_color: 0x00000000
+    label_color: 0x6F6F6F
+    name: "SK-Windows11"
+    shadow_color: 0x4DFDFDFD
+    text_color: 0x000000
+  "style/capture_by_click": true
+  "style/color_scheme": "sk-win11"
+  "style/font_point": 14
+  "style/horizontal": true
+  "style/inline_preedit": true
+  "style/label_font_point": 14
+  "style/label_format": "%s"
+  "style/layout/border_width": 1
+  "style/layout/candidate_spacing": 15
+  "style/layout/corner_radius": 6
+  "style/layout/hilite_padding": 5
+  "style/layout/hilite_spacing": 6
+  "style/layout/margin_x": 10
+  "style/layout/margin_y": 10
+  "style/layout/round_corner": 3
+  "style/layout/shadow_offset_x": 2
+  "style/layout/shadow_offset_y": 2
+  "style/layout/shadow_radius": 6
+  "style/mark_text": " "
+  ### app options
+  "app_options/code.exe":
+    ascii_mode: true
+    vim_mode: true
+  "app_options/vim.exe":
+    ascii_mode: true
+    vim_mode: true
+  "app_options/nvim.exe":
+    ascii_mode: true
+    vim_mode: true
+  "app_options/windowsterminal.exe":
+    ascii_mode: true
+  "app_options/cmd.exe":
+    ascii_mode: true
+  "app_options/bash.exe":
+    ascii_mode: true
+  "app_options/pwsh.exe":
+    ascii_mode: true
+  "app_options/subl.exe":
+    ascii_mode: true
+  "app_options/studio64.exe":
+    ascii_mode: true
+  "app_options/msedge.exe":
+    ascii_mode: false
