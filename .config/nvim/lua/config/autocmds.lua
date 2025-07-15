@@ -173,6 +173,80 @@ function ShowPath()
     print(NormalizePath(fullpath))
 end
 
+-- 搜索bazel根目录和target
+function GetBazelTargetInfo()
+    local current_file = vim.fn.expand("%:p") -- 当前文件完整路径
+    local current_dir = vim.fn.fnamemodify(current_file, ":h") -- 当前文件所在目录
+    local full_file_name = vim.fn.fnamemodify(current_file, ":t") -- 带扩展名的文件名
+    local base_name = vim.fn.fnamemodify(full_file_name, ":r") -- 去除扩展名的文件名
+
+    local bazel_root = nil
+    local search_dir = current_dir
+    while true do
+        if
+            vim.fn.filereadable(search_dir .. "/WORKSPACE") == 1
+            or vim.fn.filereadable(search_dir .. "/MODULE.bazel") == 1
+        then
+            bazel_root = search_dir
+            break
+        end
+
+        local parent = vim.fn.fnamemodify(search_dir, ":h")
+        if parent == search_dir then
+            break
+        end
+        search_dir = parent
+    end
+
+    if not bazel_root then
+        print("BazelError: Not in a Bazel workspace")
+        return nil, nil
+    end
+
+    local build_file_dir = nil
+    search_dir = current_dir
+
+    while string.sub(search_dir, 1, #bazel_root) == bazel_root do
+        if
+            vim.fn.filereadable(search_dir .. "/BUILD") == 1
+            or vim.fn.filereadable(search_dir .. "/BUILD.bazel") == 1
+        then
+            build_file_dir = search_dir
+            break
+        end
+
+        local parent = vim.fn.fnamemodify(search_dir, ":h")
+        if parent == search_dir then
+            break
+        end
+        search_dir = parent
+    end
+
+    if build_file_dir then
+        local package_path = string.sub(build_file_dir, #bazel_root + 2)
+        if package_path == "" then
+            return bazel_root, "//:" .. base_name
+        end
+
+        local relative_file = string.sub(current_dir, #build_file_dir + 2)
+        local final_target = relative_file and (relative_file ~= "" and relative_file .. "/" .. base_name or base_name)
+            or base_name
+
+        return bazel_root, "//" .. package_path .. ":" .. final_target
+    end
+
+    print("BazelError: No BUILD file found in directory hierarchy")
+    return nil, nil
+end
+
+function RunBazelTarget(bazel_root, bazel_target)
+    local userInput = vim.fn.input("Bazel Target('" .. bazel_target .. "'): ")
+    local targetName = userInput ~= "" and userInput or bazel_target
+    local floatermOptions = "--autoclose=0 --width=0.9 --height=0.85"
+    local fullCommand = string.format("cd %s && bazel run %s", bazel_root, targetName)
+    vim.cmd(string.format("FloatermNew --title=%s:%s %s %s", "BazelRun", targetName, floatermOptions, fullCommand))
+end
+
 -- 寻找根CMakeLists.txt路径
 function FindCMakeRoot()
     local path = vim.fn.expand("%:p:h") -- 获取当前文件所在目录
@@ -270,7 +344,12 @@ function CMakeDebugTarget()
 end
 
 function CMakeRunTargetNonClean()
-    ExecuteCMakeCommand("Release", false, false, true)
+    local bazel_root, bazel_target = GetBazelTargetInfo()
+    if bazel_root then
+        RunBazelTarget(bazel_root, bazel_target)
+    else
+        ExecuteCMakeCommand("Release", false, false, true)
+    end
 end
 
 function CMakeDebugTargetNonClean()
