@@ -18,6 +18,7 @@
 		"vscode_snippets": "vscode/snippets",
 		"tmux": ".config/tmux/.tmux.conf",
 		"tmux_local": ".config/tmux/.tmux.conf.local",
+        "wezterm": ".config/wezterm",
 		"yazi": ".config/yazi"
 	},
 	"linux": {
@@ -41,6 +42,7 @@
 		"vscode_snippets": "vscode/snippets",
 		"tmux": ".config/tmux/.tmux.conf",
 		"tmux_local": ".config/tmux/.tmux.conf.local",
+        "wezterm": ".config/wezterm",
 		"yazi": ".config/yazi"
 	}
 }

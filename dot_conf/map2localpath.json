@@ -18,6 +18,7 @@
 		"vscode_setting": "~/AppData/Roaming/Code/User/settings.json",
 		"vscode_key": "~/AppData/Roaming/Code/User/keybindings.json",
 		"vscode_snippets": "~/AppData/Roaming/Code/User/snippets",
+        "wezterm": "~/.wezterm",
 		"yazi": "~/AppData/Roaming/yazi/config"
 	},
 	"linux": {
@@ -42,6 +43,7 @@
         "vscode_snippets": "~/.config/Code/User/snipptes",
 		"tmux": "~/.config/tmux/tmux.conf",
 		"tmux_local": "~/.config/tmux/tmux.conf.local",
+        "wezterm": "~/.config/wezterm",
 		"yazi": "~/.config/yazi"
 	}
 }
