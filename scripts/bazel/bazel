@@ -1,0 +1,8 @@
+#!/bin/sh
+exec env -i \
+    TERM=xterm-256color \
+    LC_CTYPE=en_US.UTF-8 \
+    PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+    USER="$USER" \
+    HOME="$HOME" \
+    bazelisk "$@"
