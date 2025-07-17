@@ -94,8 +94,8 @@ local keys = {
    },
 
    -- panes: zoom+close pane
-   { key = 'UpArrow', mods = mod.SUPER_REV,     action = act.TogglePaneZoomState },
-   { key = 'w',       mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
+   { key = 'w', mods = mod.SUPER_REV, action = act.TogglePaneZoomState },
+   { key = 'w', mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
 
    -- panes: navigation
    { key = 'UpArrow',    mods = mod.SUPER, action = act.ActivatePaneDirection('Up') },
