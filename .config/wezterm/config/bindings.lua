@@ -49,9 +49,9 @@ local keys = {
    },
 
    -- cursor movement --
-   { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\u{1b}OH' },
-   { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\u{1b}OF' },
-   { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' },
+   -- { key = 'LeftArrow',  mods = mod.SUPER,     action = act.SendString '\u{1b}OH' },
+   -- { key = 'RightArrow', mods = mod.SUPER,     action = act.SendString '\u{1b}OF' },
+   -- { key = 'Backspace',  mods = mod.SUPER,     action = act.SendString '\u{15}' },
 
    -- copy/paste --
    { key = 'c',          mods = 'CTRL',  action = act.CopyTo('Clipboard') },
@@ -70,11 +70,10 @@ local keys = {
    { key = ']',          mods = mod.SUPER_REV, action = act.MoveTabRelative(1) },
 
    -- tab: title
-   { key = '0',          mods = mod.SUPER,     action = act.EmitEvent('tabs.manual-update-tab-title') },
-   { key = '0',          mods = mod.SUPER_REV, action = act.EmitEvent('tabs.reset-tab-title') },
+   { key = 'r',          mods = mod.SUPER,     action = act.EmitEvent('tabs.manual-update-tab-title') },
+   { key = 'r',          mods = mod.SUPER_REV, action = act.EmitEvent('tabs.reset-tab-title') },
 
    -- tab: hide tab-bar
-   { key = '9',          mods = mod.SUPER,     action = act.EmitEvent('tabs.toggle-tab-bar'), },
    { key = 't',          mods = mod.SUPER,     action = act.EmitEvent('tabs.toggle-tab-bar'), },
 
    -- window --
@@ -84,7 +83,7 @@ local keys = {
    -- window: zoom window
    {
       key = '-',
-      mods = mod.SUPER,
+      mods = mod.SUPER_REV,
       action = wezterm.action_callback(function(window, _pane)
          local dimensions = window:get_dimensions()
          if dimensions.is_full_screen then
@@ -97,7 +96,7 @@ local keys = {
    },
    {
       key = '=',
-      mods = mod.SUPER,
+      mods = mod.SUPER_REV,
       action = wezterm.action_callback(function(window, _pane)
          local dimensions = window:get_dimensions()
          if dimensions.is_full_screen then
@@ -107,6 +106,62 @@ local keys = {
          local new_height = dimensions.pixel_height + 50
          window:set_inner_size(new_width, new_height)
       end)
+   },
+
+   -- panes --
+   -- panes: split panes
+   {
+      key = [[\]],
+      mods = mod.SUPER,
+      action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
+   },
+   {
+      key = [[-]],
+      mods = mod.SUPER,
+      action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
+   },
+
+   -- panes: zoom+close pane
+   { key = 'Enter', mods = mod.SUPER,     action = act.TogglePaneZoomState },
+   { key = 'w',     mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
+
+   -- panes: navigation
+   { key = 'UpArrow',    mods = mod.SUPER, action = act.ActivatePaneDirection('Up') },
+   { key = 'DownArrow',  mods = mod.SUPER, action = act.ActivatePaneDirection('Down') },
+   { key = 'LeftArrow',  mods = mod.SUPER, action = act.ActivatePaneDirection('Left') },
+   { key = 'RightArrow', mods = mod.SUPER, action = act.ActivatePaneDirection('Right') },
+   {
+      key = 'p',
+      mods = mod.SUPER_REV,
+      action = act.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' }),
+   },
+
+   -- panes: scroll pane
+   { key = 'u',        mods = mod.SUPER_REV, action = act.ScrollByLine(-5) },
+   { key = 'd',        mods = mod.SUPER_REV, action = act.ScrollByLine(5) },
+   { key = 'PageUp',   mods = 'NONE',    action = act.ScrollByPage(-0.75) },
+   { key = 'PageDown', mods = 'NONE',    action = act.ScrollByPage(0.75) },
+
+   -- key-tables --
+   -- resizes fonts
+   {
+      key = 'f',
+      mods = 'LEADER',
+      action = act.ActivateKeyTable({
+         name = 'resize_font',
+         one_shot = false,
+         timemout_miliseconds = 1000,
+      }),
+   },
+   -- resize panes
+   {
+      key = 'p',
+      mods = 'LEADER',
+      action = act.ActivateKeyTable({
+         name = 'resize_pane',
+         one_shot = false,
+         timemout_miliseconds = 1000,
+      }),
    },
 
    -- background controls --
@@ -155,63 +210,9 @@ local keys = {
          backdrops:toggle_focus(window)
       end)
    },
-
-   -- panes --
-   -- panes: split panes
-   {
-      key = [[\]],
-      mods = mod.SUPER,
-      action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
-   },
-   {
-      key = [[\]],
-      mods = mod.SUPER_REV,
-      action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
-   },
-
-   -- panes: zoom+close pane
-   { key = 'Enter', mods = mod.SUPER,     action = act.TogglePaneZoomState },
-   { key = 'w',     mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
-
-   -- panes: navigation
-   { key = 'k',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Up') },
-   { key = 'j',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Down') },
-   { key = 'h',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Left') },
-   { key = 'l',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Right') },
-   {
-      key = 'p',
-      mods = mod.SUPER_REV,
-      action = act.PaneSelect({ alphabet = '1234567890', mode = 'SwapWithActiveKeepFocus' }),
-   },
-
-   -- panes: scroll pane
-   { key = 'u',        mods = mod.SUPER, action = act.ScrollByLine(-5) },
-   { key = 'd',        mods = mod.SUPER, action = act.ScrollByLine(5) },
-   { key = 'PageUp',   mods = 'NONE',    action = act.ScrollByPage(-0.75) },
-   { key = 'PageDown', mods = 'NONE',    action = act.ScrollByPage(0.75) },
-
-   -- key-tables --
-   -- resizes fonts
-   {
-      key = 'f',
-      mods = 'LEADER',
-      action = act.ActivateKeyTable({
-         name = 'resize_font',
-         one_shot = false,
-         timemout_miliseconds = 1000,
-      }),
-   },
-   -- resize panes
-   {
-      key = 'p',
-      mods = 'LEADER',
-      action = act.ActivateKeyTable({
-         name = 'resize_pane',
-         one_shot = false,
-         timemout_miliseconds = 1000,
-      }),
-   },
 }
+
+
 
 -- stylua: ignore
 local key_tables = {
