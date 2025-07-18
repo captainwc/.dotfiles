@@ -15,7 +15,7 @@ RUN apt update && \
     echo '\nif [ -f /workspace/CyberRT/setup.bash ]; then\n    . /workspace/CyberRT/setup.bash;\nfi' >> /root/.bash_env && \
     echo '\nsource /workspace/CyberRT/.venv/bin/activate' >> /root/.bash_env && \
     ln -s /usr/local/fast-rtps/lib/libfastrtps.so.1 /lib/x86_64-linux-gnu/libfastrtps.so.1 && \
-    ln -s /usr/local/fast-rtps/lib/libfast /lib/x86_64-linux-gnu/libfastcdr.so.1 && \
+    ln -s /usr/local/fast-rtps/lib/libfastcdr.so.1 /lib/x86_64-linux-gnu/libfastcdr.so.1 && \
     ln -s ~/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/libpython3.9.so.1.0 /lib/x86_64-linux-gnu/libpython3.9.so && \
     ln -s ~/.local/share/uv/python/cpython-3.9.21-linux-x86_64-gnu/lib/libpython3.9.so.1.0 /lib/x86_64-linux-gnu/libpython3.9.so.1 && \
     apt clean && rm -rf /var/lib/apt/lists/*  /tmp/*
