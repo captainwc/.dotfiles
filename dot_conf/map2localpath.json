@@ -44,6 +44,7 @@
 		"tmux": "~/.config/tmux/tmux.conf",
 		"tmux_local": "~/.config/tmux/tmux.conf.local",
         "wezterm": "~/.config/wezterm",
-		"yazi": "~/.config/yazi"
+		"yazi": "~/.config/yazi",
+        "zsh": "~/.zshrc"
 	}
 }
