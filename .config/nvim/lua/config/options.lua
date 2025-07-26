@@ -3,10 +3,11 @@
 -- Add any additional options here
 
 -- 通用配置
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
+-- vim.o.tabstop = 4
+-- vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.relativenumber = false
+vim.g.autoformat = false
 
 -- [插件]
 -- -- FLoatTerm
