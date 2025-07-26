@@ -309,15 +309,18 @@
     },
     {
         "key": "ctrl+l ctrl+t",
-        "command": "leetcode.testSolution"
+        "command": "leetcode.testSolution",
+        "when": "!terminalFocus"
     },
     {
         "key": "ctrl+l ctrl+s",
-        "command": "leetcode.submitSolution"
+        "command": "leetcode.submitSolution",
+        "when": "!terminalFocus"
     },
     {
         "key": "ctrl+l ctrl+p",
-        "command": "leetCodeExplorer.focus"
+        "command": "leetCodeExplorer.focus",
+        "when": "!terminalFocus"
     },
     {
         "key": "ctrl+m ctrl+r",
@@ -326,7 +329,8 @@
     },
     {
         "key": "ctrl+l ctrl+f",
-        "command": "leetcode.searchProblem"
+        "command": "leetcode.searchProblem",
+        "when": "!terminalFocus"
     },
     {
         "key": "shift+alt+down",
