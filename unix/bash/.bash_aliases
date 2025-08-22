@@ -23,6 +23,9 @@ alias vima='vim ~/.bash_aliases'
 alias vimal='vim ~/.bash_aliases_local'
 alias vime='vim ~/.bash_env'
 
+alias fzf='fzf --ansi --smart-case'
+alias fzf-view="fzf --preview-window=up --preview='bat --color always {}'"
+
 # 彩色的less（彩色man手册）
 export LESS_TERMCAP_mb=$'\e[01;31m'    # 开始加粗（红色）
 export LESS_TERMCAP_md=$'\e[01;31m'    # 加粗（红色）
@@ -295,6 +298,20 @@ fkill() {
     if [ "x$pid" != "x" ]; then
         echo $pid | xargs kill -${1:-9}
     fi
+}
+
+fgit() {
+    local hashid
+    hashid=$(git lg \
+        | fzf --preview-window=up,36% \
+            --preview="git show --color=always \$(echo {} | choose -f ' ' 1 | choose -f '-' 0)" \
+        | choose -f ' ' 1 | choose -f '-' 0)
+    git show ${hashid} | delta -s
+}
+
+fhistory() {
+    git lg $1 | fzf --preview-window=up,70% \
+    --preview="git show --color=always --format= \$(echo {} | choose -f ' ' 1 | choose -f '-' 0) -- '$1' | delta -w 140"
 }
 
 ### software manage (only for linux)

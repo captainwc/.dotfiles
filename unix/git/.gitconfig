@@ -29,4 +29,7 @@
     navigate = true  # use n and N to move between diff sections
     dark = true
     side-by-side = true
-    line-numbers = true
+    line-numbers = false
+
+[alias]
+    lg=log --color --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset%s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
