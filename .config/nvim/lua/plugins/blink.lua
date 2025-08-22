@@ -1,6 +1,8 @@
 return {
     "saghen/blink.cmp",
+    build = "cargo build --release",
     opts = {
+        fuzzy = { implementation = "rust" },
         completion = {
             accept = {
                 -- experimental auto-brackets support
