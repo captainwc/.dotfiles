@@ -704,4 +704,13 @@
         "u",
         // "v", // for visual block mod, and can use "mi" "ma" for multi cursor
     ],
+    // git
+    "git-graph.date.format": "ISO Date & Time",
+    "gitlens.defaultDateFormat": "YY/MM/DD HH:mm:ss",
+    "gitlens.defaultDateSource": "committed",
+    "gitlens.ai.model": "vscode",
+    "gitlens.graph.minimap.enabled": false,
+    "gitlens.launchpad.indicator.enabled": false,
+    "gitlens.graph.layout": "editor",
+    "diffEditor.hideUnchangedRegions.enabled": true,
 }

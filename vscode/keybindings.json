@@ -31,11 +31,6 @@
         "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
     },
     {
-        "key": "alt+`",
-        "command": "workbench.action.terminal.toggleTerminal",
-        "when": "terminal.active"
-    },
-    {
         "key": "alt+2",
         "command": "workbench.view.explorer",
         "when": "viewContainer.workbench.view.explorer.enabled"
@@ -361,5 +356,9 @@
         "key": "shift+alt+up",
         "command": "-editor.action.insertCursorAbove",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+oem_3",
+        "command": "workbench.action.togglePanel"
     }
 ]
