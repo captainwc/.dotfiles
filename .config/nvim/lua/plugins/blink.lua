@@ -35,16 +35,21 @@ return {
 
         cmdline = {
             enabled = true,
+            keymap = { preset = "inherit" },
             completion = {
                 menu = {
                     auto_show = true,
-                }
-            }
+                },
+            },
         },
 
         keymap = {
-            ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
-            ['<C-d>'] = { 'scroll_documentation_up', 'fallback' }
+            preset = "default",
+            ["<Tab>"] = { "select_and_accept", "fallback" },
+            ["<Up>"] = { "select_prev", "fallback" },
+            ["<Down>"] = { "select_next", "fallback" },
+            ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+            ["<C-d>"] = { "scroll_documentation_up", "fallback" },
         },
     },
 }
