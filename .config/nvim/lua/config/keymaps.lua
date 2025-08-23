@@ -8,7 +8,7 @@
 -- normal
 -- Toggle Wrap: Use <leader>uw Instead
 -- vim.api.nvim_set_keymap("n", "<leader>w", ":if &wrap | set nowrap | else | set wrap | endif<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<CR>", ":w<esc>", { noremap = true, silent = true }) -- Save on enter
+vim.api.nvim_set_keymap("n", "<CR>", ":LazyFormat<CR>:w<esc>", { noremap = true, silent = true }) -- Format and Save on enter
 vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true }) -- Redo
 vim.api.nvim_set_keymap("n", "gb", "<C-o>", { noremap = true, silent = true }) -- go back
 vim.api.nvim_set_keymap("n", "gp", "<C-i>", { noremap = true, silent = true }) -- go prev
