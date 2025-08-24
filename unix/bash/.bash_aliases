@@ -302,16 +302,20 @@ fkill() {
 
 fgit() {
     local hashid
-    hashid=$(git lg \
+    hashid=$(git lng \
         | fzf --preview-window=up,36% \
-            --preview="git show --color=always \$(echo {} | choose -f ' ' 1 | choose -f '-' 0)" \
+            --preview="git show --color=always \$(echo {} | choose -f '-' 0)" \
         | choose -f ' ' 1 | choose -f '-' 0)
     git show ${hashid} | delta -s
 }
 
 fhistory() {
-    git lg $1 | fzf --preview-window=up,70% \
-    --preview="git show --color=always --format= \$(echo {} | choose -f ' ' 1 | choose -f '-' 0) -- '$1' | delta -w 140"
+    local file
+    file=$(fd . "$@" -E "*\.git\/*" | fzf --exit-0)
+    if [[ -n "$file" ]]; then
+        git lng -- "$file" | fzf --preview-window=up,70% \
+            --preview="git show --color=always --format=fuller \$(echo {} | awk -F '-' '{print \$1}') -- '$file' | delta -w 140"
+    fi
 }
 
 ### software manage (only for linux)
