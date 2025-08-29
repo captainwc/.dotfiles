@@ -1,0 +1,36 @@
+/** For advanced users. */
+{
+  "defaultFontFamily": {
+    "standard": null, //String - Defaults to "Times New Roman".
+    "serif": null, // String - Defaults to "Times New Roman".
+    "sansSerif": null, // String - Defaults to "Arial".
+    "monospace": null // String - Defaults to "Courier New".
+  },
+  "autoHideMenuBar": true, //Boolean - Auto hide the menu bar unless the `Alt` key is pressed. Default is false.
+
+  // Array - Search Service user can access from context menu after a range of text is selected. Each item is formatted as [caption, url]
+  "searchService": [["Search with Google", "https://google.com/search?q=%s"]],
+
+  // Custom key binding, which will override the default ones.
+  // see https://support.typora.io/Shortcut-Keys/#change-shortcut-keys for detail
+  "keyBinding": {
+    // 切换为应为模式，然后对应选项按钮的text就是
+    "Outline": "Alt+Q",
+    "Open Quickly": "Alt+`",
+    "File Tree": "Alt+1",
+    "Articles": "Alt+2",
+    "Source Code Mode": "Alt+3",
+    "Replace": "Ctrl+r",
+    "HTML": "Ctrl+P", // Export as html
+    "PDF": "Ctrl+Shift+P", // export as pdf
+    "Image": "Ctrl+Shift+I", // export as img
+    "Insert Image": "Alt+I",
+    "Insert Local Images": "Alt+Shift+I",
+    "Clear Format": "Alt+D", // delete such as strong、italy etc.
+    "Toggle DevTools": "F12"
+  },
+
+  "monocolorEmoji": true, //default false. Only work for Windows
+  "maxFetchCountOnFileList": 500,
+  "flags": [] // default [], append Chrome launch flags, e.g: [["disable-gpu"], ["host-rules", "MAP * 127.0.0.1"]]
+}
