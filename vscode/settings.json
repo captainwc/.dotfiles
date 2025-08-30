@@ -591,8 +591,7 @@
                     "fontStyle": "italic"
                 },
                 "function": {
-                    "foreground": "#50FA7B",
-                    "fontStyle": "bold"
+                    "foreground": "#0ec0f6",
                 },
                 "parameter": {
                     // "foreground": "#54adc8",
@@ -615,6 +614,9 @@
                     "foreground": "#bd970b",
                     "fontStyle": "bold"
                 },
+                "function": {
+                    "foreground": "#0a91b8",
+                },
                 "*.static": {
                     "foreground": "#723ac7",
                     "fontStyle": "italic bold"
@@ -631,9 +633,6 @@
                 "method": {
                     "foreground": "#0a91b8",
                     "fontStyle": "italic"
-                },
-                "function": {
-                    "fontStyle": "bold"
                 },
                 "parameter": {
                     "fontStyle": "underline"
@@ -680,6 +679,20 @@
                 },
             }
         }
+    },
+    // > developer: inspect editor tokens and scopes
+    "editor.tokenColorCustomizations": {
+        "[Trae Light]": {
+            "textMateRules": [
+                {
+                    "scope": "",
+                    "settings": {
+                        "foreground": "#717371",
+                        "fontStyle": "italic bold strikethrough"
+                    }
+                }
+            ]
+        },
     },
     // 小插件们
     "lldb.suppressUpdateNotifications": true,
