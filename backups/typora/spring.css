@@ -45,10 +45,10 @@
     --use-dynamic-effect: 1;
 
     /* H1 interactive effect 一级标题交互效果 */
-    --h1-hover-effect: 1;
+    --h1-hover-effect: 0;
 
     /* H2 interactive effect 二级标题交互效果 */
-    --h2-after-effect: 1;
+    --h2-after-effect: 0;
 
     /* H3 H4 H5 H6 interactive effect 三,四,五,六级标题交互效果 */
     --h3-6-hover-effect: 0;
@@ -61,10 +61,10 @@
 
     /* Blockquote interactive effect 引用块交互效果 */
     --blockquote-hover-effect: 1;
-    
+
     /* Alert interactive effect 提示框交互效果 */
     --alert-hover-effect: 1;
-    
+
     /* Strong text interactive effect 粗体文本交互效果 */
     --strong-hover-effect: 1;
 
@@ -81,26 +81,31 @@
     --del-hover-effect: 1;
 
     /* Inline code block interactive effect 内联代码块交互效果 */
-    --code-hover-effect: 1;
+    --code-hover-effect: 0;
 
     /* Code block interactive effect 代码块交互效果 */
     --fence-hover-effect: 0;
-    
+
     /* List interactive effect 列表交互效果
      * The following two values ​​need to be changed synchronously
      * 下面两个值需同步更改 0-italic or 1-normal */
     --list-marker-effect: 1;
     --list-ol-text-style: normal;
-    
+
     /* Divider interactive effect 分割线交互效果 */
     --hr-hover-effect: 1;
-    
+
     /* Table interactive effect 表格交互效果 */
     --table-hover-effect: 0;
 
     /************************************** Color Scheme 颜色配置 **************************************
      **************************************************************************************************/
 
+}
+
+* {
+    overflow-wrap: break-word;
+    word-break: break-all;
 }
 
 html {
@@ -162,7 +167,7 @@ content #write>h5.md-focus:before {
 
 #write h1,
 #write h2 {
-    text-align: center;
+    text-align: left;
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
@@ -944,11 +949,11 @@ h6 code {
 code {
     background-color: rgba(221, 235, 213, 0.5);
     color: #359d09;
-    font-family: "Fira Code", Consolas, "Lucida Console", "Courier", monospace, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Maple Mono Normal NF CN", "Fira Code", Consolas, "Lucida Console", "Courier", monospace, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     font-weight: 550;
     margin: 0 2px;
-    padding: 3px 3px 1px;
+    padding: 1px 3px 1px 3px;
     border-radius: 7px;
     transition: all 0.3s ease;
     z-index: -1;
@@ -957,7 +962,7 @@ code {
 code:hover {
     background-color: rgba(221, 235, 213, calc(0.5 + 0.5 * var(--code-hover-effect) * var(--use-dynamic-effect)));
     font-weight: calc(550 + 150 * var(--code-hover-effect) * var(--use-dynamic-effect));
-    padding: 3px 3px calc(1px + 2px * var(--code-hover-effect) * var(--use-dynamic-effect));
+    padding: 1px 3px calc(2px + 2px * var(--code-hover-effect) * var(--use-dynamic-effect));
 }
 
 /* strike */
@@ -1013,7 +1018,8 @@ a img {
 
 /* code fences */
 .md-fences {
-    font-family: "Fira Code", Consolas, "Lucida Console", "Courier", monospace, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Maple Mono Normal NF CN", "Fira Code", Consolas, "Lucida Console", "Courier", monospace, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
     color: #2f4f4f;
     background-color: #FFFFFF;
     padding: 17px;
