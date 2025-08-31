@@ -275,13 +275,36 @@ function GetCMakeTargetInfo()
     local targetName = userInput ~= "" and userInput or defaultTargetName
 
     local targetPath = ""
-    local binPath = NormalizePath(buildDir .. "/bin")
-    if vim.fn.isdirectory(binPath) == 1 then
-        targetPath = NormalizePath("bin/" .. targetName)
+    -- 检查 bin 目录下是否存在目标文件
+    local binTargetPath = NormalizePath(buildDir .. "/bin/" .. targetName)
+    if vim.fn.filereadable(binTargetPath) == 1 then
+        targetPath = binTargetPath
+    -- 检查当前目录下是否存在目标文件
+    elseif vim.fn.filereadable(targetName) == 1 then
+        targetPath = targetName
+    -- 如果都不存在，递归查找目标文件
     else
-        targetPath = NormalizePath(targetName)
+        local function find_in_subdirs(dir, file)
+            local searchPath = dir .. "/**/" .. file
+            local result = vim.fn.glob(searchPath, false, true)
+            if #result > 0 then
+                for _, path in ipairs(result) do
+                    if vim.fn.filereadable(path) == 1 then
+                        -- 返回其相对路径
+                        if path:sub(1, #dir) == dir then
+                            return path:sub(#dir + 2)
+                        else
+                            return NormalizePath(path)
+                        end
+                    end
+                end
+            end
+            return nil
+        end
+        targetPath = find_in_subdirs(buildDir, targetName)
+        local userInput2 = vim.fn.input("Run('" .. targetPath .. "'): ")
+        targetPath = userInput2 ~= "" and userInput2 or targetPath
     end
-
     return buildDir, targetName, targetPath
 end
 
