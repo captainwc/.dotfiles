@@ -1,0 +1,106 @@
+{
+    "": {
+        "Width": 1
+    },
+    "AddNoteActiveEdit": true,
+    "AlwaysShowComment": false,
+    "AppFont": "微软雅黑 Light",
+    "AppFontSize": 11,
+    "AutoAddtoOutline": true,
+    "AutoOpenDoc": 0,
+    "Circle": {
+        "Width": 0
+    },
+    "CommentFont": "华文中宋",
+    "CommentFontSize": 12,
+    "CommentWidth": 400,
+    "CustomColors": "#fffbb9 #ddffd5 #506dec #ffd3e9 #f89e02 #60bb46 #cc0000 #fe668f #3243b6 #01ff01 #01fffd #000000",
+    "DefaultPageLayout": 3,
+    "EpubFont": "华文仿宋",
+    "FixCommentWidth": false,
+    "HotKeys": {
+        "101": "0",
+        "106": "[",
+        "107": "]",
+        "112": "Ctrl+C",
+        "113": "Ctrl+D",
+        "120": "Ctrl+O",
+        "126": "Ctrl+W",
+        "139": "Ctrl+F",
+        "140": "Shift+F3",
+        "141": "F3",
+        "149": "Alt+Q",
+        "165": "`",
+        "167": "Alt+T",
+        "221": "4",
+        "222": "2",
+        "234": "Alt+E",
+        "239": "V",
+        "252": "Ctrl+Shift+P",
+        "274": "Ctrl+T",
+        "278": "Alt+R",
+        "284": "Ctrl+B",
+        "309": "1",
+        "311": "3",
+        "318": "F10",
+        "377": "Alt+W",
+        "404": "F9",
+        "424": "5",
+        "433": "Alt+Shift+S",
+        "439": "6",
+        "440": "F",
+        "442": "Alt+Shift+Right",
+        "443": "Ctrl+Z",
+        "444": "Ctrl+Y",
+        "482": "Alt+A",
+        "484": "Alt+Shift+Down",
+        "485": "7",
+        "521": "F8",
+        "531": "Alt+`",
+        "532": "A",
+        "602": "Alt+H",
+        "613": "Alt+D",
+        "633": "Alt+1",
+        "660": "Ctrl+Shift+A"
+    },
+    "Line": {
+        "Color": "ffcc0000",
+        "Width": 1
+    },
+    "LineCurve": {
+        "Color": "ffcc0000"
+    },
+    "LinePen": {
+        "Color": "fffffbb9",
+        "Width": 16
+    },
+    "MindNodeShowFlags": 7,
+    "MindNodeWidth": 0,
+    "NomoreRemind": true,
+    "NoteToolConfig": -921,
+    "OutlineShowImage": true,
+    "OutlineShowText": true,
+    "PenShowTraces": true,
+    "Polygon": {
+        "Width": 3
+    },
+    "Rectangle": {
+        "Color": "ffcc0000",
+        "Width": 1
+    },
+    "ShowLineTrace": true,
+    "ShowMarkupToolbar": false,
+    "ShowMode": 0,
+    "ShowTextToolbar": false,
+    "TextFrame": {
+        "Color": "ffcc0000"
+    },
+    "TextFrameFontSize": 10,
+    "TitleFont": "华文中宋",
+    "UnderLine": {
+        "Color": "ffe80000"
+    },
+    "UseMouseClick": false,
+    "VerticalPattern": false,
+    "WholeWord": false
+}
