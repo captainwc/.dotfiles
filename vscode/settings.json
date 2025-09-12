@@ -581,17 +581,18 @@
                     "fontStyle": "italic bold"
                 },
                 "templateType": "#ff0000",
-                "namespace": "#91ecb2f8",
+                "namespace": "#baf4d0e6",
                 "property": {
-                    "foreground": "#de6872",
+                    // "foreground": "#de6872",
+                    "foreground": "#C7EDCC",
                     "fontStyle": "italic"
                 },
                 "method": {
-                    "foreground": "#0ec0f6",
+                    "foreground": "#3dc8f2",
                     "fontStyle": "italic"
                 },
                 "function": {
-                    "foreground": "#0ec0f6",
+                    "foreground": "#3dc8f2",
                 },
                 "parameter": {
                     // "foreground": "#54adc8",
@@ -601,6 +602,13 @@
                     "foreground": "#C1AE75",
                     "fontStyle": "bold"
                 },
+                "class": "#9be8a5",
+                "struct": "#9be8a5",
+                "enum": {
+                    "foreground": "#9be8a5",
+                    "fontStyle": "bold"
+                },
+                "type": "#9be8a5"
             }
         },
         "[Trae Light]": {
