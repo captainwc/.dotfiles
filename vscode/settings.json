@@ -714,7 +714,6 @@
     "atomicviz.layout.showInSidebar": false,
     "lazygit-vscode.lazygitPath": "lazygit",
     "augment.nextEdit.enableBackgroundSuggestions": false,
-    "diffEditor.hideUnchangedRegions.enabled": true,
     // vscode-neovim
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
@@ -726,10 +725,16 @@
         // "v", // for visual block mod, and can use "mi" "ma" for multi cursor
     ],
     // git
+    "diffEditor.hideUnchangedRegions.enabled": true,
+    "git-graph.commitDetailsView.location": "Docked to Bottom",
+    "git-graph.customBranchGlobPatterns": [],
     "git-graph.date.format": "ISO Date & Time",
-    "git-graph.date.type": "Author Date",
-    "git.blame.statusBarItem.enabled": false,
+    "git-graph.date.type": "Commit Date",
+    "git.blame.editorDecoration.enabled": false,
+    "git.blame.statusBarItem.enabled": true,
     "git.timeline.date": "committed",
+    "githd.blameView.enabled": false,
+    "githd.editor.disabled": true,
     "gitlens.ai.model": "vscode",
     "gitlens.codeLens.recentChange.enabled": false,
     "gitlens.currentLine.enabled": false,
@@ -740,5 +745,4 @@
     "gitlens.graph.minimap.enabled": false,
     "gitlens.launchpad.indicator.enabled": false,
     "gitlens.statusBar.enabled": true,
-    "diffEditor.hideUnchangedRegions.enabled": true,
 }
