@@ -572,13 +572,13 @@
                     "foreground": "#f9f274b7",
                     "fontStyle": "italic bold"
                 },
+                "method": {
+                    "foreground": "#3dc8f2",
+                    "fontStyle": "italic"
+                },
                 "*.readonly": {
                     "foreground": "#f5c812b7",
                     "fontStyle": "bold"
-                },
-                "*.static": {
-                    "foreground": "#955cfe",
-                    "fontStyle": "italic bold"
                 },
                 "templateType": "#ff0000",
                 "namespace": "#baf4d0e6",
@@ -587,16 +587,16 @@
                     "foreground": "#C7EDCC",
                     "fontStyle": "italic"
                 },
-                "method": {
-                    "foreground": "#3dc8f2",
-                    "fontStyle": "italic"
-                },
                 "function": {
                     "foreground": "#3dc8f2",
                 },
                 "parameter": {
                     // "foreground": "#54adc8",
                     "fontStyle": "underline"
+                },
+                "*.static": {
+                    "foreground": "#955cfe",
+                    "fontStyle": "italic bold"
                 },
                 "typeParameter": {
                     "foreground": "#C1AE75",
@@ -618,6 +618,10 @@
                     "foreground": "#f8990aad",
                     "fontStyle": "italic bold"
                 },
+                "method": {
+                    "foreground": "#0a91b8",
+                    "fontStyle": "italic"
+                },
                 "*.readonly": {
                     "foreground": "#bd970b",
                     "fontStyle": "bold"
@@ -638,10 +642,6 @@
                     "foreground": "#b84852",
                     "fontStyle": "italic"
                 },
-                "method": {
-                    "foreground": "#0a91b8",
-                    "fontStyle": "italic"
-                },
                 "parameter": {
                     "fontStyle": "underline"
                 },
@@ -657,9 +657,16 @@
                     "foreground": "#a8a12d",
                     "fontStyle": "italic bold"
                 },
+                "method": {
+                    "foreground": "#0a91b8",
+                    "fontStyle": "italic"
+                },
                 "*.readonly": {
                     "foreground": "#bd970b",
                     "fontStyle": "bold"
+                },
+                "function": {
+                    "foreground": "#0a91b8",
                 },
                 "*.static": {
                     "foreground": "#723ac7",
@@ -672,10 +679,6 @@
                 },
                 "property": {
                     "foreground": "#b84852",
-                    "fontStyle": "italic"
-                },
-                "method": {
-                    "foreground": "#0a91b8",
                     "fontStyle": "italic"
                 },
                 "parameter": {
