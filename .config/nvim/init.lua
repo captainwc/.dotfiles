@@ -15,4 +15,9 @@ else
 
     -- 启用 true-color 支持
     vim.opt.termguicolors = true
+
+    vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        pattern = "*.bash*",
+        command = "set filetype=sh",
+    })
 end
