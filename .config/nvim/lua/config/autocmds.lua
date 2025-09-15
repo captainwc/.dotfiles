@@ -30,7 +30,7 @@ function WrapCommandForDiffOS(cmd)
         return is_win and tool_mapping[cmd].windows or tool_mapping[cmd].linux
     end
     -- 其余的，linux上加上 ./
-    return is_win and cmd or "./" .. cmd
+    return (is_win or cmd ~= "^/") and cmd or "./" .. cmd
 end
 
 -- 规则化路径分隔符
@@ -199,7 +199,6 @@ function GetBazelTargetInfo()
     end
 
     if not bazel_root then
-        print("BazelError: Not in a Bazel workspace")
         return nil, nil
     end
 
