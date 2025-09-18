@@ -1,6 +1,6 @@
 return {
     "saghen/blink.cmp",
-    build = "cargo build --release",
+    -- build = "cargo build --release",
     opts = {
         fuzzy = { implementation = "rust" },
         completion = {
