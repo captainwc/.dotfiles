@@ -11,7 +11,7 @@ vim.g.autoformat = false
 
 -- [插件]
 -- -- FLoatTerm
-vim.g.floaterm_width = 0.6
-vim.g.floaterm_height = 0.6
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.8
 vim.g.floaterm_autoclose = 0
 -- vim.opt.shell = "D:/env/msys2/usr/bin/bash.exe"
