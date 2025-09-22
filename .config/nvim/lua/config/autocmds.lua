@@ -24,13 +24,18 @@ function WrapCommandForDiffOS(cmd)
         gdb = { windows = "gdb", linux = "cgdb" },
         pdb = { windows = "pdb", linux = "pudb" },
     }
-    local is_win = OsIsWindows()
-    -- 命令映射
+    local is_win = package.config:sub(1, 1) == "\\"
     if tool_mapping[cmd] then
         return is_win and tool_mapping[cmd].windows or tool_mapping[cmd].linux
     end
-    -- 其余的，linux上加上 ./
-    return (is_win or cmd ~= "^/") and cmd or "./" .. cmd
+    local expanded_cmd = vim.fn.expand(cmd .. ":p:r")
+    local is_absolute_path = expanded_cmd:match("^/") ~= nil or expanded_cmd:match("^%a:[/\\]") ~= nil
+    if not is_absolute_path and not is_win then
+        if not cmd:match("^%./") then
+            cmd = "./" .. cmd
+        end
+    end
+    return cmd
 end
 
 -- 规则化路径分隔符
