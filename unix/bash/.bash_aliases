@@ -26,6 +26,19 @@ alias vime='vim ~/.bash_env'
 alias fzf='fzf --ansi --smart-case'
 alias fzf-view="fzf --preview-window=up --preview='bat --color always {}'"
 
+function cd() {
+    if [[ -f "$1" ]]; then
+        builtin cd $(dirname "$1") || return
+    else
+        builtin cd "$@" || return
+    fi
+    if [[ -f .venv/bin/activate ]]; then
+        source .venv/bin/activate
+    elif [[ -n "$VIRTUAL_ENV" ]]; then
+        deactivate
+    fi
+}
+
 # 彩色的less（彩色man手册）
 export LESS_TERMCAP_mb=$'\e[01;31m'    # 开始加粗（红色）
 export LESS_TERMCAP_md=$'\e[01;31m'    # 加粗（红色）
