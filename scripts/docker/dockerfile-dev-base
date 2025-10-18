@@ -53,24 +53,26 @@ RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" 
     && echo 'export PATH="$HOME/.local/modernunix":${PATH}' >> $HOME/.bash_env \
     && echo 'export PATH="$HOME/.local/bin":${PATH}' >> $HOME/.bash_env \
     && echo "alias ls='lsd'" >> $HOME/.bash_aliases_local \
+    && echo "alias vim='nvim'" >> $HOME/.bash_aliases_local \
+    && echo "alias vi='/usr/bin/vim'" >> $HOME/.bash_aliases_local \
     && echo "alias gdb='cgdb -q'" >> $HOME/.bash_aliases_local \
+    && echo "alias y='yazi'" >> $HOME/.bash_aliases_local \
     && echo "PermitRootLogin yes\nPasswordAuthentication no\nPubkeyAuthentication yes" >> /etc/ssh/sshd_config \
     && git clone https://gitee.com/kaikaixixi/.dotfiles.git $HOME/.dotfiles \
     && chmod +x $HOME/.dotfiles/run.sh \
     && cd $HOME/.dotfiles && ./run.sh \
     && git clone https://gitee.com/kaikaixixi/modernunix.git /tmp/modernunix \
     && mkdir -p $HOME/.local/modernunix \
-    && mv /tmp/modernunix/linux-x86_64/static/* $HOME/.local/modernunix/ \
-    && mv /tmp/modernunix/linux-x86_64/bazel/* $HOME/.local/modernunix/ \
-    && mv /tmp/modernunix/linux-x86_64/uv/* $HOME/.local/modernunix/ \
-    && mv /tmp/modernunix/linux-x86_64/soar $HOME/.local/modernunix/ \
+    && find /tmp/modernunix -perm /111 -type f -not -path "*\.git*" -not -name "install.sh" -exec sudo cp {} $HOME/.local/modernunix/ \; \
     && ln -s $HOME/.local/modernunix/bazelisk /usr/bin/bazelisk \
     && ln -s $HOME/.dotfiles/scripts/bazel/bazel /usr/bin/bazel \
     && apt-get clean && rm -rf /var/lib/apt/lists/*  /tmp/*
 
 # vim插件等进一步配置
 RUN wget -O /tmp/node22.tar.xz https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz && tar xf /tmp/node22.tar.xz -C /opt \
+    && wget -O /tmp/nvim11.4.tar.gz https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-x86_64.tar.gz && tar xf /tmp/nvim11.4.tar.gz -C /opt \
     && echo 'export PATH="/opt/node-v22.14.0-linux-x64/bin":${PATH}' >> $HOME/.bash_env \
+    && echo 'export PATH="/opt/nvim-linux-x86_64/bin":${PATH}' >> $HOME/.bash_env \
     && wget -O /tmp/plugged.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/vim-plugged.zip \
     && wget -O /tmp/coc-clangd.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/coc-extensions-clangd.zip \
     && unzip /tmp/plugged.zip -d $HOME/.vim \
