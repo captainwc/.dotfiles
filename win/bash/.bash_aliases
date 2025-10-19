@@ -24,6 +24,19 @@ alias vimal='vim ~/.bash_aliases_local'
 alias vime='vim ~/.bash_env'
 
 # functions
+function cd() {
+    if [[ -f "$1" ]]; then
+        builtin cd $(dirname "$1") || return
+    else
+        builtin cd "$@" || return
+    fi
+    if [[ -f .venv/Scripts/activate ]]; then
+        source .venv/Scripts/activate
+    elif [[ -n "$VIRTUAL_ENV" ]]; then
+        deactivate
+    fi
+}
+
 ipshow() {
     echo -en '[IPV4]: '
     curl 4.ipw.cn
