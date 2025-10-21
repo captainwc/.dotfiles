@@ -8,3 +8,4 @@
 vim.o.expandtab = true
 vim.o.relativenumber = false
 vim.g.autoformat = false
+vim.opt.termguicolors = true
