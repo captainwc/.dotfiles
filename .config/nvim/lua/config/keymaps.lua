@@ -2,22 +2,20 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- leader   由于leader要在加载lazy之前设置，但是放在init.lua最前面又不生效
--- vim.g.mapleader = ","
-
 -- normal
--- Toggle Wrap: Use <leader>uw Instead
--- vim.api.nvim_set_keymap("n", "<leader>w", ":if &wrap | set nowrap | else | set wrap | endif<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<CR>", ":LazyFormat<CR>:w<esc>", { noremap = true, silent = true }) -- Format and Save on enter
 vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true }) -- Redo
+vim.api.nvim_set_keymap("n", "<backspace>", "X", { noremap = true, silent = true }) -- backspace
 vim.api.nvim_set_keymap("n", "gb", "<C-o>", { noremap = true, silent = true }) -- go back
 vim.api.nvim_set_keymap("n", "gp", "<C-i>", { noremap = true, silent = true }) -- go prev
 vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = true, silent = true }) -- go back
 vim.api.nvim_set_keymap("n", "<M-right>", "<C-i>", { noremap = true, silent = true }) -- go prev
-vim.api.nvim_set_keymap("n", "<leader>fp", ":lua ShowFilePath()<CR>", { noremap = true, silent = true }) -- print currfile path
+vim.api.nvim_set_keymap("n", "<leader>fp", ":lua ShowPath()<CR>", { noremap = true, silent = true }) -- print currfile path
+
+-- code
+vim.api.nvim_set_keymap("n", "<M-o>", ":ClangdSwitchSourceHeader<CR>", { noremap = true, silent = true })
 
 -- FloatTerm
-vim.api.nvim_set_keymap("n", "<Leader>mn", ":FloatermNew<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>t", ":FloatermToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<leader>t", "<C-\\><C-n>:FloatermToggle<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>k", ":FloatermKill<CR>", { noremap = true, silent = true })
