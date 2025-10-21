@@ -30,8 +30,19 @@ function cd() {
     else
         builtin cd "$@" || return
     fi
-    if [[ -f .venv/Scripts/activate ]]; then
-        source .venv/Scripts/activate
+    local venv_path=""
+    local search_dir=$(pwd -P)
+    while [[ "$search_dir" != "/" ]]; do
+        if [[ -f "$search_dir/.venv/Scripts/activate" ]]; then
+            venv_path="$search_dir/.venv"
+            break
+        fi
+        search_dir=$(dirname "$search_dir")
+    done
+    if [[ -n "$venv_path" ]]; then
+        if [[ -z "$VIRTUAL_ENV" || "$VIRTUAL_ENV" != "$venv_path" ]]; then
+            source "$venv_path/Scripts/activate"
+        fi
     elif [[ -n "$VIRTUAL_ENV" ]]; then
         deactivate
     fi
