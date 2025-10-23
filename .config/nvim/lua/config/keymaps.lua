@@ -6,14 +6,27 @@
 vim.api.nvim_set_keymap("n", "<CR>", ":LazyFormat<CR>:w<esc>", { noremap = true, silent = true }) -- Format and Save on enter
 vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true }) -- Redo
 vim.api.nvim_set_keymap("n", "<backspace>", "X", { noremap = true, silent = true }) -- backspace
-vim.api.nvim_set_keymap("n", "gb", "<C-o>", { noremap = true, silent = true }) -- go back
-vim.api.nvim_set_keymap("n", "gp", "<C-i>", { noremap = true, silent = true }) -- go prev
+vim.api.nvim_set_keymap("v", "<C-c>", "y", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<C-j>", ":join<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<M-l>", ":lua ShowPath()<CR>", { noremap = true, silent = true, desc = "show incoming_calls"})
+
+-- move
+vim.api.nvim_set_keymap("n", "<C-A>", "I<ESC>l", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-E>", "$", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-A>", "<ESC>I", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-E>", "<ESC>A", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "}", "%", { noremap = true, silent = true, desc = "go to paired bracket"})
+vim.api.nvim_set_keymap("n", "{", "%", { noremap = true, silent = true, desc = "go to paired bracket"})
+vim.api.nvim_set_keymap("n", "gb", "<C-o>", { noremap = true, silent = true, desc = "gp back" }) -- go back
+vim.api.nvim_set_keymap("n", "gp", "<C-i>", { noremap = true, silent = true, desc = "go preview" }) -- go prev
 vim.api.nvim_set_keymap("n", "<M-left>", "<C-o>", { noremap = true, silent = true }) -- go back
 vim.api.nvim_set_keymap("n", "<M-right>", "<C-i>", { noremap = true, silent = true }) -- go prev
-vim.api.nvim_set_keymap("n", "<leader>fp", ":lua ShowPath()<CR>", { noremap = true, silent = true }) -- print currfile path
 
 -- code
 vim.api.nvim_set_keymap("n", "<M-o>", ":ClangdSwitchSourceHeader<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>sf", ":FzfLua lines<CR>", { noremap = true, silent = true, desc = "fuzz search buffer lines"})
+vim.api.nvim_set_keymap("n", "<M-c>", ":lua vim.lsp.buf.incoming_calls()<CR>", { noremap = true, silent = true, desc = "show incoming_calls"})
+vim.api.nvim_set_keymap("n", "<M-S-C>", ":lua vim.lsp.buf.outgoing_calls()<CR>", { noremap = true, silent = true, desc = "show outgoing_calls"})
 
 -- FloatTerm
 vim.api.nvim_set_keymap("n", "<Leader>t", ":FloatermToggle<CR>", { noremap = true, silent = true })
@@ -61,78 +74,18 @@ if vim.g.vscode then
     -- action() means async while call() means sync
     vim.api.nvim_set_keymap("n", "<backspace>", "X", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "U", "<Cmd>lua require('vscode').call('redo')<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>uw",
-        "<Cmd>lua require('vscode').call('editor.action.toggleWordWrap')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>uh",
-        "<Cmd>lua require('vscode').call('clangd.inlayHints.toggle')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>uz",
-        "<Cmd>lua require('vscode').call('workbench.action.toggleZenMode')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>gg",
-        "<Cmd>lua require('vscode').call('lazygit-vscode.toggle')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>r",
-        "<Cmd>lua require('vscode').action('code-runner.run')<CR>",
-        { noremap = true, silent = true }
-    )
+    vim.api.nvim_set_keymap( "n", "<leader>uw", "<Cmd>lua require('vscode').call('editor.action.toggleWordWrap')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>uh", "<Cmd>lua require('vscode').call('clangd.inlayHints.toggle')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>uz", "<Cmd>lua require('vscode').call('workbench.action.toggleZenMode')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>gg", "<Cmd>lua require('vscode').call('lazygit-vscode.toggle')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>r", "<Cmd>lua require('vscode').action('code-runner.run')<CR>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "<leader>d", ":lua VscodeDebugSingleFile()<CR>", { noremap = true, silent = true })
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>mr",
-        "<Cmd>lua require('vscode').action('cmake.launchTarget')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>md",
-        "<Cmd>lua require('vscode').action('cmake.debugTarget')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>cr",
-        "<Cmd>lua require('vscode').call('editor.action.rename')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>cf",
-        "<Cmd>lua require('vscode').call('editor.action.formatDocument')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>ca",
-        "<Cmd>lua require('vscode').call('editor.action.quickFix')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>e",
-        "<Cmd>lua require('vscode').call('workbench.explorer.fileView.focus')<CR>",
-        { noremap = true, silent = true }
-    )
-    vim.api.nvim_set_keymap(
-        "n",
-        "<leader>o",
-        "<Cmd>lua require('vscode').call('outline.focus')<CR>",
-        { noremap = true, silent = true }
-    )
+    vim.api.nvim_set_keymap( "n", "<leader>mr", "<Cmd>lua require('vscode').action('cmake.launchTarget')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>md", "<Cmd>lua require('vscode').action('cmake.debugTarget')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>cr", "<Cmd>lua require('vscode').call('editor.action.rename')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>cf", "<Cmd>lua require('vscode').call('editor.action.formatDocument')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>ca", "<Cmd>lua require('vscode').call('editor.action.quickFix')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>e", "<Cmd>lua require('vscode').call('workbench.explorer.fileView.focus')<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap( "n", "<leader>o", "<Cmd>lua require('vscode').call('outline.focus')<CR>", { noremap = true, silent = true })
     vim.api.nvim_set_keymap("n", "<leader>mv", ":lua VscodeSayHello()<CR>", { noremap = true, silent = true })
 end
