@@ -1,0 +1,4 @@
+#!/bin/bash
+bash -c "shopt -s expand_aliases
+source ~/.bashrc 2>/dev/null
+$*"
