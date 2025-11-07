@@ -8,7 +8,7 @@ vim.api.nvim_set_keymap("n", "U", "<C-r>", { noremap = true, silent = true }) --
 vim.api.nvim_set_keymap("n", "<backspace>", "X", { noremap = true, silent = true }) -- backspace
 vim.api.nvim_set_keymap("v", "<C-c>", "y", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<C-j>", ":join<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<M-l>", ":lua ShowPath()<CR>", { noremap = true, silent = true, desc = "show incoming_calls"})
+vim.api.nvim_set_keymap("n", "<leader>fp", ":lua ShowPath()<CR>", { noremap = true, silent = true, desc = "show incoming_calls"})
 
 -- move
 vim.api.nvim_set_keymap("n", "<C-A>", "I<ESC>l", { noremap = true, silent = true })

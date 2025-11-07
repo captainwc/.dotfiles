@@ -174,7 +174,7 @@ function ShowPath()
     local filename = vim.fn.expand("%:p:t")
     local fullbase = vim.fn.expand("%:p:r")
     local extension = vim.fn.expand("%:p:e")
-    print(NormalizePath(filename))
+    -- print(NormalizePath(filename))
     print(NormalizePath(fullpath))
 end
 
