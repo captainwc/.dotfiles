@@ -40,6 +40,9 @@ end
 
 -- 规则化路径分隔符
 function NormalizePath(path)
+    if not path then
+        return nil
+    end
     local sep = "/"
     if OsIsWindows() then
         sep = "\\"
@@ -64,7 +67,9 @@ function GetCompileOptions(type)
         CPP = "-std=c++20 ",
         CPP_Debug = "-g -O0 -fno-inline -std=c++20 ",
         C = "",
-        C_Debug = "-g -O0 -fno-inline",
+        C_Debug = "-g -O0 -fno-inline ",
+        RUST = "",
+        RUST_Debug = "-g ",
     }
 
     local compileOptions = vim.fn.input("[" .. type .. "] Compile Options", defaultOptionsMap[type])
@@ -85,6 +90,11 @@ function RunFile()
         ToggleFT(
             "RUN",
             "g++ % -o %< " .. GetCompileOptions("CPP") .. " && " .. WrapCommandForDiffOS("%<") .. " && rm %<"
+        )
+    elseif ft == "rust" then
+        ToggleFT(
+            "RUN",
+            "rustc % -o %< " .. GetCompileOptions("RUST") .. " && " .. WrapCommandForDiffOS("%<") .. " && rm %<"
         )
     elseif ft == "java" then
         ToggleFT("RUN", "javac % && java %<")
@@ -115,6 +125,18 @@ function DebugFile()
                 string.format(
                     "bash -c 'g++ %% -o %%< %s && %s -q %%< && rm %%<'",
                     GetCompileOptions("CPP_Debug"),
+                    WrapCommandForDiffOS("gdb")
+                )
+            )
+        )
+    elseif ft == "rust" then
+        vim.cmd(
+            string.format(
+                "FloatermNew --autoclose=1 --title=%s --width=0.9 --height=0.85 %s",
+                "DEBUG",
+                string.format(
+                    "bash -c 'rustc %% -o %%< %s && %s -q %%< && rm %%<'",
+                    GetCompileOptions("RUST_Debug"),
                     WrapCommandForDiffOS("gdb")
                 )
             )
@@ -251,6 +273,34 @@ function RunBazelTarget(bazel_root, bazel_target)
     vim.cmd(string.format("FloatermNew --title=%s:%s %s %s", "BazelRun", targetName, floatermOptions, fullCommand))
 end
 
+function FindCargoRoot()
+    local path = vim.fn.expand("%:p:h")
+    local last_cargo_toml = nil
+    while true do
+        if vim.fn.filereadable(path .. "/Cargo.toml") == 1 then
+            last_cargo_toml = path
+        end
+        local parent = vim.fn.fnamemodify(path, ":h")
+        if parent == path then
+            break
+        end
+        path = parent
+    end
+    return NormalizePath(last_cargo_toml) or nil
+end
+
+function RunCargoTarget(cargo_root)
+    local userInput = vim.fn.input("cargo run ('bin name'): ")
+    local fullCommand = ""
+    if userInput ~= "" then
+        fullCommand = string.format("cd %s && cargo run --bin %s", cargo_root, userInput)
+    else
+        fullCommand = string.format("cd %s && cargo run %s", cargo_root, userInput)
+    end
+    local floatermOptions = "--autoclose=0 --width=0.9 --height=0.85"
+    vim.cmd(string.format("FloatermNew --title=%s:%s %s %s", "CargoRun", userInput, floatermOptions, fullCommand))
+end
+
 -- 寻找根CMakeLists.txt路径
 function FindCMakeRoot()
     local path = vim.fn.expand("%:p:h") -- 获取当前文件所在目录
@@ -375,7 +425,12 @@ function CMakeRunTargetNonClean()
     if bazel_root then
         RunBazelTarget(bazel_root, bazel_target)
     else
-        ExecuteCMakeCommand("Release", false, false, true)
+        local cargo_root = FindCargoRoot()
+        if cargo_root then
+            RunCargoTarget(cargo_root)
+        else
+            ExecuteCMakeCommand("Release", false, false, true)
+        end
     end
 end
 
