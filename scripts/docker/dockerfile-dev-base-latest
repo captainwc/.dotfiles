@@ -1,13 +1,12 @@
-FROM ubuntu:latest
+FROM gcc:latest
 
 # env
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
-    EDITOR=vim
+    EDITOR=nvim
 
 # 基本工具
-RUN sed -i 's@http://archive.ubuntu.com@http://mirrors.ustc.edu.cn@g' /etc/apt/sources.list \
-    && sed -i 's@http://security.ubuntu.com@http://mirrors.ustc.edu.cn@g' /etc/apt/sources.list \
+RUN sed -i 's@http://deb.debian.org@http://mirrors.ustc.edu.cn@g' /etc/apt/sources.list.d/debian.sources \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
     ca-certificates \
@@ -17,33 +16,14 @@ RUN sed -i 's@http://archive.ubuntu.com@http://mirrors.ustc.edu.cn@g' /etc/apt/s
     build-essential \
     busybox \
     cgdb \
-    clangd-19 \
-    clang-format-19 \
-    clang-tidy-19 \
     cmake \
-    curl \
     file \
-    gcc-14 g++-14 \
     gdb \
-    git \
-    make \
     ninja-build \
     python-is-python3 \
     sudo \
-    universal-ctags \
     unzip \
-    vim \
-    wget \
-    && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 140 \
-    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 140 \
-    && update-alternatives --install /usr/bin/clang clang /usr/bin/clang-19 190 \
-    && update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 190 \
-    && update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-19 190 \
-    && update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-19 190 \
-    && update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-19 190 \
-    && update-alternatives --install /usr/bin/scan-build scan-build /usr/bin/scan-build-19 190 \
-    && update-alternatives --install /usr/bin/scan-build-py scan-build-py /usr/bin/scan-build-py-19 190 \
-    && update-alternatives --install /usr/bin/scan-view scan-view /usr/bin/scan-view-19 190
+    wget
 
 # 配置与moderntools
 RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" >> $HOME/.bashrc \
@@ -53,28 +33,24 @@ RUN echo "\nif [ -f $HOME/.bash_aliases ]; then\n    . $HOME/.bash_aliases\nfi" 
     && echo 'export PATH="$HOME/.local/modernunix":${PATH}' >> $HOME/.bash_env \
     && echo 'export PATH="$HOME/.local/bin":${PATH}' >> $HOME/.bash_env \
     && echo "alias ls='lsd'" >> $HOME/.bash_aliases_local \
+    && echo "alias vim='nvim'" >> $HOME/.bash_aliases_local \
+    && echo "alias vi='/usr/bin/vim'" >> $HOME/.bash_aliases_local \
     && echo "alias gdb='cgdb -q'" >> $HOME/.bash_aliases_local \
+    && echo "alias y='yazi'" >> $HOME/.bash_aliases_local \
     && echo "PermitRootLogin yes\nPasswordAuthentication no\nPubkeyAuthentication yes" >> /etc/ssh/sshd_config \
     && git clone https://gitee.com/kaikaixixi/.dotfiles.git $HOME/.dotfiles \
     && chmod +x $HOME/.dotfiles/run.sh \
     && cd $HOME/.dotfiles && ./run.sh \
     && git clone https://gitee.com/kaikaixixi/modernunix.git /tmp/modernunix \
     && mkdir -p $HOME/.local/modernunix \
-    && mv /tmp/modernunix/linux-x86_64/static/* $HOME/.local/modernunix/ \
-    && mv /tmp/modernunix/linux-x86_64/bazel/* $HOME/.local/modernunix/ \
-    && mv /tmp/modernunix/linux-x86_64/uv/* $HOME/.local/modernunix/ \
-    && mv /tmp/modernunix/linux-x86_64/soar $HOME/.local/modernunix/ \
-    && ln -s $HOME/.local/modernunix/bazelisk $HOME/.local/modernunix/bazel \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*  /tmp/*
-
-# vim插件等进一步配置
-RUN wget -O /tmp/node22.tar.xz https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz && tar xf /tmp/node22.tar.xz -C /opt \
+    && find /tmp/modernunix -perm /111 -type f -not -path "*\.git*" -not -name "install.sh" -exec sudo cp {} $HOME/.local/modernunix/ \; \
+    && ln -s $HOME/.local/modernunix/bazelisk /usr/bin/bazelisk \
+    && ln -s $HOME/.dotfiles/scripts/bazel/bazel /usr/bin/bazel \
+    && wget -O /tmp/node22.tar.xz https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz && tar xf /tmp/node22.tar.xz -C /opt \
+    && wget -O /tmp/nvim11.4.tar.gz https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-x86_64.tar.gz && tar xf /tmp/nvim11.4.tar.gz -C /opt \
     && echo 'export PATH="/opt/node-v22.14.0-linux-x64/bin":${PATH}' >> $HOME/.bash_env \
-    && wget -O /tmp/plugged.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/vim-plugged.zip \
-    && wget -O /tmp/coc-clangd.zip https://shuaikai-bucket0001.oss-cn-shanghai.aliyuncs.com/script/vim/coc-extensions-clangd.zip \
-    && unzip /tmp/plugged.zip -d $HOME/.vim \
-    && mkdir -p $HOME/.config/coc && unzip /tmp/coc-clangd.zip -d $HOME/.config/coc \
-    && rm -rf /tmp/*
+    && echo 'export PATH="/opt/nvim-linux-x86_64/bin":${PATH}' >> $HOME/.bash_env \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*  /tmp/*
 
 WORKDIR /workspace
 CMD ["/bin/bash"]
