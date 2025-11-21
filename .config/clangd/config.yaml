@@ -6,6 +6,7 @@ CompileFlags:
       -Wall,
       # -std=c++23
     ]
+  Remove: [-fno-canonical-system-headers]
   # Compiler: x86_64-w64-mingw32-g++
   # Compiler: g++
 
