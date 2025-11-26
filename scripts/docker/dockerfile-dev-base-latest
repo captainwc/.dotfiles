@@ -3,6 +3,7 @@ FROM gcc:latest
 # env
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=en_US.UTF-8 \
+    TERM=xterm-256color \
     EDITOR=nvim
 
 # 基本工具
@@ -21,6 +22,7 @@ RUN sed -i 's@http://deb.debian.org@http://mirrors.ustc.edu.cn@g' /etc/apt/sourc
     gdb \
     ninja-build \
     python-is-python3 \
+    python3-venv \
     sudo \
     unzip \
     wget
