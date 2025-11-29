@@ -1,21 +1,34 @@
 FROM dev-base:latest
 
+# 可通过 --build-arg GH_PROXY=... 覆盖
+ARG GH_PROXY=https://ghfast.top
+
 WORKDIR /workspace
 
 RUN apt update \
     && apt install -y --no-install-recommends \
-    ncurses-dev \
-    uuid-dev \
-    libasio-dev \
-    libtinyxml2-dev \
-    && wget -O /tmp/fastrtps.patch https://raw.githubusercontent.com/captainwc/CyberRT/refs/heads/master/tools/install/FastRTPS_1.5.0.patch \
-    && git clone --single-branch --branch v1.5.0 --depth 1 https://github.com/eProsima/Fast-RTPS.git /workspace/fastRTPS \
+        ncurses-dev \
+        uuid-dev \
+        libasio-dev \
+        libtinyxml2-dev \
+    && git config --global url."${GH_PROXY}/https://github.com/".insteadOf "https://github.com/" \
+    && git config --global url."${GH_PROXY}/https://".insteadOf "https://" \
+    && wget -O /tmp/fastrtps.patch "${GH_PROXY}/https://raw.githubusercontent.com/captainwc/CyberRT/refs/heads/master/tools/install/FastRTPS_1.5.0.patch" \
+    && git clone --single-branch --branch v1.5.0 --depth 1 "https://github.com/eProsima/Fast-RTPS.git" /workspace/fastRTPS \
     && cd fastRTPS \
+    && sed -i 's|http://|https://|g' .gitmodules \
     && git submodule update --init \
     && patch -p1 < /tmp/fastrtps.patch \
-    && echo "rebuild:\n\t@rm -rf build 2>/dev/null; mkdir build\n\t@cd build && cmake .. \\\\\n\t\t-DEPROSIMA_BUILD=ON \\\\\n\t\t-DCMAKE_BUILD_TYPE=Debug \\\\\n\t\t-DCOMPILE_EXAMPLES=ON \\\\\n\t\t-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \\\\\n\t\t-G\"Ninja\"\n\t@cd build && ninja -j8" > makefile \
+    && echo "rebuild:\n\t@rm -rf build 2>/dev/null; mkdir build\n\t@cd build && cmake .. \\\\\n\t\t-DEPROSIMA_BUILD=ON \\\\\n\t\t-DCMAKE_BUILD_TYPE=Debug \\\\\n\t\t-DCOMPILE_EXAMPLES=ON \\\\\n\t\t-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \\\\\n\t\t-DCMAKE_CXX_STANDARD=20 \\\\\n\t\t-DCMAKE_CXX_STANDARD_REQUIRED=ON \\\\\n\t\t-G\"Ninja\"\n\t@cd build && ninja -j12\n\ninstall:\n\t@cd build && ninja install\n\nclean:\n\t@rm -rf build\n\t@mkdir build" > makefile \
+    && cd thirdparty/fastcdr && git add . && git commit -m "setup" && cd - \
     && git add . && git commit -m "setup" \
-    && apt clean && rm -rf /var/lib/apt/lists/*  /tmp/*
+    && wget -O .clang-format "${GH_PROXY}/https://raw.githubusercontent.com/captainwc/quick-cmake/refs/heads/main/.clang-format" \
+    && wget -O .clang-tidy "${GH_PROXY}/https://raw.githubusercontent.com/captainwc/quick-cmake/refs/heads/main/.clang-tidy" \
+    && wget -O .clangd "${GH_PROXY}/https://raw.githubusercontent.com/captainwc/quick-cmake/refs/heads/main/config.yaml" \
+    && find . \( -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \) -not -path '*/thirdparty/*' -exec clang-format -i {} + \
+    && find . \( -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \) -not -path '*/thirdparty/*' -exec sed -i 's|//!|///|g' {} + \
+    && git add . && git commit -m "format" \
+    && apt clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 WORKDIR /workspace/fastRTPS
-CMD [ "/bin/bash" ]
+CMD ["/bin/bash"]
