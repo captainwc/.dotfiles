@@ -1,0 +1,51 @@
+# Stage1: 准备内核源码与 clang 兼容的 compile_commands.json
+FROM ubuntu:22.04 AS builder
+
+RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+    sed -i 's/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    build-essential bc libncurses-dev libssl-dev libelf-dev bison flex \
+    wget git perl python3 python-is-python3 clang llvm lld
+
+WORKDIR /kernel
+
+ENV KERNEL_VERSION=6.11.9
+RUN wget -c https://mirrors.tuna.tsinghua.edu.cn/kernel/v6.x/linux-${KERNEL_VERSION}.tar.xz --no-check-certificate && \
+    tar xf linux-${KERNEL_VERSION}.tar.xz && rm linux-${KERNEL_VERSION}.tar.xz
+
+WORKDIR /kernel/linux-${KERNEL_VERSION}
+
+# 移除外设 & 增强调试
+RUN make defconfig && \
+    scripts/config --disable MODULES && \
+    scripts/config --disable DRM && \
+    scripts/config --disable SOUND && \
+    scripts/config --disable WLAN && \
+    scripts/config --disable BLUETOOTH && \
+    scripts/config --disable USB && \
+    scripts/config --disable I2C && \
+    scripts/config --disable SPI && \
+    scripts/config --disable MMC && \
+    scripts/config --disable SDIO && \
+    scripts/config --disable INPUT_MOUSE && \
+    scripts/config --disable KEYBOARD_ATKBD && \
+    scripts/config --disable HID && \
+    scripts/config --enable DEBUG_INFO && \
+    scripts/config --enable GDB_SCRIPTS && \
+    scripts/config --enable FRAME_POINTER && \
+    scripts/config --enable KALLSYMS && \
+    make olddefconfig
+
+RUN make -j$(nproc) CC=clang LLVM=1 compile_commands.json
+
+
+# Stage2: 阅读环境
+FROM dev-base AS kernel-reader
+
+ENV KERNEL_VERSION=6.11.9
+WORKDIR /kernel/linux-${KERNEL_VERSION}
+COPY --from=builder /kernel/linux-* /kernel/linux-${KERNEL_VERSION}
+RUN mv compile_commands.json bak-compile_commands.json && make clean && mv bak-compile_commands.json compile_commands.json \
+    && sed -i 's|^\s*-xc++,\s*||g' ~/.config/clangd/config.yaml
+
+CMD ["/bin/bash"]
