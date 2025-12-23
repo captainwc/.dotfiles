@@ -359,6 +359,18 @@ _ibash() {
     fi
 }
 complete -F _ibash ibash
+
+## specific wrapper
+subl() {
+    local win_path
+    for p in "$@"; do
+        win_path=$(wslpath -w "$p")
+        set -- "$@" "$win_path"
+        shift
+    done
+    subl.exe "$@"
+}
+
 ### software manage (only for linux)
 update-nvim() {
 	wget -O /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
