@@ -342,6 +342,23 @@ fhistory() {
     fi
 }
 
+## Complete
+_ibash() {
+    local cur=${COMP_WORDS[1]}
+    if [[ $COMP_CWORD == 1 ]]; then
+        COMPREPLY=($(compgen -c -- "$cur"))
+    else
+        local cmd=${COMP_WORDS[1]}
+        if [[ -n $cmd && $(type -t _command_offset 2>/dev/null) == function ]]; then
+            COMP_WORDS=("${COMP_WORDS[@]:1}")
+            COMP_CWORD=$((COMP_CWORD - 1))
+            _command_offset 0 "$cmd"
+        else
+            COMPREPLY=($(compgen -f -- "${COMP_WORDS[COMP_CWORD]}"))
+        fi
+    fi
+}
+complete -F _ibash ibash
 ### software manage (only for linux)
 update-nvim() {
 	wget -O /tmp/nvim.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
